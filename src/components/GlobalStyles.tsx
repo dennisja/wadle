@@ -15,7 +15,7 @@ const GlobalStyles: VFC = () => {
 
         html,
         body,
-        .root {
+        #root {
           height: 100%;
         }
 

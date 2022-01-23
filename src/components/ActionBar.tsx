@@ -10,6 +10,7 @@ const ActionBar: VFC = () => {
       sx={{
         justifyContent: 'space-around',
         alignItems: 'center',
+        width: '100%',
       }}
     >
       <Button sx={{ color: 'black', backgroundColor: 'white' }}>
