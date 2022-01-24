@@ -20,9 +20,10 @@ export const getBoardCellStatus = (
   row: readonly string[],
   answer: string,
   currentRowIndex: number,
+  isGameOver: boolean,
 ) => {
   // if row is not yet submitted
-  if (rowIndex >= currentRowIndex) {
+  if (rowIndex >= currentRowIndex && !isGameOver) {
     return LetterStatus.UN_GUESSED;
   }
 
@@ -37,9 +38,22 @@ export const getBoardCellStatus = (
     row.slice(0, columnIndex + 1),
     cellCharacter,
   );
+  const guessesAreLessThanTotalGuessesInAnswer =
+    cellCharactersAlreadyVisited <= cellCharactersInAnswer;
+
+  const cellCharacterIndexInPrediction = row
+    .slice(columnIndex + 1)
+    .indexOf(cellCharacter);
+  const cellCharacterIndexInAnswer = answer
+    .slice(columnIndex + 1)
+    .indexOf(cellCharacter);
+  const isAccuratelyGuessedInFuture =
+    cellCharacterIndexInAnswer === cellCharacterIndexInPrediction &&
+    cellCharacterIndexInPrediction !== -1;
   if (
     answer.includes(cellCharacter) &&
-    cellCharactersAlreadyVisited <= cellCharactersInAnswer
+    guessesAreLessThanTotalGuessesInAnswer &&
+    !isAccuratelyGuessedInFuture
   ) {
     return LetterStatus.INACCURATE_GUESS;
   }

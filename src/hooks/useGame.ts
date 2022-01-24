@@ -24,9 +24,15 @@ enum RowStatus {
 
 enum GameStatus {
   PLAYING = 'playing',
-  OVER = 'over',
+  WON = 'won',
+  LOST = 'lost',
   UN_STARTED = 'unStarted',
 }
+
+const GAME_OVER_STATES = [GameStatus.LOST, GameStatus.LOST];
+
+const isGameOver = (gameStatus: GameStatus): boolean =>
+  GAME_OVER_STATES.some(status => status === gameStatus);
 
 const getRowStatus = (characters: string[], answer: string): RowStatus => {
   const word = characters.join('');
@@ -44,7 +50,7 @@ const useGame = () => {
   const [gameState, setGameState] = useState(GameStatus.PLAYING);
 
   const addLetterToBoard = (character: string) => {
-    if (currentColumn < board[0].length && gameState !== GameStatus.OVER) {
+    if (currentColumn < board[0].length && !isGameOver(gameState)) {
       setBoard(prevBoard => {
         const newRow = prevBoard[currentRow].map((value, index) =>
           index === currentColumn ? character : value,
@@ -59,7 +65,7 @@ const useGame = () => {
   };
 
   const removeLetterFromBoard = () => {
-    if (currentColumn >= 0 && gameState !== GameStatus.OVER) {
+    if (currentColumn >= 0 && !isGameOver(gameState)) {
       setBoard(prevBoard => {
         const newRow = prevBoard[currentRow].map((value, index) =>
           index === currentColumn - 1 ? '' : value,
@@ -75,27 +81,27 @@ const useGame = () => {
 
   // rename this to advance to next answer
   const advanceToNextRow = () => {
-    if (gameState === GameStatus.OVER) {
+    if (isGameOver(gameState)) {
       return;
     }
 
     const rowState = getRowStatus(board[currentRow], answer);
+
     if (rowState === RowStatus.HAS_INVALID_WORD) {
       setIsValidRow(false);
       return;
     }
 
     if (rowState === RowStatus.HAS_ANSWER) {
-      setGameState(GameStatus.OVER);
-      setCurrentRow(row => Math.min(row + 1, board.length - 1));
-      // confeti
-      return;
+      setGameState(GameStatus.WON);
     }
 
-    if (currentRow < board.length && rowState === RowStatus.HAS_VALID_WORD) {
-      setCurrentRow(row => Math.min(row + 1, board.length - 1));
-      setCurrentColumn(0);
+    if (currentRow === board.length - 1 && rowState !== RowStatus.HAS_ANSWER) {
+      setGameState(GameStatus.LOST);
     }
+
+    setCurrentColumn(0);
+    setCurrentRow(row => Math.min(row + 1, board.length - 1));
   };
 
   const resetGame = () => {
@@ -118,6 +124,7 @@ const useGame = () => {
       board[rowIndex],
       answer,
       currentRow,
+      isGameOver(gameState),
     );
   };
 
