@@ -45,7 +45,7 @@ const useGame = () => {
   const [board, setBoard] = useState(defaultBoard);
   const [currentRow, setCurrentRow] = useState(defaultRow);
   const [currentColumn, setCurrentColumn] = useState(defaultColumn);
-  const [answer, setAnswer] = useState(getRandomWord);
+  const [answer] = useState(getRandomWord);
   const [isValidRow, setIsValidRow] = useState(true);
   const [gameState, setGameState] = useState(GameStatus.PLAYING);
 
