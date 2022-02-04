@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import { Box, Button, Flex } from 'theme-ui';
-import { ReactComponent as DeleteIcon } from '../../assets/icons/delete.svg';
 import { LetterStatus } from '../../types';
+import { DeleteIcon } from '../../ui/icons';
 import { LETTER_STATUS_STYLES } from '../../utils/constants';
 
 const KEYBOARD_LETTERS = [

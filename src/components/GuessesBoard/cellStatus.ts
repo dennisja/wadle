@@ -22,7 +22,7 @@ export const getBoardCellStatus = (
   currentRowIndex: number,
   isGameOver: boolean,
 ) => {
-  // if row is not yet submitted
+  // if row is not yet submitted or game is over
   if (rowIndex >= currentRowIndex && !isGameOver) {
     return LetterStatus.UN_GUESSED;
   }
@@ -47,13 +47,13 @@ export const getBoardCellStatus = (
   const cellCharacterIndexInAnswer = answer
     .slice(columnIndex + 1)
     .indexOf(cellCharacter);
-  const isAccuratelyGuessedInFuture =
+  const isAccuratelyGuessedAhead =
     cellCharacterIndexInAnswer === cellCharacterIndexInPrediction &&
     cellCharacterIndexInPrediction !== -1;
   if (
     answer.includes(cellCharacter) &&
     guessesAreLessThanTotalGuessesInAnswer &&
-    !isAccuratelyGuessedInFuture
+    !isAccuratelyGuessedAhead
   ) {
     return LetterStatus.INACCURATE_GUESS;
   }

@@ -1,4 +1,7 @@
 // list extracted from https://eslforums.com/5-letter-words/
+
+import { getRandomItem } from '.';
+
 // TODO: update list to have more words
 const WORD_LIST = [
   'aback',
@@ -2522,9 +2525,6 @@ const createWordBag = (list: string[]): Bag => {
 
 const WORD_BAG = createWordBag(WORD_LIST);
 
-const getRandomWord = () => {
-  const randomIndex = Math.round(Math.random() * WORD_LIST.length);
-  return WORD_LIST[randomIndex].toUpperCase();
-};
+const getRandomWord = () => getRandomItem(WORD_LIST).toUpperCase();
 
 export { WORD_LIST, WORD_BAG, getRandomWord };
