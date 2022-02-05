@@ -6,15 +6,6 @@ import App from './App';
 import { SENTRY_DSN, NODE_ENV, COMMIT_SHA } from './envs';
 import reportWebVitals from './reportWebVitals';
 
-// eslint-disable-next-line no-console
-console.log({
-  dsn: SENTRY_DSN,
-  integrations: [new BrowserTracing()],
-  tracesSampleRate: 0.5,
-  release: `wadle@${COMMIT_SHA}`,
-  environment: NODE_ENV,
-});
-
 Sentry.init({
   dsn: SENTRY_DSN,
   integrations: [new BrowserTracing()],
