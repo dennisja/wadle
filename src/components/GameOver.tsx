@@ -32,42 +32,40 @@ const GameOver: VFC<GameOverProps> = ({
   playAgain,
   steps,
   answer,
-}) => {
-  return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1,
-      }}
-    >
-      <Text as='span' role='img' sx={{ fontSize: '10rem' }}>
-        {gameStatus === GameStatus.WON ? '🎉' : '🚫'}
-      </Text>
+}) => (
+  <Flex
+    sx={{
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flex: 1,
+    }}
+  >
+    <Text as="span" role="img" sx={{ fontSize: '10rem' }}>
+      {gameStatus === GameStatus.WON ? '🎉' : '🚫'}
+    </Text>
 
-      <Text sx={{ fontSize: '28px', fontWeight: 'bolder', mb: '16px' }}>
-        {getRandomItem(
-          gameStatus === GameStatus.WON
-            ? GAME_WON_MESSAGES[steps]
-            : GAME_LOST_MESSAGES,
-        )}
-      </Text>
-
-      {gameStatus === GameStatus.LOST && (
-        <Text sx={{ marginBottom: '16px' }}>
-          The answer was {/* TODO(theme): replace this with theme */}
-          <Text as='span' sx={{ fontSize: '20px', fontWeight: 'bolder' }}>
-            {answer}
-          </Text>
-        </Text>
+    <Text sx={{ fontSize: '28px', fontWeight: 'bolder', mb: '16px' }}>
+      {getRandomItem(
+        gameStatus === GameStatus.WON
+          ? GAME_WON_MESSAGES[steps]
+          : GAME_LOST_MESSAGES
       )}
+    </Text>
 
-      <Button sx={{ '&:hover': { cursor: 'pointer' } }} onClick={playAgain}>
-        Play Again
-      </Button>
-    </Flex>
-  );
-};
+    {gameStatus === GameStatus.LOST && (
+      <Text sx={{ marginBottom: '16px' }}>
+        The answer was {/* TODO(theme): replace this with theme */}
+        <Text as="span" sx={{ fontSize: '20px', fontWeight: 'bolder' }}>
+          {answer}
+        </Text>
+      </Text>
+    )}
+
+    <Button sx={{ '&:hover': { cursor: 'pointer' } }} onClick={playAgain}>
+      Play Again
+    </Button>
+  </Flex>
+);
 
 export default GameOver;

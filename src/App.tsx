@@ -30,7 +30,7 @@ function App() {
         />
         {game.isGameOver && (
           <Modal
-            title='Game Over'
+            title="Game Over"
             isOpen={game.isGameOver}
             onClose={game.resetGame}
           >

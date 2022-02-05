@@ -34,13 +34,13 @@ const defaultLettersStatus = LETTERS.reduce<Record<string, LetterStatus>>(
     letters[currentLetter] = LetterStatus.UN_GUESSED;
     return letters;
   },
-  {},
+  {}
 );
 
 const updateLetterStatus = (
   characters: string[],
   answer: string,
-  status: Record<string, LetterStatus>,
+  status: Record<string, LetterStatus>
 ) => {
   for (let i = 0; i < characters.length; i += 1) {
     const character = characters[i];
@@ -66,7 +66,7 @@ export const getKeyboardLettersStatus = ({
   board: string[][];
   answer: string;
 }) => {
-  let letterStatus = { ...defaultLettersStatus };
+  const letterStatus = { ...defaultLettersStatus };
   for (let row = currentRow - 1; row >= 0; row -= 1) {
     updateLetterStatus(board[row], answer, letterStatus);
   }

@@ -22,38 +22,34 @@ const Keyboard: VFC<KeyBoardProps> = ({
   onDeleteCharacter,
   onEnter,
   lettersStatus,
-}) => {
-  return (
-    <Box>
-      {KEYBOARD_LETTERS.map((rowLetters, index) => {
-        return (
-          <Flex
-            key={`keyboard-row-${index}`}
-            sx={{ justifyContent: 'center', marginBottom: '10px' }}
+}) => (
+  <Box>
+    {KEYBOARD_LETTERS.map((rowLetters, index) => (
+      <Flex
+        key={`keyboard-row-${index}`}
+        sx={{ justifyContent: 'center', marginBottom: '10px' }}
+      >
+        {index === 2 && <Button onClick={onEnter}>Enter</Button>}
+        {rowLetters.map((letter) => (
+          <Button
+            key={letter}
+            sx={{
+              ...LETTER_STATUS_STYLES[lettersStatus[letter]],
+              marginLeft: '5px',
+            }} // TODO: Fix the button styles
+            onClick={() => onAddCharacter(letter)}
           >
-            {index === 2 && <Button onClick={onEnter}>Enter</Button>}
-            {rowLetters.map(letter => (
-              <Button
-                key={letter}
-                sx={{
-                  ...LETTER_STATUS_STYLES[lettersStatus[letter]],
-                  marginLeft: '5px',
-                }} // TODO: Fix the button styles
-                onClick={() => onAddCharacter(letter)}
-              >
-                {letter}
-              </Button>
-            ))}
-            {index === 2 && (
-              <Button onClick={onDeleteCharacter} sx={{ marginLeft: '5px' }}>
-                <DeleteIcon />
-              </Button>
-            )}
-          </Flex>
-        );
-      })}
-    </Box>
-  );
-};
+            {letter}
+          </Button>
+        ))}
+        {index === 2 && (
+          <Button onClick={onDeleteCharacter} sx={{ marginLeft: '5px' }}>
+            <DeleteIcon />
+          </Button>
+        )}
+      </Flex>
+    ))}
+  </Box>
+);
 
 export default Keyboard;
