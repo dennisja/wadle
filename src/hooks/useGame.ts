@@ -32,7 +32,7 @@ export enum GameStatus {
 const GAME_OVER_STATES = [GameStatus.LOST, GameStatus.WON];
 
 const isGameOver = (gameStatus: GameStatus): boolean =>
-  GAME_OVER_STATES.some(status => status === gameStatus);
+  GAME_OVER_STATES.some((status) => status === gameStatus);
 
 const getRowStatus = (characters: string[], answer: string): RowStatus => {
   const word = characters.join('');
@@ -51,24 +51,24 @@ const useGame = () => {
 
   const addLetterToBoard = (character: string) => {
     if (currentColumn < board[0].length && !isGameOver(gameState)) {
-      setBoard(prevBoard => {
+      setBoard((prevBoard) => {
         const newRow = prevBoard[currentRow].map((value, index) =>
-          index === currentColumn ? character : value,
+          index === currentColumn ? character : value
         );
         const newBoard = [...prevBoard];
         newBoard[currentRow] = newRow;
         return newBoard;
       });
-      setCurrentColumn(prevColumn => prevColumn + 1);
+      setCurrentColumn((prevColumn) => prevColumn + 1);
       setIsValidRow(true);
     }
   };
 
   const removeLetterFromBoard = () => {
     if (currentColumn >= 0 && !isGameOver(gameState)) {
-      setBoard(prevBoard => {
+      setBoard((prevBoard) => {
         const newRow = prevBoard[currentRow].map((value, index) =>
-          index === currentColumn - 1 ? '' : value,
+          index === currentColumn - 1 ? '' : value
         );
         const newBoard = [...prevBoard];
         newBoard[currentRow] = newRow;
@@ -101,7 +101,7 @@ const useGame = () => {
     }
 
     setCurrentColumn(0);
-    setCurrentRow(row => Math.min(row + 1, board.length - 1));
+    setCurrentRow((row) => Math.min(row + 1, board.length - 1));
   };
 
   const resetGame = () => {
@@ -118,16 +118,15 @@ const useGame = () => {
   }: {
     columnIndex: number;
     rowIndex: number;
-  }) => {
-    return getBoardCellStatus(
+  }) =>
+    getBoardCellStatus(
       columnIndex,
       rowIndex,
       board[rowIndex],
       answer,
       currentRow,
-      isGameOver(gameState),
+      isGameOver(gameState)
     );
-  };
 
   const isRowInvalid = (rowIndex: number): boolean =>
     currentRow === rowIndex && !isValidRow;

@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Noop } from '../../types';
 import ReactModal from 'react-modal';
-import useWindowWidth from '../../hooks/useWindowSize';
 import { Button, Flex, Text } from 'theme-ui';
+import { Noop } from '../../types';
+import useWindowWidth from '../../hooks/useWindowSize';
 import { CloseIcon } from '../icons';
 
 ReactModal.setAppElement('#root');
@@ -76,7 +76,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
       shouldCloseOnOverlayClick
     >
       <Flex
-        as='header'
+        as="header"
         sx={{
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -85,7 +85,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
           px: '16px',
         }}
       >
-        <Text as='h2'>{title}</Text>
+        <Text as="h2">{title}</Text>
         <Button
           onClick={onClose}
           sx={{

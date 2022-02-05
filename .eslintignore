@@ -1,0 +1,13 @@
+*.lock
+package.json
+.husky
+.eslintrc
+.eslintignore
+.gitignore
+.gitattributes
+node_modules
+build
+dist
+coverage
+*.log
+*.svg

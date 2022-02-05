@@ -2,9 +2,9 @@ import { LetterStatus } from '../../types';
 
 const characterCount = (
   characters: string | readonly string[],
-  character: string,
+  character: string
 ): number => {
-  let result: number = 0;
+  let result = 0;
   for (let i = 0; i < characters.length; i += 1) {
     const currentCharacter = characters[i];
     if (currentCharacter === character) {
@@ -20,7 +20,7 @@ export const getBoardCellStatus = (
   row: readonly string[],
   answer: string,
   currentRowIndex: number,
-  isGameOver: boolean,
+  isGameOver: boolean
 ) => {
   // if row is not yet submitted or game is over
   if (rowIndex >= currentRowIndex && !isGameOver) {
@@ -36,7 +36,7 @@ export const getBoardCellStatus = (
   const cellCharactersInAnswer = characterCount(answer, cellCharacter);
   const cellCharactersAlreadyVisited = characterCount(
     row.slice(0, columnIndex + 1),
-    cellCharacter,
+    cellCharacter
   );
   const guessesAreLessThanTotalGuessesInAnswer =
     cellCharactersAlreadyVisited <= cellCharactersInAnswer;
