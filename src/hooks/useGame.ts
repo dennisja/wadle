@@ -22,14 +22,14 @@ enum RowStatus {
   HAS_INVALID_WORD = 'hasInvalidWord',
 }
 
-enum GameStatus {
+export enum GameStatus {
   PLAYING = 'playing',
   WON = 'won',
   LOST = 'lost',
   UN_STARTED = 'unStarted',
 }
 
-const GAME_OVER_STATES = [GameStatus.LOST, GameStatus.LOST];
+const GAME_OVER_STATES = [GameStatus.LOST, GameStatus.WON];
 
 const isGameOver = (gameStatus: GameStatus): boolean =>
   GAME_OVER_STATES.some(status => status === gameStatus);
@@ -45,7 +45,7 @@ const useGame = () => {
   const [board, setBoard] = useState(defaultBoard);
   const [currentRow, setCurrentRow] = useState(defaultRow);
   const [currentColumn, setCurrentColumn] = useState(defaultColumn);
-  const [answer] = useState(getRandomWord);
+  const [answer, setAnswer] = useState(getRandomWord);
   const [isValidRow, setIsValidRow] = useState(true);
   const [gameState, setGameState] = useState(GameStatus.PLAYING);
 
@@ -109,6 +109,7 @@ const useGame = () => {
     setCurrentRow(0);
     setCurrentColumn(0);
     setGameState(GameStatus.UN_STARTED);
+    setAnswer(getRandomWord());
   };
 
   const cellStatus = ({
@@ -144,6 +145,10 @@ const useGame = () => {
     }),
     getCellStatus: cellStatus,
     isRowInvalid,
+    gameStatus: gameState,
+    isGameOver: isGameOver(gameState),
+    currentStep: currentRow,
+    answer,
   };
 };
 

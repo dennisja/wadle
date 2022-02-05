@@ -46,7 +46,7 @@ const Row: VFC<RowProps> = ({
 }) => {
   return (
     <Box
-      style={{ display: 'flex', ...(isInvalid && { border: '1px solid red' }) }}
+      sx={{ display: 'flex', ...(isInvalid && { border: '1px solid red' }) }}
     >
       {letters.map((character, columnIndex) => (
         <Cell

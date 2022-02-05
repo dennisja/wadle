@@ -4,3 +4,5 @@ export enum LetterStatus {
   INACCURATE_GUESS = 'inaccurateGuess', // guessed and in answer but in wrong position
   ABSENT_GUESS = 'absentGuess', // guessed but not in answer
 }
+
+export type Noop = () => void;
