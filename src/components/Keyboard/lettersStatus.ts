@@ -44,14 +44,14 @@ const updateLetterStatus = (
 ) => {
   for (let i = 0; i < characters.length; i += 1) {
     const character = characters[i];
-    if (status[character] === LetterStatus.ACCURATE_GUESS) {
+    if (status[character] === LetterStatus.CORRECT) {
       continue;
     } else if (answer.charAt(i) === character) {
-      status[character] = LetterStatus.ACCURATE_GUESS;
+      status[character] = LetterStatus.CORRECT;
     } else if (answer.includes(character)) {
-      status[character] = LetterStatus.INACCURATE_GUESS;
+      status[character] = LetterStatus.PRESENT;
     } else {
-      status[character] = LetterStatus.ABSENT_GUESS;
+      status[character] = LetterStatus.ABSENT;
     }
   }
   return status;

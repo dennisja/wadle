@@ -30,7 +30,7 @@ export const getBoardCellStatus = (
   const cellCharacter = row[columnIndex];
 
   if (cellCharacter === answer.charAt(columnIndex)) {
-    return LetterStatus.ACCURATE_GUESS;
+    return LetterStatus.CORRECT;
   }
 
   const cellCharactersInAnswer = characterCount(answer, cellCharacter);
@@ -55,8 +55,8 @@ export const getBoardCellStatus = (
     guessesAreLessThanTotalGuessesInAnswer &&
     !isAccuratelyGuessedAhead
   ) {
-    return LetterStatus.INACCURATE_GUESS;
+    return LetterStatus.PRESENT;
   }
 
-  return LetterStatus.ABSENT_GUESS;
+  return LetterStatus.ABSENT;
 };
