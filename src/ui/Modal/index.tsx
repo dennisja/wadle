@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import ReactModal from 'react-modal';
-import { Button, Flex, Text } from 'theme-ui';
+import { Flex, Text } from 'theme-ui';
 import { Noop } from '../../types';
 import useWindowWidth from '../../hooks/useWindowSize';
 import { CloseIcon } from '../icons';
+import Button from '../Button';
 
 ReactModal.setAppElement('#root');
 
@@ -80,24 +81,22 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
         sx={{
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderBottom: '1px solid rgba(0,0,0, 0.1)',
-          py: '8px',
-          px: '16px',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+          py: 's',
+          px: 'm',
         }}
       >
         <Text as="h2">{title}</Text>
         <Button
           onClick={onClose}
+          size="small"
           sx={{
             // TODO(theme): Move all these to theme
             backgroundColor: 'transparent',
-            color: 'rgba(0,0,0,0.6)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            color: 'rgba(0, 0, 0, 0.6)',
             transition: '0.3s',
             borderRadius: '50%',
-            p: '8px',
+            p: 's',
             '&:hover': {
               backgroundColor: 'rgba(0,0,0,0.2)',
               cursor: 'pointer',

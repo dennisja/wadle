@@ -1,8 +1,8 @@
 import { VFC } from 'react';
-import { Box, Button, Flex } from 'theme-ui';
+import { Box, Flex } from 'theme-ui';
 import { LetterStatus } from '../../types';
+import Button from '../../ui/Button';
 import { DeleteIcon } from '../../ui/icons';
-import { LETTER_STATUS_STYLES } from '../../utils/constants';
 
 const KEYBOARD_LETTERS = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -23,27 +23,39 @@ const Keyboard: VFC<KeyBoardProps> = ({
   onEnter,
   lettersStatus,
 }) => (
-  <Box>
+  <Box sx={{ width: '500px', maxWidth: '96vw' }}>
     {KEYBOARD_LETTERS.map((rowLetters, index) => (
       <Flex
         key={`keyboard-row-${index}`}
         sx={{ justifyContent: 'center', marginBottom: '10px' }}
       >
-        {index === 2 && <Button onClick={onEnter}>Enter</Button>}
+        {index === 2 && (
+          <Button
+            onClick={onEnter}
+            sx={{ flex: 1.5 }}
+            variant={LetterStatus.UN_GUESSED}
+          >
+            Enter
+          </Button>
+        )}
+        {index === 1 && <Box sx={{ flex: 0.5 }} />}
         {rowLetters.map((letter) => (
           <Button
             key={letter}
-            sx={{
-              ...LETTER_STATUS_STYLES[lettersStatus[letter]],
-              marginLeft: '5px',
-            }} // TODO: Fix the button styles
+            variant={lettersStatus[letter]}
+            sx={{ ml: 'xs', flex: 1 }}
             onClick={() => onAddCharacter(letter)}
           >
             {letter}
           </Button>
         ))}
+        {index === 1 && <Box sx={{ flex: 0.5 }} />}
         {index === 2 && (
-          <Button onClick={onDeleteCharacter} sx={{ marginLeft: '5px' }}>
+          <Button
+            onClick={onDeleteCharacter}
+            variant={LetterStatus.UN_GUESSED}
+            sx={{ ml: 'xs', flex: 1.5 }}
+          >
             <DeleteIcon />
           </Button>
         )}

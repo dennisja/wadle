@@ -1,6 +1,7 @@
 import { VFC } from 'react';
-import { Button, Flex, Text } from 'theme-ui';
+import { Flex, Text } from 'theme-ui';
 import { GameStatus } from '../hooks/useGame';
+import Button from '../ui/Button';
 import { getRandomItem } from '../utils';
 
 const GAME_WON_MESSAGES: Record<number, string[]> = {
@@ -62,7 +63,12 @@ const GameOver: VFC<GameOverProps> = ({
       </Text>
     )}
 
-    <Button sx={{ '&:hover': { cursor: 'pointer' } }} onClick={playAgain}>
+    <Button
+      sx={{ '&:hover': { cursor: 'pointer' } }}
+      variant="primary"
+      onClick={playAgain}
+      size="medium"
+    >
       Play Again
     </Button>
   </Flex>

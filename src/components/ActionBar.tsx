@@ -14,7 +14,9 @@ const ActionBar: VFC = () => (
     <Button sx={{ color: 'black', backgroundColor: 'white' }}>
       <InfoIcon />
     </Button>
-    <Text as="h1">Wadle</Text>
+    <Text as="h1" variant="h1">
+      Wadle
+    </Text>
     <Button sx={{ color: 'black', backgroundColor: 'white' }}>
       <SettingsIcon />
     </Button>
