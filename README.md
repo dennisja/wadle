@@ -2,6 +2,11 @@
 
 Based on [wordle](https://www.powerlanguage.co.uk/wordle/)
 
+## Goals
+
+- [x] Try out SVG sprites for loading SVG Icons
+- [ ] Learn theme-ui
+
 ## Available Scripts
 
 In the project directory, you can run:
