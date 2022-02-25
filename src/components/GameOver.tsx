@@ -46,7 +46,7 @@ const GameOver: VFC<GameOverProps> = ({
       {gameStatus === GameStatus.WON ? '🎉' : '🚫'}
     </Text>
 
-    <Text sx={{ fontSize: '28px', fontWeight: 'bolder', mb: '16px' }}>
+    <Text variant="tiles">
       {getRandomItem(
         gameStatus === GameStatus.WON
           ? GAME_WON_MESSAGES[steps]
@@ -55,17 +55,17 @@ const GameOver: VFC<GameOverProps> = ({
     </Text>
 
     {gameStatus === GameStatus.LOST && (
-      <Text sx={{ marginBottom: '16px' }}>
-        The answer was {/* TODO(theme): replace this with theme */}
-        <Text as="span" sx={{ fontSize: '20px', fontWeight: 'bolder' }}>
+      <Text>
+        The answer was{' '}
+        <Text as="span" variant="h4">
           {answer}
         </Text>
       </Text>
     )}
 
     <Button
-      sx={{ '&:hover': { cursor: 'pointer' } }}
       variant="primary"
+      sx={{ my: 'l' }}
       onClick={playAgain}
       size="medium"
     >

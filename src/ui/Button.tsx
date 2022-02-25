@@ -19,6 +19,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         justifyContent: 'center',
         ...sx,
         ...buttonSizes[size],
+        '&:hover': { cursor: 'pointer' },
+        '&:disabled': { cursor: 'not-allowed' },
       }}
       ref={ref}
     >

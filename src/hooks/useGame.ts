@@ -26,7 +26,7 @@ export enum GameStatus {
   PLAYING = 'playing',
   WON = 'won',
   LOST = 'lost',
-  UN_STARTED = 'unStarted',
+  IDLE = 'idle',
 }
 
 const GAME_OVER_STATES = [GameStatus.LOST, GameStatus.WON];
@@ -108,8 +108,12 @@ const useGame = () => {
     setBoard(defaultBoard);
     setCurrentRow(0);
     setCurrentColumn(0);
-    setGameState(GameStatus.UN_STARTED);
+    setGameState(GameStatus.PLAYING);
     setAnswer(getRandomWord());
+  };
+
+  const toIdleState = () => {
+    setGameState(GameStatus.IDLE);
   };
 
   const cellStatus = ({
@@ -148,6 +152,7 @@ const useGame = () => {
     isGameOver: isGameOver(gameState),
     currentStep: currentRow,
     answer,
+    toIdleState,
   };
 };
 
