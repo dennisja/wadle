@@ -5,7 +5,8 @@ import GameOver from './components/GameOver';
 import GlobalStyles from './components/GlobalStyles';
 import GuessesBoard from './components/GuessesBoard';
 import Keyboard from './components/Keyboard';
-import useGame from './hooks/useGame';
+import useGame, { GameStatus } from './hooks/useGame';
+import Button from './ui/Button';
 import Modal from './ui/Modal';
 import theme from './ui/theme';
 
@@ -22,26 +23,30 @@ function App() {
           isRowInvalid={game.isRowInvalid}
           getCellStatus={game.getCellStatus}
         />
-        <Keyboard
-          onAddCharacter={game.addLetterToBoard}
-          onDeleteCharacter={game.removeLetterFromBoard}
-          onEnter={game.advanceToNextRow}
-          lettersStatus={game.keyboardLettersStatus}
-        />
-        {game.isGameOver && (
-          <Modal
-            title="Game Over"
-            isOpen={game.isGameOver}
-            onClose={game.resetGame}
-          >
-            <GameOver
-              answer={game.answer}
-              gameStatus={game.gameStatus}
-              playAgain={game.resetGame}
-              steps={game.currentStep}
-            />
-          </Modal>
+        {GameStatus.IDLE === game.gameStatus ? (
+          <Button size="large" sx={{ mb: 'xl' }} onClick={game.resetGame}>
+            Play Again
+          </Button>
+        ) : (
+          <Keyboard
+            onAddCharacter={game.addLetterToBoard}
+            onDeleteCharacter={game.removeLetterFromBoard}
+            onEnter={game.advanceToNextRow}
+            lettersStatus={game.keyboardLettersStatus}
+          />
         )}
+        <Modal
+          title="Game Over"
+          isOpen={game.isGameOver}
+          onClose={game.toIdleState}
+        >
+          <GameOver
+            answer={game.answer}
+            gameStatus={game.gameStatus}
+            playAgain={game.resetGame}
+            steps={game.currentStep}
+          />
+        </Modal>
       </GameContainer>
     </ThemeProvider>
   );

@@ -2,7 +2,7 @@ import { ThemeUIStyleObject } from 'theme-ui';
 
 const fontFamily = "'Clear Sans', 'Helvetica Neue', Arial, sans-serif";
 
-type TextVariant = 'default' | 'h1' | 'tiles' | 'highlight';
+type TextVariant = 'default' | 'h1' | 'h4' | 'tiles' | 'highlight';
 
 const text: Record<TextVariant, ThemeUIStyleObject> = {
   default: {
@@ -18,7 +18,13 @@ const text: Record<TextVariant, ThemeUIStyleObject> = {
     fontSize: '36px',
     fontWeight: 700,
     letterSpacing: '0.2rem',
-    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
+  h4: {
+    fontFamily,
+    fontSize: '20px',
+    fontWeight: 700,
+    letterSpacing: '0.2rem',
     textTransform: 'uppercase',
   },
   tiles: {
