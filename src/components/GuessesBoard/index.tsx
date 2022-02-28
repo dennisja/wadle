@@ -1,6 +1,7 @@
 import { VFC } from 'react';
 import { Box, Text, ThemeUIStyleObject } from 'theme-ui';
 import { LetterStatus } from '../../types';
+import { GetRowCellsStatus } from './types';
 
 const LETTER_STATUS_STYLES: Record<LetterStatus, ThemeUIStyleObject> = {
   [LetterStatus.UN_GUESSED]: {},
@@ -16,18 +17,6 @@ const LETTER_STATUS_STYLES: Record<LetterStatus, ThemeUIStyleObject> = {
     backgroundColor: 'green',
     color: 'colorTone.6',
   },
-};
-
-type GetCellStatus = (options: {
-  columnIndex: number;
-  rowIndex: number;
-}) => LetterStatus;
-
-type RowProps = {
-  letters: readonly string[];
-  isInvalid: boolean;
-  rowIndex: number;
-  getCellStatus: GetCellStatus;
 };
 
 type CellProps = { character: string; state: LetterStatus; isInvalid: boolean };
@@ -50,18 +39,25 @@ const Cell: VFC<CellProps> = ({ character, state, isInvalid }) => (
   </Text>
 );
 
+type RowProps = {
+  letters: readonly string[];
+  isInvalid: boolean;
+  rowIndex: number;
+  rowCellsStatus: readonly LetterStatus[];
+};
+
 const Row: VFC<RowProps> = ({
   letters,
   isInvalid,
   rowIndex,
-  getCellStatus,
+  rowCellsStatus,
 }) => (
   <>
     {letters.map((character, columnIndex) => (
       <Cell
         character={character}
         key={`${rowIndex}-${columnIndex}`}
-        state={getCellStatus({ columnIndex, rowIndex })}
+        state={rowCellsStatus[columnIndex]}
         isInvalid={isInvalid}
       />
     ))}
@@ -80,22 +76,22 @@ const boardStyles: ThemeUIStyleObject = {
 type GuessesBoardProps = {
   rows: readonly string[][];
   isRowInvalid: (rowIndex: number) => boolean;
-  getCellStatus: GetCellStatus;
+  getRowCellsStatus: GetRowCellsStatus;
 };
 
 const GuessesBoard: VFC<GuessesBoardProps> = ({
   rows,
   isRowInvalid,
-  getCellStatus,
+  getRowCellsStatus,
 }) => (
   <Box sx={boardStyles}>
-    {rows.map((letters, index) => (
+    {rows.map((row, rowIndex) => (
       <Row
-        key={index}
-        letters={letters}
-        isInvalid={isRowInvalid(index)}
-        getCellStatus={getCellStatus}
-        rowIndex={index}
+        key={rowIndex}
+        letters={row}
+        isInvalid={isRowInvalid(rowIndex)}
+        rowCellsStatus={getRowCellsStatus({ row, rowIndex })}
+        rowIndex={rowIndex}
       />
     ))}
   </Box>

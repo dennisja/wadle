@@ -21,7 +21,7 @@ function App() {
         <GuessesBoard
           rows={game.board}
           isRowInvalid={game.isRowInvalid}
-          getCellStatus={game.getCellStatus}
+          getRowCellsStatus={game.getRowCellsStatus}
         />
         {GameStatus.IDLE === game.gameStatus ? (
           <Button size="large" sx={{ mb: 'xl' }} onClick={game.resetGame}>

@@ -6,7 +6,11 @@ import useWindowWidth from '../../hooks/useWindowSize';
 import { CloseIcon } from '../icons';
 import Button from '../Button';
 
-ReactModal.setAppElement('#root');
+const isNotTestEnv = process.env.NODE_ENV !== 'test';
+
+if (isNotTestEnv) {
+  ReactModal.setAppElement('#root');
+}
 
 const modalCustomStyles: ReactModal.Styles = {
   overlay: {
@@ -75,6 +79,7 @@ const Modal: FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
       onRequestClose={onClose}
       style={modalStyles}
       shouldCloseOnOverlayClick
+      ariaHideApp={isNotTestEnv}
     >
       <Flex
         as="header"
