@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { getBoardCellStatus } from '../components/GuessesBoard/cellStatus';
+import { getRowCellsStatus } from '../components/GuessesBoard/rowCellsStatus';
+import { GetRowCellsStatus } from '../components/GuessesBoard/types';
 import { getKeyboardLettersStatus } from '../components/Keyboard/lettersStatus';
 import { getRandomWord, WORD_BAG } from '../utils/word';
 
@@ -101,7 +102,7 @@ const useGame = () => {
     }
 
     setCurrentColumn(0);
-    setCurrentRow((row) => Math.min(row + 1, board.length - 1));
+    setCurrentRow((row) => Math.min(row + 1, board.length));
   };
 
   const resetGame = () => {
@@ -116,21 +117,8 @@ const useGame = () => {
     setGameState(GameStatus.IDLE);
   };
 
-  const cellStatus = ({
-    columnIndex,
-    rowIndex,
-  }: {
-    columnIndex: number;
-    rowIndex: number;
-  }) =>
-    getBoardCellStatus(
-      columnIndex,
-      rowIndex,
-      board[rowIndex],
-      answer,
-      currentRow,
-      isGameOver(gameState)
-    );
+  const rowCellsStatus: GetRowCellsStatus = ({ row, rowIndex }) =>
+    getRowCellsStatus({ row, answer, isSubmitted: rowIndex < currentRow });
 
   const isRowInvalid = (rowIndex: number): boolean =>
     currentRow === rowIndex && !isValidRow;
@@ -146,13 +134,13 @@ const useGame = () => {
       board,
       answer,
     }),
-    getCellStatus: cellStatus,
     isRowInvalid,
     gameStatus: gameState,
     isGameOver: isGameOver(gameState),
     currentStep: currentRow,
     answer,
     toIdleState,
+    getRowCellsStatus: rowCellsStatus,
   };
 };
 

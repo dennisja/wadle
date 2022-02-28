@@ -42,7 +42,7 @@ const GameOver: VFC<GameOverProps> = ({
       flex: 1,
     }}
   >
-    <Text as="span" role="img" sx={{ fontSize: '10rem' }}>
+    <Text as="span" role="img" sx={{ fontSize: '12rem' }}>
       {gameStatus === GameStatus.WON ? '🎉' : '🚫'}
     </Text>
 

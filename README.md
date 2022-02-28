@@ -5,7 +5,7 @@ Based on [wordle](https://www.powerlanguage.co.uk/wordle/)
 ## Goals
 
 - [x] Try out SVG sprites for loading SVG Icons
-- [ ] Learn theme-ui
+- [ ] Try out theme-ui
 
 ## Available Scripts
 

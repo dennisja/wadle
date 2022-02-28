@@ -1,5 +1,7 @@
 import { getRandomItem } from '.';
 
+const BAD_WORDS_LIST = ['penis', 'whore'];
+
 const WORD_LIST = [
   'aahed',
   'aalii',
@@ -5854,7 +5856,6 @@ const WORD_LIST = [
   'pends',
   'penes',
   'pengo',
-  'penis',
   'penna',
   'penne',
   'penni',
@@ -8997,7 +8998,6 @@ const WORD_LIST = [
   'whoof',
   'whoop',
   'whops',
-  'whore',
   'whorl',
   'whort',
   'whose',
@@ -9356,6 +9356,8 @@ const createWordBag = (list: string[]): Bag => {
 
 const WORD_BAG = createWordBag(WORD_LIST);
 
+const BAD_WORDS_BAG = createWordBag(BAD_WORDS_LIST);
+
 const getRandomWord = () => getRandomItem(WORD_LIST).toUpperCase();
 
-export { WORD_LIST, WORD_BAG, getRandomWord };
+export { WORD_LIST, WORD_BAG, getRandomWord, BAD_WORDS_BAG };
