@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { getRowCellsStatus } from '../components/GuessesBoard/rowCellsStatus';
 import { GetRowCellsStatus } from '../components/GuessesBoard/types';
 import { getKeyboardLettersStatus } from '../components/Keyboard/lettersStatus';
 import { getRandomWord, WORD_BAG } from '../utils/word';
+import { usePersistedState } from './usePersistedState';
 
 const defaultBoard = [
   ['', '', '', '', ''],
@@ -42,13 +42,40 @@ const getRowStatus = (characters: string[], answer: string): RowStatus => {
   return RowStatus.HAS_INVALID_WORD;
 };
 
+enum LocalStorageStateKeys {
+  BOARD = 'board',
+  CURRENT_ROW = 'currentRow',
+  CURRENT_COLUMN = 'currentColumn',
+  ANSWER = 'guess',
+  IS_VALID_ROW = 'isValidRow',
+  GAME_STATE = 'gameState',
+}
+
 const useGame = () => {
-  const [board, setBoard] = useState(defaultBoard);
-  const [currentRow, setCurrentRow] = useState(defaultRow);
-  const [currentColumn, setCurrentColumn] = useState(defaultColumn);
-  const [answer, setAnswer] = useState(getRandomWord);
-  const [isValidRow, setIsValidRow] = useState(true);
-  const [gameState, setGameState] = useState(GameStatus.PLAYING);
+  const [board, setBoard] = usePersistedState({
+    key: LocalStorageStateKeys.BOARD,
+    fallback: defaultBoard,
+  });
+  const [currentRow, setCurrentRow] = usePersistedState({
+    key: LocalStorageStateKeys.CURRENT_ROW,
+    fallback: defaultRow,
+  });
+  const [currentColumn, setCurrentColumn] = usePersistedState({
+    key: LocalStorageStateKeys.CURRENT_COLUMN,
+    fallback: defaultColumn,
+  });
+  const [answer, setAnswer] = usePersistedState({
+    key: LocalStorageStateKeys.ANSWER,
+    fallback: getRandomWord,
+  });
+  const [isValidRow, setIsValidRow] = usePersistedState({
+    key: LocalStorageStateKeys.IS_VALID_ROW,
+    fallback: true,
+  });
+  const [gameState, setGameState] = usePersistedState({
+    key: LocalStorageStateKeys.GAME_STATE,
+    fallback: GameStatus.PLAYING,
+  });
 
   const addLetterToBoard = (character: string) => {
     if (currentColumn < board[0].length && !isGameOver(gameState)) {
