@@ -4,10 +4,20 @@ import colors from './colors';
 import text from './text';
 import space from './space';
 import radii from './radii';
+import zIndices from './zIndices';
+import mediaQueries from './mediaQueries';
 
 const makeTheme = <T extends Theme>(t: T) => t;
 
-const theme = makeTheme({ colors, text, buttons, space, radii });
+const theme = makeTheme({
+  colors,
+  text,
+  buttons,
+  space,
+  radii,
+  zIndices,
+  mediaQueries,
+});
 
 export type ExactThemeType = typeof theme;
 

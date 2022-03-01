@@ -1,10 +1,8 @@
+import { ClassNames, ClassNamesContent } from '@emotion/react';
 import { FC } from 'react';
 import ReactModal from 'react-modal';
-import { Flex, Text } from 'theme-ui';
 import { Noop } from '../../types';
-import useWindowWidth from '../../hooks/useWindowSize';
-import { CloseIcon } from '../icons';
-import Button from '../Button';
+import ModalHeader from './ModalHeader';
 
 const isNotTestEnv = process.env.NODE_ENV !== 'test';
 
@@ -12,108 +10,99 @@ if (isNotTestEnv) {
   ReactModal.setAppElement('#root');
 }
 
-const modalCustomStyles: ReactModal.Styles = {
-  overlay: {
-    backgroundColor: 'rgba(0,0,0,0.5)', // TODO(theme): get this from theme
-    bottom: 0,
-    left: 0,
-    position: 'fixed',
-    right: 0,
-    top: 0,
-    zIndex: '2', // TODO(theme): get this from theme
-  },
-  // TODO(theme): change the content styles based on screen size
-  content: {
-    border: 'none',
-    borderRadius: 0,
-    backgroundColor: 'white',
-    color: 'black',
-    height: '100%',
-    marginLeft: '60%',
-    padding: 0,
-    position: 'static',
-    width: '40%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-};
+const TRANSITION_DURATION = 240;
 
-// TODO: check whether we can do this with theme ui + react modal instead
-const useModalStyles = (): ReactModal.Styles => {
-  const { windowWidth } = useWindowWidth();
+const getOverlayStyles = ({
+  cx,
+  css,
+  theme,
+}: ClassNamesContent): ReactModal.Classes => ({
+  base: cx(css`
+    background-color: rgba(0, 0, 0, 0.5);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: ${theme.zIndices.modalOverlay};
+  `),
+  afterOpen: cx(css``),
+  beforeClose: cx(css``),
+});
 
-  if (windowWidth > 1024) {
-    return modalCustomStyles;
-  }
+const getModalContentStyles = ({
+  cx,
+  css,
+  theme,
+}: ClassNamesContent): ReactModal.Classes => ({
+  base: cx(css`
+    border: none;
+    border-radius: 0;
+    background-color: white;
+    color: black;
+    height: 100%;
+    margin-left: auto;
+    padding: 0;
+    position: static;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity ${TRANSITION_DURATION}ms ease-in-out;
 
-  if (windowWidth > 676) {
-    return {
-      ...modalCustomStyles,
-      content: {
-        ...modalCustomStyles.content,
-        marginLeft: '50%',
-        width: '50%',
-      },
-    };
-  }
+    ${theme.mediaQueries.smToM} {
+      width: 50%;
+    }
 
-  return {
-    ...modalCustomStyles,
-    content: {
-      ...modalCustomStyles.content,
-      height: '80vh',
-      marginTop: '20vh',
-      marginLeft: 0,
-      width: '100%',
-    },
-  };
-};
+    ${theme.mediaQueries.sm} {
+      height: 80vh;
+      margin-top: 20vh;
+      margin-left: 0;
+      width: 100%;
+      transform: translateY(100%);
+      transition: transform ${TRANSITION_DURATION}ms ease-in-out;
+    }
+  `),
+  afterOpen: cx(css`
+    opacity: 1;
+
+    ${theme.mediaQueries.sm} {
+      transform: translateY(0);
+    }
+  `),
+  beforeClose: cx(css`
+    opacity: 0;
+
+    ${theme.mediaQueries.sm} {
+      transform: translateY(100%);
+    }
+  `),
+});
 
 type ModalProps = { isOpen: boolean; onClose: Noop; title: string };
 
-const Modal: FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
-  const modalStyles = useModalStyles();
-  return (
-    <ReactModal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      style={modalStyles}
-      shouldCloseOnOverlayClick
-      ariaHideApp={isNotTestEnv}
-    >
-      <Flex
-        as="header"
-        sx={{
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-          py: 's',
-          px: 'm',
-        }}
-      >
-        <Text as="h2">{title}</Text>
-        <Button
-          onClick={onClose}
-          size="small"
-          sx={{
-            // TODO(theme): Move all these to theme
-            backgroundColor: 'transparent',
-            color: 'rgba(0, 0, 0, 0.6)',
-            transition: '0.3s',
-            borderRadius: '50%',
-            p: 's',
-            '&:hover': {
-              backgroundColor: 'rgba(0,0,0,0.2)',
-              cursor: 'pointer',
-            },
-          }}
+const Modal: FC<ModalProps> = ({ isOpen, onClose, children, title }) => (
+  <ClassNames>
+    {({ css, cx, theme }) => {
+      const overlayClassName = getOverlayStyles({ css, cx, theme });
+      const className = getModalContentStyles({ css, cx, theme });
+      return (
+        <ReactModal
+          shouldCloseOnEsc
+          shouldCloseOnOverlayClick
+          isOpen={isOpen}
+          onRequestClose={onClose}
+          ariaHideApp={isNotTestEnv}
+          overlayClassName={overlayClassName}
+          className={className}
+          closeTimeoutMS={TRANSITION_DURATION}
         >
-          <CloseIcon />
-        </Button>
-      </Flex>
-      {children}
-    </ReactModal>
-  );
-};
+          <ModalHeader title={title} onClose={onClose} />
+          {children}
+        </ReactModal>
+      );
+    }}
+  </ClassNames>
+);
 
 export default Modal;

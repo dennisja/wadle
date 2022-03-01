@@ -1,4 +1,4 @@
-import { getRowCellsStatus } from './rowCellsStatus';
+import { getRowCellsStatus } from '../rowCellsStatus';
 
 describe('first', () => {
   it.each<[string[], string, boolean, string[]]>([

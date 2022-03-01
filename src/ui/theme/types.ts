@@ -30,3 +30,5 @@ export type Radii = ArrayWithExtraKeys<
     circular: string;
   }
 >;
+
+export type ZIndices = { modalOverlay: number };
