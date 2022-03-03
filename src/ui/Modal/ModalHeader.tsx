@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import { Flex, Text, ThemeUIStyleObject } from 'theme-ui';
 import { Noop } from '../../types';
 import Button from '../Button';
-import { CloseIcon } from '../icons';
+import Icon from '../Icon';
 
 const headerContainerStyles: ThemeUIStyleObject = {
   justifyContent: 'space-between',
@@ -38,7 +38,7 @@ const ModalHeader: VFC<ModalHeaderProps> = ({ title, onClose }) => (
         },
       }}
     >
-      <CloseIcon />
+      <Icon iconName="close" />
     </Button>
   </Flex>
 );

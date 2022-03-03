@@ -1,6 +1,10 @@
 import { VFC } from 'react';
 
-export type IconProps = JSX.IntrinsicElements['svg'] & { iconName: string };
+const icons = ['delete', 'info', 'settings', 'stats', 'close'] as const;
+
+type IconName = typeof icons[number];
+
+export type IconProps = JSX.IntrinsicElements['svg'] & { iconName: IconName };
 
 const Icon: VFC<IconProps> = ({
   iconName,
@@ -12,12 +16,5 @@ const Icon: VFC<IconProps> = ({
     <use href={`/sprite.svg#${iconName}`} />
   </svg>
 );
-
-export const createIconComponent = (iconName: string) => {
-  const IconComponent: VFC<JSX.IntrinsicElements['svg']> = (props) => (
-    <Icon {...props} iconName={iconName} />
-  );
-  return IconComponent;
-};
 
 export default Icon;
