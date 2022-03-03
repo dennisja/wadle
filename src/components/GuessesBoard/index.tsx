@@ -46,7 +46,7 @@ type RowProps = {
   rowCellsStatus: readonly LetterStatus[];
 };
 
-const Row: VFC<RowProps> = ({
+export const Row: VFC<RowProps> = ({
   letters,
   isInvalid,
   rowIndex,

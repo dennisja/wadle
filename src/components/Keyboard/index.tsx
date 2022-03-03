@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import { Box, Flex } from 'theme-ui';
 import { LetterStatus } from '../../types';
 import Button from '../../ui/Button';
-import { DeleteIcon } from '../../ui/icons';
+import Icon from '../../ui/Icon';
 
 const KEYBOARD_LETTERS = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
@@ -56,7 +56,7 @@ const Keyboard: VFC<KeyBoardProps> = ({
             variant={LetterStatus.UN_GUESSED}
             sx={{ ml: 'xs', flex: 1.5 }}
           >
-            <DeleteIcon />
+            <Icon iconName="delete" />
           </Button>
         )}
       </Flex>
