@@ -1,6 +1,7 @@
 import { VFC } from 'react';
 import { Button, Flex, Text } from 'theme-ui';
 import Icon from '../ui/Icon';
+import Instructions from './Instructions';
 
 const ActionBar: VFC = () => (
   /** TODO: comeback and fix the styles of the buttons and how the   */
@@ -11,9 +12,7 @@ const ActionBar: VFC = () => (
       width: '100%',
     }}
   >
-    <Button sx={{ color: 'black', backgroundColor: 'white' }}>
-      <Icon iconName="info" />
-    </Button>
+    <Instructions />
     <Text as="h1" variant="h1">
       Wadle
     </Text>
