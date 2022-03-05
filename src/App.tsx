@@ -17,7 +17,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <GameContainer>
-        <ActionBar />
+        <ActionBar
+          gameMode={game.gameMode}
+          onGameModeChange={game.toggleGameMode}
+        />
         <GuessesBoard
           rows={game.board}
           isRowInvalid={game.isRowInvalid}
