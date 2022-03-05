@@ -6,3 +6,15 @@ export enum LetterStatus {
 }
 
 export type Noop = () => void;
+
+export enum GameStatus {
+  PLAYING = 'playing',
+  WON = 'won',
+  LOST = 'lost',
+  IDLE = 'idle',
+}
+
+export enum GameMode {
+  HARD = 'hard',
+  EASY = 'easy',
+}

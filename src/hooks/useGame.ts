@@ -1,8 +1,11 @@
 import { GetRowCellsStatus } from '../components/GuessesBoard/types';
 import { getKeyboardLettersStatus } from '../components/Keyboard/lettersStatus';
-import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/game';
+import { GameMode, GameStatus } from '../types';
+import { isGameOver, isHardMode } from '../utils/game';
+import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/row';
 import { getRandomWord, WORD_BAG } from '../utils/word';
 import { usePersistedState } from './usePersistedState';
+import useStats from './useStats';
 
 const defaultBoard = [
   ['', '', '', '', ''],
@@ -23,25 +26,6 @@ enum RowStatus {
   HAS_INVALID_WORD = 'hasInvalidWord',
 }
 
-export enum GameStatus {
-  PLAYING = 'playing',
-  WON = 'won',
-  LOST = 'lost',
-  IDLE = 'idle',
-}
-
-export enum GameMode {
-  HARD = 'hard',
-  EASY = 'easy',
-}
-
-const GAME_OVER_STATES = [GameStatus.LOST, GameStatus.WON];
-
-const isGameOver = (gameStatus: GameStatus): boolean =>
-  GAME_OVER_STATES.some((status) => status === gameStatus);
-
-const isHardMode = (mode: GameMode): boolean => GameMode.HARD === mode;
-
 const getRowStatus = (characters: string[], answer: string): RowStatus => {
   const word = characters.join('');
   if (word === answer) return RowStatus.HAS_ANSWER;
@@ -55,7 +39,7 @@ enum LocalStorageStateKeys {
   CURRENT_COLUMN = 'currentColumn',
   ANSWER = 'guess',
   IS_VALID_ROW = 'isValidRow',
-  GAME_STATE = 'gameState',
+  GAME_STATE = 'gameStatus',
   GAME_MODE = 'gameMode',
 }
 
@@ -80,17 +64,24 @@ const useGame = () => {
     key: LocalStorageStateKeys.IS_VALID_ROW,
     fallback: true,
   });
-  const [gameState, setGameState] = usePersistedState({
-    key: LocalStorageStateKeys.GAME_STATE,
-    fallback: GameStatus.PLAYING,
-  });
   const [gameMode, setGameMode] = usePersistedState({
     key: LocalStorageStateKeys.GAME_MODE,
     fallback: GameMode.EASY,
   });
+  const { gameStats, streakStats, ...stats } = useStats();
+  const [gameStatus, setGameStatus] = usePersistedState({
+    key: LocalStorageStateKeys.GAME_STATE,
+    fallback: () => {
+      // initialize stats for someone's first every game
+      if (!gameStats.length) {
+        stats.updateStatsOnGameStart(gameMode);
+      }
+      return GameStatus.PLAYING;
+    },
+  });
 
   const addLetterToBoard = (character: string) => {
-    if (currentColumn < board[0].length && !isGameOver(gameState)) {
+    if (currentColumn < board[0].length && !isGameOver(gameStatus)) {
       setBoard((prevBoard) => {
         const newRow = prevBoard[currentRow].map((value, index) =>
           index === currentColumn ? character : value
@@ -105,7 +96,7 @@ const useGame = () => {
   };
 
   const removeLetterFromBoard = () => {
-    if (currentColumn >= 0 && !isGameOver(gameState)) {
+    if (currentColumn >= 0 && !isGameOver(gameStatus)) {
       setBoard((prevBoard) => {
         const newRow = prevBoard[currentRow].map((value, index) =>
           index === currentColumn - 1 ? '' : value
@@ -119,9 +110,8 @@ const useGame = () => {
     }
   };
 
-  // rename this to advance to next answer
   const advanceToNextRow = () => {
-    if (isGameOver(gameState)) {
+    if (isGameOver(gameStatus)) {
       return;
     }
 
@@ -148,27 +138,36 @@ const useGame = () => {
     }
 
     if (rowState === RowStatus.HAS_ANSWER) {
-      setGameState(GameStatus.WON);
+      stats.updateStatsOnGameEnd({
+        status: GameStatus.WON,
+        guesses: currentRow + 1,
+      });
+      setGameStatus(GameStatus.WON);
     }
 
     if (currentRow === board.length - 1 && rowState !== RowStatus.HAS_ANSWER) {
-      setGameState(GameStatus.LOST);
+      stats.updateStatsOnGameEnd({
+        status: GameStatus.LOST,
+        guesses: currentRow + 1,
+      });
+      setGameStatus(GameStatus.LOST);
     }
 
     setCurrentColumn(0);
     setCurrentRow((row) => Math.min(row + 1, board.length));
   };
 
-  const resetGame = () => {
+  const restartGame = () => {
     setBoard(defaultBoard);
     setCurrentRow(0);
     setCurrentColumn(0);
-    setGameState(GameStatus.PLAYING);
+    setGameStatus(GameStatus.PLAYING);
     setAnswer(getRandomWord());
+    stats.updateStatsOnGameStart(gameMode);
   };
 
   const toIdleState = () => {
-    setGameState(GameStatus.IDLE);
+    setGameStatus(GameStatus.IDLE);
   };
 
   const rowCellsStatus: GetRowCellsStatus = ({ row, rowIndex }) =>
@@ -186,7 +185,7 @@ const useGame = () => {
   return {
     board,
     addLetterToBoard,
-    resetGame,
+    restartGame,
     removeLetterFromBoard,
     advanceToNextRow,
     keyboardLettersStatus: getKeyboardLettersStatus({
@@ -195,14 +194,16 @@ const useGame = () => {
       answer,
     }),
     isRowInvalid,
-    gameStatus: gameState,
-    isGameOver: isGameOver(gameState),
+    gameStatus,
+    isGameOver: isGameOver(gameStatus),
     currentStep: currentRow,
     answer,
     toIdleState,
     getRowCellsStatus: rowCellsStatus,
     toggleGameMode,
     gameMode,
+    streakStats,
+    gameStats,
   };
 };
 

@@ -8,9 +8,8 @@ import {
   Divider,
   ThemeUIStyleObject,
 } from 'theme-ui';
-import { GameMode } from '../../hooks/useGame';
 import useToggle from '../../hooks/useToggle';
-import { Noop } from '../../types';
+import { GameMode, Noop } from '../../types';
 import Icon from '../../ui/Icon';
 import Modal from '../../ui/Modal';
 

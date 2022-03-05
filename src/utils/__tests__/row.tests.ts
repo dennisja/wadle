@@ -1,4 +1,4 @@
-import { getPreviousRevelationErrors, getRowCellsStatus } from '../game';
+import { getPreviousRevelationErrors, getRowCellsStatus } from '../row';
 
 describe('utils/game', () => {
   describe('getPreviousRevelationErrors', () => {

@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import { Flex, Text } from 'theme-ui';
-import { GameStatus } from '../hooks/useGame';
+import { GameStatus } from '../types';
 import Button from '../ui/Button';
 import { getRandomItem } from '../utils';
 
