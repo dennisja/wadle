@@ -18,3 +18,16 @@ export enum GameMode {
   HARD = 'hard',
   EASY = 'easy',
 }
+
+export type GameStats = {
+  status: GameStatus;
+  guesses: number;
+  startedAt: number; // time stamp at which game was started
+  finishedAt: number;
+  mode: GameMode;
+};
+
+export type StreakStats = {
+  currentStreak: number;
+  maxStreak: number;
+};

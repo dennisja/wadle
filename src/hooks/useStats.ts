@@ -1,24 +1,11 @@
 import { useCallback } from 'react';
-import { GameMode, GameStatus } from '../types';
+import { GameMode, GameStats, GameStatus, StreakStats } from '../types';
 import { usePersistedState } from './usePersistedState';
 
 enum StatsLocalStorageKeys {
   GAME = 'stats:Game',
   STREAK = 'stats:Streak',
 }
-
-type GameStats = {
-  status: GameStatus;
-  guesses: number;
-  startedAt: number; // time stamp at which game was started
-  finishedAt: number;
-  mode: GameMode;
-};
-
-type StreakStats = {
-  currentStreak: number;
-  maxStreak: number;
-};
 
 type UpdateStatsOnGameEndOptions = {
   status: GameStatus;

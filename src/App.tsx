@@ -21,6 +21,8 @@ function App() {
         <ActionBar
           gameMode={game.gameMode}
           onGameModeChange={game.toggleGameMode}
+          gameStats={game.gameStats}
+          streakStats={game.streakStats}
         />
         <GuessesBoard
           rows={game.board}
