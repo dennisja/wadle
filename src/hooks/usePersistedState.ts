@@ -61,7 +61,7 @@ export const usePersistedState = <T>({
 }: UsePersistedStateOptions<T>): UsePersistedStateResult<T> => {
   const getDefaultValue = () => {
     const fallbackValue = fallback instanceof Function ? fallback() : fallback;
-    return read<T>({ key, fallback: fallbackValue }) as T;
+    return read<T>({ key, fallback: fallbackValue });
   };
 
   const [state, setState] = useState<T>(getDefaultValue);

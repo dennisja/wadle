@@ -17,7 +17,15 @@ const exampleTilesStyles: ThemeUIStyleObject = {
   gridTemplateColumns: 'repeat(5, 1fr)',
   rowGap: 'm',
   width: '350px',
+  maxWidth: '90vw',
   height: '60px',
+};
+
+const instructionContainerStyles: ThemeUIStyleObject = {
+  padding: 'm',
+  flexDirection: 'column',
+  rowGap: 'm',
+  overflow: 'auto',
 };
 
 const EXAMPLE_ROW_LETTERS = ['W', 'A', 'D', 'L', 'E'];
@@ -145,7 +153,7 @@ const Instructions: VFC = () => {
         <Icon iconName="info" />
       </IconButton>
       <Modal isOpen={isOpen} onClose={toggleIsOpen} title="Instructions">
-        <Flex sx={{ padding: 'm', flexDirection: 'column', rowGap: 'm' }}>
+        <Flex sx={instructionContainerStyles}>
           {INSTRUCTIONS.map((instruction) => (
             <Text key={instruction.slice(0, 10)}>{instruction}</Text>
           ))}

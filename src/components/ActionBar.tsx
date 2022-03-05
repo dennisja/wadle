@@ -1,24 +1,24 @@
 import { VFC } from 'react';
-import { Button, Flex, Text } from 'theme-ui';
-import Icon from '../ui/Icon';
+import { Flex, Text, ThemeUIStyleObject } from 'theme-ui';
 import Instructions from './Instructions';
+import Settings, { SettingsProps } from './Settings';
 
-const ActionBar: VFC = () => (
-  /** TODO: comeback and fix the styles of the buttons and how the   */
-  <Flex
-    sx={{
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      width: '100%',
-    }}
-  >
+const actionBarContainerStyles: ThemeUIStyleObject = {
+  justifyContent: 'space-around',
+  alignItems: 'center',
+  width: '100%',
+};
+
+type ActionBarProps = SettingsProps;
+
+const ActionBar: VFC<ActionBarProps> = ({ gameMode, onGameModeChange }) => (
+  <Flex sx={actionBarContainerStyles}>
     <Instructions />
     <Text as="h1" variant="h1">
       Wadle
     </Text>
-    <Button sx={{ color: 'black', backgroundColor: 'white' }}>
-      <Icon iconName="settings" />
-    </Button>
+    <Settings gameMode={gameMode} onGameModeChange={onGameModeChange} />
   </Flex>
 );
+
 export default ActionBar;

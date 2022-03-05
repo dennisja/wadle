@@ -1,6 +1,6 @@
-import { getRowCellsStatus } from '../components/GuessesBoard/rowCellsStatus';
 import { GetRowCellsStatus } from '../components/GuessesBoard/types';
 import { getKeyboardLettersStatus } from '../components/Keyboard/lettersStatus';
+import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/game';
 import { getRandomWord, WORD_BAG } from '../utils/word';
 import { usePersistedState } from './usePersistedState';
 
@@ -30,10 +30,17 @@ export enum GameStatus {
   IDLE = 'idle',
 }
 
+export enum GameMode {
+  HARD = 'hard',
+  EASY = 'easy',
+}
+
 const GAME_OVER_STATES = [GameStatus.LOST, GameStatus.WON];
 
 const isGameOver = (gameStatus: GameStatus): boolean =>
   GAME_OVER_STATES.some((status) => status === gameStatus);
+
+const isHardMode = (mode: GameMode): boolean => GameMode.HARD === mode;
 
 const getRowStatus = (characters: string[], answer: string): RowStatus => {
   const word = characters.join('');
@@ -49,6 +56,7 @@ enum LocalStorageStateKeys {
   ANSWER = 'guess',
   IS_VALID_ROW = 'isValidRow',
   GAME_STATE = 'gameState',
+  GAME_MODE = 'gameMode',
 }
 
 const useGame = () => {
@@ -75,6 +83,10 @@ const useGame = () => {
   const [gameState, setGameState] = usePersistedState({
     key: LocalStorageStateKeys.GAME_STATE,
     fallback: GameStatus.PLAYING,
+  });
+  const [gameMode, setGameMode] = usePersistedState({
+    key: LocalStorageStateKeys.GAME_MODE,
+    fallback: GameMode.EASY,
   });
 
   const addLetterToBoard = (character: string) => {
@@ -120,6 +132,21 @@ const useGame = () => {
       return;
     }
 
+    if (isHardMode(gameMode)) {
+      const revelationErrors = getPreviousRevelationErrors({
+        answer,
+        currentRow: board[currentRow],
+        previousRow: board[currentRow - 1] || [],
+      });
+      if (revelationErrors.length) {
+        setIsValidRow(false);
+        // TODO(toast): add toast here instead
+        // eslint-disable-next-line no-alert
+        window.alert(revelationErrors.join('\n'));
+        return;
+      }
+    }
+
     if (rowState === RowStatus.HAS_ANSWER) {
       setGameState(GameStatus.WON);
     }
@@ -150,6 +177,12 @@ const useGame = () => {
   const isRowInvalid = (rowIndex: number): boolean =>
     currentRow === rowIndex && !isValidRow;
 
+  const toggleGameMode = () => {
+    setGameMode((prevMode) =>
+      prevMode === GameMode.HARD ? GameMode.EASY : GameMode.HARD
+    );
+  };
+
   return {
     board,
     addLetterToBoard,
@@ -168,6 +201,8 @@ const useGame = () => {
     answer,
     toIdleState,
     getRowCellsStatus: rowCellsStatus,
+    toggleGameMode,
+    gameMode,
   };
 };
 
