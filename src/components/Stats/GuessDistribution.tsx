@@ -1,5 +1,5 @@
 import { useMemo, VFC } from 'react';
-import { Box, Flex } from 'theme-ui';
+import { Box, Flex, ThemeUIStyleObject, Text } from 'theme-ui';
 import { GameStats } from '../../types';
 
 type GuessDistributionEntry = { value: number; title: string };
@@ -31,6 +31,21 @@ export const getGuessBarWidth = (value: number, maxValue: number): number => {
   return Math.round(((value + offset) / (maxValue + offset)) * 100);
 };
 
+const barStyles: ThemeUIStyleObject = {
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  pr: 'xs',
+  mx: 'xs',
+  bg: 'colorTone.1',
+  color: 'colorTone.6',
+};
+
+const barContainerStyles: ThemeUIStyleObject = {
+  height: '20px',
+  width: '100%',
+  mb: 's',
+};
+
 type GuessDistributionProps = { gameStats: readonly GameStats[] };
 
 const GuessDistribution: VFC<GuessDistributionProps> = ({ gameStats }) => {
@@ -46,18 +61,17 @@ const GuessDistribution: VFC<GuessDistributionProps> = ({ gameStats }) => {
 
   return (
     <Box sx={{ p: 'm' }}>
+      <Text variant="h4" as="h3" sx={{ mb: 'm' }}>
+        Guess Distribution
+      </Text>
       {guessDistribution.map((guess) => (
-        <Flex key={guess.title} sx={{ height: '20px', width: '100%', mb: 's' }}>
+        <Flex key={guess.title} sx={barContainerStyles}>
           <Flex>{guess.title}</Flex>
           <Flex sx={{ flex: 1 }}>
             <Flex
               sx={{
                 width: `${getGuessBarWidth(guess.value, maxValue)}%`,
-                bg: 'green',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                px: 's',
-                mx: 'xs',
+                ...barStyles,
               }}
             >
               <Box>{guess.value}</Box>

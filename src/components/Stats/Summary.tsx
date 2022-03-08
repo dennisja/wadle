@@ -5,7 +5,7 @@ import { Statistics } from './types';
 
 type StatsSummary = { value: number; title: string };
 
-const getTotalPlayedGames = (gameStats: readonly GameStats[]): number =>
+export const getTotalPlayedGames = (gameStats: readonly GameStats[]): number =>
   gameStats[gameStats.length - 1].status === GameStatus.PLAYING
     ? gameStats.length - 1
     : gameStats.length;
@@ -36,23 +36,71 @@ const getStreakSummary = ({
   return summary;
 };
 
-type SummaryProps = {
-  summary: readonly StatsSummary[];
+const getTimeSummary = (
+  gameStats: readonly GameStats[]
+): readonly StatsSummary[] => {
+  const gameTimes = gameStats.reduce<number[]>((allTimes, currentGame) => {
+    if (currentGame.finishedAt > 0) {
+      allTimes.push(currentGame.finishedAt - currentGame.startedAt);
+    }
+    return allTimes;
+  }, []);
+  const numberOfGames = gameTimes.length;
+  const totalGameTime = gameTimes.reduce<number>(
+    (totalTime, currentTime) => currentTime + totalTime,
+    0
+  );
+  const maxTime = Math.max(...gameTimes);
+  const minTime = Math.min(...gameTimes);
+  const averageTime = totalGameTime / numberOfGames;
+
+  return [
+    { value: maxTime, title: 'Longest game' },
+    { value: minTime, title: 'Shortest game' },
+    { value: averageTime, title: 'Average time' },
+    { value: totalGameTime, title: 'Play time' },
+  ];
 };
 
-const Summary: VFC<SummaryProps> = ({ summary }) => (
-  <Flex sx={{ justifyContent: 'space-between', p: 'm' }}>
-    {summary.map((stat) => (
-      <Box key={stat.title}>
-        <Text as="p" variant="h4" sx={{ textAlign: 'center' }}>
-          {stat.value}
-        </Text>
-        <Text as="p" variant="caption" sx={{ wordBreak: 'break-word' }}>
-          {stat.title}
-        </Text>
-      </Box>
-    ))}
-  </Flex>
+const formatTime = (totalMilliSeconds: number): string => {
+  const milliSecondsInASecond = 1000;
+  const milliSecondsInMinute = 60 * milliSecondsInASecond;
+  const milliSecondsInHour = 60 * milliSecondsInMinute;
+
+  const hours = Math.floor(totalMilliSeconds / milliSecondsInHour);
+  let remainder = totalMilliSeconds % milliSecondsInHour;
+
+  const minutes = Math.floor(remainder / milliSecondsInMinute);
+  remainder %= milliSecondsInMinute;
+
+  const seconds = Math.floor(remainder / milliSecondsInASecond);
+  return `${hours}:${minutes}:${seconds}`;
+};
+
+type SummaryProps = {
+  summary: readonly StatsSummary[];
+  valueFormatter?: (value: number) => string;
+  title: string;
+};
+
+const Summary: VFC<SummaryProps> = ({ summary, valueFormatter, title }) => (
+  <Box sx={{ p: 'm' }}>
+    <Text variant="h4" as="h3">
+      {title}
+    </Text>
+    <Flex sx={{ justifyContent: 'space-between' }}>
+      {summary.map((stat) => (
+        <Box key={stat.title} sx={{ textAlign: 'center' }}>
+          <Text as="p" variant="h4" sx={{ textAlign: 'center' }}>
+            {valueFormatter ? valueFormatter(stat.value) : stat.value}
+          </Text>
+          <Text as="p" variant="caption" sx={{ wordBreak: 'break-word' }}>
+            {stat.title}
+          </Text>
+        </Box>
+      ))}
+    </Flex>
+  </Box>
 );
 
 type StreakSummaryProps = Statistics;
@@ -62,14 +110,16 @@ const StreakSummary: VFC<StreakSummaryProps> = ({ streakStats, gameStats }) => {
     () => getStreakSummary({ gameStats, streakStats }),
     [gameStats, streakStats]
   );
-  return <Summary summary={streakSummary} />;
+  return <Summary summary={streakSummary} title="Streak" />;
 };
 
 type TimeSummaryProps = { gameStats: readonly GameStats[] };
 
 const TimeSummary: VFC<TimeSummaryProps> = ({ gameStats }) => {
-  console.log(gameStats);
-  return null;
+  const timeSummary = getTimeSummary(gameStats);
+  return (
+    <Summary summary={timeSummary} valueFormatter={formatTime} title="Time" />
+  );
 };
 
 export { StreakSummary, TimeSummary };
