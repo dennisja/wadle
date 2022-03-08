@@ -72,7 +72,7 @@ const useGame = () => {
   const [gameStatus, setGameStatus] = usePersistedState({
     key: LocalStorageStateKeys.GAME_STATE,
     fallback: () => {
-      // initialize stats for someone's first every game
+      // initialize stats for someone's very first game
       if (!gameStats.length) {
         stats.updateStatsOnGameStart(gameMode);
       }
