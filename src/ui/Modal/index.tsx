@@ -61,6 +61,7 @@ const getModalContentStyles = ({
       width: 100%;
       transform: translateY(100%);
       transition: transform ${TRANSITION_DURATION}ms ease-in-out;
+      padding-bottom: calc(env(safe-area-inset-bottom) + ${theme.space.xxl}px);
     }
   `),
   afterOpen: cx(css`

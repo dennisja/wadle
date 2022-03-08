@@ -5,7 +5,8 @@ import GameOver from './components/GameOver';
 import GlobalStyles from './components/GlobalStyles';
 import GuessesBoard from './components/GuessesBoard';
 import Keyboard from './components/Keyboard';
-import useGame, { GameStatus } from './hooks/useGame';
+import useGame from './hooks/useGame';
+import { GameStatus } from './types';
 import Button from './ui/Button';
 import Modal from './ui/Modal';
 import theme from './ui/theme';
@@ -20,6 +21,8 @@ function App() {
         <ActionBar
           gameMode={game.gameMode}
           onGameModeChange={game.toggleGameMode}
+          gameStats={game.gameStats}
+          streakStats={game.streakStats}
         />
         <GuessesBoard
           rows={game.board}
@@ -27,7 +30,7 @@ function App() {
           getRowCellsStatus={game.getRowCellsStatus}
         />
         {GameStatus.IDLE === game.gameStatus ? (
-          <Button size="large" sx={{ mb: 'xl' }} onClick={game.resetGame}>
+          <Button size="large" sx={{ mb: 'xl' }} onClick={game.restartGame}>
             Play Again
           </Button>
         ) : (
@@ -46,7 +49,7 @@ function App() {
           <GameOver
             answer={game.answer}
             gameStatus={game.gameStatus}
-            playAgain={game.resetGame}
+            playAgain={game.restartGame}
             steps={game.currentStep}
           />
         </Modal>

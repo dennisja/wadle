@@ -16,16 +16,15 @@ import { Row } from './GuessesBoard';
 const exampleTilesStyles: ThemeUIStyleObject = {
   gridTemplateColumns: 'repeat(5, 1fr)',
   rowGap: 'm',
-  width: '350px',
+  width: '250px',
   maxWidth: '90vw',
-  height: '60px',
+  height: '40px',
 };
 
 const instructionContainerStyles: ThemeUIStyleObject = {
   padding: 'm',
   flexDirection: 'column',
-  rowGap: 'm',
-  overflow: 'auto',
+  overflowY: 'auto',
 };
 
 const EXAMPLE_ROW_LETTERS = ['W', 'A', 'D', 'L', 'E'];
@@ -155,10 +154,12 @@ const Instructions: VFC = () => {
       <Modal isOpen={isOpen} onClose={toggleIsOpen} title="Instructions">
         <Flex sx={instructionContainerStyles}>
           {INSTRUCTIONS.map((instruction) => (
-            <Text key={instruction.slice(0, 10)}>{instruction}</Text>
+            <Text key={instruction.slice(0, 10)} sx={{ mb: 'm' }}>
+              {instruction}
+            </Text>
           ))}
-          <Divider />
-          <Text as="h3" variant="h4">
+          <Divider color="colorTone.3" />
+          <Text as="h3" variant="h4" sx={{ mb: 'm' }}>
             Examples
           </Text>
           {EXAMPLES.map((example) => (
