@@ -9360,4 +9360,4 @@ const BAD_WORDS_BAG = createWordBag(BAD_WORDS_LIST);
 
 const getRandomWord = () => getRandomItem(WORD_LIST).toUpperCase();
 
-export { WORD_LIST, WORD_BAG, getRandomWord, BAD_WORDS_BAG };
+export { WORD_BAG, getRandomWord, BAD_WORDS_BAG };

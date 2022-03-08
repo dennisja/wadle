@@ -1,6 +1,6 @@
 import { useMemo, VFC } from 'react';
 import { Box, Flex, ThemeUIStyleObject, Text } from 'theme-ui';
-import { GameStats } from '../../types';
+import { GameStats, GameStatus } from '../../types';
 
 type GuessDistributionEntry = { value: number; title: string };
 
@@ -17,8 +17,9 @@ export const getGuessDistribution = (
   ];
 
   gameStats.forEach((stat) => {
-    // a game in progress has its stats as zero. We don't want that in here
-    if (stat.guesses) {
+    // a game in progress has its guesses as zero. We don't want that in here
+    // we also want to include only won games in the guess distribution
+    if (stat.guesses && stat.status === GameStatus.WON) {
       distribution[stat.guesses - 1].value += 1;
     }
   });
