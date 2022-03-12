@@ -1,7 +1,6 @@
 import { VFC } from 'react';
-import { Flex, Text, ThemeUIStyleObject } from 'theme-ui';
+import { Flex, IconButton, Text, ThemeUIStyleObject } from 'theme-ui';
 import { Noop } from '../../types';
-import Button from '../Button';
 import Icon from '../Icon';
 
 const headerContainerStyles: ThemeUIStyleObject = {
@@ -22,9 +21,8 @@ const ModalHeader: VFC<ModalHeaderProps> = ({ title, onClose }) => (
     <Text as="h2" variant="h4">
       {title}
     </Text>
-    <Button
+    <IconButton
       onClick={onClose}
-      size="small"
       sx={{
         // TODO(theme): Move all these to theme
         backgroundColor: 'transparent',
@@ -39,7 +37,7 @@ const ModalHeader: VFC<ModalHeaderProps> = ({ title, onClose }) => (
       }}
     >
       <Icon iconName="close" />
-    </Button>
+    </IconButton>
   </Flex>
 );
 

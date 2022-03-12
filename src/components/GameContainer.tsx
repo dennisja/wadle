@@ -1,8 +1,9 @@
 import { FC } from 'react';
-import { Flex } from 'theme-ui';
+import { Flex, FlexProps } from 'theme-ui';
 
-const GameContainer: FC = ({ children }) => (
+const GameContainer: FC<FlexProps> = ({ children, ...props }) => (
   <Flex
+    {...props}
     sx={{
       flexDirection: 'column',
       justifyContent: 'space-between',
