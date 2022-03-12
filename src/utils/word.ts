@@ -1,6 +1,6 @@
 import { getRandomItem } from '.';
 
-const BAD_WORDS_LIST = ['penis', 'whore'];
+const BAD_WORDS_LIST = ['penis', 'whore', 'dildo', 'pussy', 'fucks'];
 
 const WORD_LIST = [
   'aahed',
@@ -2079,7 +2079,6 @@ const WORD_LIST = [
   'diked',
   'diker',
   'dikes',
-  'dildo',
   'dills',
   'dilly',
   'dimer',
@@ -6279,7 +6278,6 @@ const WORD_LIST = [
   'purty',
   'puses',
   'pushy',
-  'pussy',
   'puton',
   'putti',
   'putto',
@@ -8773,6 +8771,7 @@ const WORD_LIST = [
   'vireo',
   'vires',
   'virga',
+  'virgo',
   'virid',
   'virls',
   'virtu',

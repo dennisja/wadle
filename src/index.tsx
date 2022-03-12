@@ -5,6 +5,7 @@ import { BrowserTracing } from '@sentry/tracing';
 import App from './App';
 import { SENTRY_DSN, NODE_ENV, COMMIT_SHA } from './envs';
 import reportWebVitals from './reportWebVitals';
+import { ROOT_ELEMENT } from './utils/constants';
 
 Sentry.init({
   dsn: SENTRY_DSN,
@@ -18,7 +19,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  ROOT_ELEMENT
 );
 
 // If you want to start measuring performance in your app, pass a function
