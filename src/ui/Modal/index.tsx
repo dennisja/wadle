@@ -18,7 +18,7 @@ const getOverlayStyles = ({
   theme,
 }: ClassNamesContent): ReactModal.Classes => ({
   base: cx(css`
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: ${theme.colors.opacity50};
     bottom: 0;
     left: 0;
     position: fixed;
@@ -38,8 +38,8 @@ const getModalContentStyles = ({
   base: cx(css`
     border: none;
     border-radius: 0;
-    background-color: white;
-    color: black;
+    background-color: ${theme.colors.colorTone[5]};
+    color: ${theme.colors.text};
     height: 100%;
     margin-left: auto;
     padding: 0;

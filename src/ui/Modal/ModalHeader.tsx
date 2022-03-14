@@ -6,7 +6,8 @@ import Icon from '../Icon';
 const headerContainerStyles: ThemeUIStyleObject = {
   justifyContent: 'space-between',
   alignItems: 'center',
-  borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+  borderBottom: '1px solid',
+  borderBottomColor: 'opacity10',
   py: 's',
   px: 'm',
 };
@@ -22,19 +23,9 @@ const ModalHeader: VFC<ModalHeaderProps> = ({ title, onClose }) => (
       {title}
     </Text>
     <IconButton
+      variant="iconSecondary"
       onClick={onClose}
-      sx={{
-        // TODO(theme): Move all these to theme
-        backgroundColor: 'transparent',
-        color: 'rgba(0, 0, 0, 0.6)',
-        transition: '0.3s',
-        borderRadius: '50%',
-        p: 's',
-        '&:hover': {
-          backgroundColor: 'rgba(0,0,0,0.2)',
-          cursor: 'pointer',
-        },
-      }}
+      sx={{ p: 's', borderRadius: '50%' }}
     >
       <Icon iconName="close" />
     </IconButton>

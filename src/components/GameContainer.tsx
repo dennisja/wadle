@@ -9,6 +9,7 @@ const GameContainer: FC<FlexProps> = ({ children, ...props }) => (
       justifyContent: 'space-between',
       alignItems: 'center',
       height: '100%',
+      bg: 'colorTone.6',
     }}
   >
     {children}

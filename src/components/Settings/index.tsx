@@ -1,4 +1,4 @@
-import { VFC } from 'react';
+import { FC, useCallback, VFC } from 'react';
 import {
   Flex,
   Box,
@@ -7,6 +7,7 @@ import {
   Switch,
   Divider,
   ThemeUIStyleObject,
+  useColorMode,
 } from 'theme-ui';
 import useToggle from '../../hooks/useToggle';
 import { GameMode, Noop } from '../../types';
@@ -19,6 +20,47 @@ const switchStyles: ThemeUIStyleObject = {
   },
 };
 
+type SettingRowProps = { title: string; description?: string };
+
+const SettingRow: FC<SettingRowProps> = ({ title, description, children }) => (
+  <>
+    <Box sx={{ p: 'm' }}>
+      <Flex sx={{ justifyContent: 'space-between', mb: 's' }}>
+        <Text as="div" variant="h5">
+          {title}
+        </Text>
+        {children}
+      </Flex>
+      {description && (
+        <Text as="p" variant="caption">
+          {description}
+        </Text>
+      )}
+    </Box>
+    <Divider color="opacity10" />
+  </>
+);
+
+const ColorModeSettingRow = () => {
+  const [colorMode, setColorMode] = useColorMode();
+
+  const toggleColorMode = useCallback(() => {
+    setColorMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  }, [setColorMode]);
+
+  return (
+    <SettingRow title="Dark mode">
+      <Box>
+        <Switch
+          sx={switchStyles}
+          checked={colorMode === 'dark'}
+          onChange={toggleColorMode}
+        />
+      </Box>
+    </SettingRow>
+  );
+};
+
 export type SettingsProps = {
   onGameModeChange: Noop;
   gameMode: GameMode;
@@ -27,32 +69,25 @@ export type SettingsProps = {
 const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
   const [isOpen, toggleModal] = useToggle();
 
-  // TODO: make a UI component for settings later
   return (
     <>
       <IconButton onClick={toggleModal}>
         <Icon iconName="settings" />
       </IconButton>
       <Modal title="Settings" isOpen={isOpen} onClose={toggleModal}>
-        <Box sx={{ p: 's', rowGap: 's' }}>
-          <Flex sx={{ justifyContent: 'space-between', mb: 's' }}>
-            <Text as="div" variant="h5">
-              Hard mode
-            </Text>
-            <Box>
-              <Switch
-                sx={switchStyles}
-                checked={gameMode === GameMode.HARD}
-                onChange={onGameModeChange}
-              />
-            </Box>
-          </Flex>
-          <Text as="p" variant="caption">
-            All revelations in the previous guesses must be used
-          </Text>
-        </Box>
-        {/* TODO: move this to theme */}
-        <Divider color="rgba(0,0,0,0.1)" />
+        <SettingRow
+          title="Hard mode"
+          description="All revelations in the previous guesses must be used"
+        >
+          <Box>
+            <Switch
+              sx={switchStyles}
+              checked={gameMode === GameMode.HARD}
+              onChange={onGameModeChange}
+            />
+          </Box>
+        </SettingRow>
+        <ColorModeSettingRow />
       </Modal>
     </>
   );
