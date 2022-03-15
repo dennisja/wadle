@@ -116,7 +116,7 @@ const StreakSummary: VFC<StreakSummaryProps> = ({ streakStats, gameStats }) => {
 type TimeSummaryProps = { gameStats: readonly GameStats[] };
 
 const TimeSummary: VFC<TimeSummaryProps> = ({ gameStats }) => {
-  const timeSummary = getTimeSummary(gameStats);
+  const timeSummary = useMemo(() => getTimeSummary(gameStats), [gameStats]);
   return (
     <Summary summary={timeSummary} valueFormatter={formatTime} title="Time" />
   );

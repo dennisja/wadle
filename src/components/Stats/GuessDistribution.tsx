@@ -75,7 +75,7 @@ const GuessDistribution: VFC<GuessDistributionProps> = ({ gameStats }) => {
                 ...barStyles,
               }}
             >
-              <Box>{guess.value}</Box>
+              <Text color="text">{guess.value}</Text>
             </Flex>
           </Flex>
         </Flex>

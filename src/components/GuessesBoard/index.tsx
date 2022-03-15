@@ -4,7 +4,10 @@ import { LetterStatus } from '../../types';
 import { GetRowCellsStatus } from './types';
 
 const LETTER_STATUS_STYLES: Record<LetterStatus, ThemeUIStyleObject> = {
-  [LetterStatus.UN_GUESSED]: {},
+  [LetterStatus.UN_GUESSED]: {
+    border: '1px solid',
+    borderColor: 'colorTone.2',
+  },
   [LetterStatus.PRESENT]: {
     backgroundColor: 'yellow',
     color: 'colorTone.6',
@@ -24,14 +27,12 @@ type CellProps = { character: string; state: LetterStatus; isInvalid: boolean };
 const Cell: VFC<CellProps> = ({ character, state, isInvalid }) => (
   <Text
     sx={{
-      borderRadius: '6px',
-      boxShadow:
-        '5px 5px 5px rgba(0, 0, 0, .1), -5px -5px 5px rgba(255,255,255)',
+      borderRadius: 's',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       ...(state && LETTER_STATUS_STYLES[state]),
-      ...(isInvalid && { border: '1px solid red' }),
+      ...(isInvalid && { borderColor: 'red' }),
     }}
     variant="tiles"
   >

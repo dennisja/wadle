@@ -22,6 +22,23 @@ const buttons = {
     color: 'colorTone.7',
     backgroundColor: 'green',
   },
+  icon: {
+    color: 'text',
+    '&:hover': {
+      color: 'green',
+      backgroundColor: 'colorTone.7',
+      cursor: 'pointer',
+    },
+  },
+  iconSecondary: {
+    backgroundColor: 'transparent',
+    color: 'opacity50',
+    transition: '0.3s',
+    '&:hover': {
+      backgroundColor: 'opacity10',
+      cursor: 'pointer',
+    },
+  },
 };
 
 export const buttonSizes: Record<ButtonSize, ThemeUIStyleObject> = {
