@@ -72,6 +72,13 @@ const boardStyles: ThemeUIStyleObject = {
   gap: 's',
   width: '350px',
   height: '420px',
+  '@media screen and (max-width: 349px)': {
+    width: '90vw',
+    height: 'calc(90vw * 6 / 5)',
+    '& > span': {
+      fontSize: '20px',
+    },
+  },
 };
 
 type GuessesBoardProps = {
