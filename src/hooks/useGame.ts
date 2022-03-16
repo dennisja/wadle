@@ -3,7 +3,7 @@ import { getKeyboardLettersStatus } from '../components/Keyboard/lettersStatus';
 import { GameMode, GameStatus } from '../types';
 import { isGameOver, isHardMode } from '../utils/game';
 import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/row';
-import { getRandomWord, WORD_BAG } from '../utils/word';
+import { getAnswer, getAnswerIndex, WORD_BAG } from '../utils/word';
 import { usePersistedState } from './usePersistedState';
 import useStats from './useStats';
 
@@ -56,9 +56,9 @@ const useGame = () => {
     key: LocalStorageStateKeys.CURRENT_COLUMN,
     fallback: defaultColumn,
   });
-  const [answer, setAnswer] = usePersistedState({
+  const [answerIndex, setAnswerIndex] = usePersistedState({
     key: LocalStorageStateKeys.ANSWER,
-    fallback: getRandomWord,
+    fallback: getAnswerIndex,
   });
   const [isValidRow, setIsValidRow] = usePersistedState({
     key: LocalStorageStateKeys.IS_VALID_ROW,
@@ -79,6 +79,7 @@ const useGame = () => {
       return GameStatus.PLAYING;
     },
   });
+  const answer = getAnswer(answerIndex);
 
   const addLetterToBoard = (character: string) => {
     if (currentColumn < board[0].length && !isGameOver(gameStatus)) {
@@ -162,7 +163,7 @@ const useGame = () => {
     setCurrentRow(0);
     setCurrentColumn(0);
     setGameStatus(GameStatus.PLAYING);
-    setAnswer(getRandomWord());
+    setAnswerIndex(getAnswerIndex());
     stats.updateStatsOnGameStart(gameMode);
   };
 
@@ -197,7 +198,7 @@ const useGame = () => {
     gameStatus,
     isGameOver: isGameOver(gameStatus),
     currentStep: currentRow,
-    answer,
+    answerIndex,
     toIdleState,
     getRowCellsStatus: rowCellsStatus,
     toggleGameMode,

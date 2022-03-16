@@ -47,7 +47,7 @@ function App() {
           onClose={game.toIdleState}
         >
           <GameOver
-            answer={game.answer}
+            answerId={game.answerIndex}
             gameStatus={game.gameStatus}
             playAgain={game.restartGame}
             steps={game.currentStep}

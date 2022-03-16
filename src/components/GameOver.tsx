@@ -3,6 +3,7 @@ import { Flex, Text } from 'theme-ui';
 import { GameStatus } from '../types';
 import Button from '../ui/Button';
 import { getRandomItem } from '../utils';
+import { getAnswer } from '../utils/word';
 
 const GAME_WON_MESSAGES: Record<number, string[]> = {
   1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
@@ -20,7 +21,7 @@ const GAME_LOST_MESSAGES = [
 ];
 
 type GameOverProps = {
-  answer: string;
+  answerId: number;
   gameStatus: GameStatus;
   playAgain: () => void;
 
@@ -32,7 +33,7 @@ const GameOver: VFC<GameOverProps> = ({
   gameStatus,
   playAgain,
   steps,
-  answer,
+  answerId,
 }) => (
   <Flex
     sx={{
@@ -58,7 +59,7 @@ const GameOver: VFC<GameOverProps> = ({
       <Text>
         The answer was{' '}
         <Text as="span" variant="h4">
-          {answer}
+          {getAnswer(answerId)}
         </Text>
       </Text>
     )}
