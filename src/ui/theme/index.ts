@@ -5,7 +5,7 @@ import text from './text';
 import space from './space';
 import radii from './radii';
 import zIndices from './zIndices';
-import mediaQueries from './mediaQueries';
+import mediaQueries, { breakPoints } from './mediaQueries';
 
 const makeTheme = <T extends Theme>(t: T) => t;
 
@@ -17,6 +17,7 @@ const theme = makeTheme({
   radii,
   zIndices,
   mediaQueries,
+  breakpoints: breakPoints,
 });
 
 export type ExactThemeType = typeof theme;

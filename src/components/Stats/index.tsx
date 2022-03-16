@@ -1,5 +1,5 @@
 import { VFC } from 'react';
-import { Divider, Text, IconButton, ThemeUIStyleObject } from 'theme-ui';
+import { Divider, Text, IconButton, ThemeUIStyleObject, Flex } from 'theme-ui';
 import useToggle from '../../hooks/useToggle';
 import Icon from '../../ui/Icon';
 import Modal from '../../ui/Modal';
@@ -16,6 +16,12 @@ const noGamesInfoStyles: ThemeUIStyleObject = {
   color: 'colorTone.1',
 };
 
+const statsContainerStyles: ThemeUIStyleObject = {
+  height: '100%',
+  overflowY: 'auto',
+  flexDirection: 'column',
+};
+
 export type StatsProps = Statistics;
 
 const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
@@ -29,13 +35,13 @@ const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
       </IconButton>
       <Modal isOpen={isOpen} onClose={toggleModal} title="Statistics">
         {playedSomeGames ? (
-          <>
+          <Flex sx={statsContainerStyles}>
             <StreakSummary gameStats={gameStats} streakStats={streakStats} />
             <Divider color="colorTone.4" />
             <TimeSummary gameStats={gameStats} />
             <Divider color="colorTone.4" />
             <GuessDistribution gameStats={gameStats} />
-          </>
+          </Flex>
         ) : (
           <Text as="div" variant="h4" sx={noGamesInfoStyles}>
             Play Some Games

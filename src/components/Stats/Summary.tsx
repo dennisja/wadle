@@ -1,5 +1,5 @@
 import { useMemo, VFC } from 'react';
-import { Box, Flex, Text } from 'theme-ui';
+import { Box, Flex, Grid, Text, ThemeUIStyleObject } from 'theme-ui';
 import { GameStats, GameStatus } from '../../types';
 import { Statistics } from './types';
 
@@ -62,6 +62,8 @@ const getTimeSummary = (
   ];
 };
 
+const toDisplayTimeFormat = (n: number): string => (n < 10 ? `0${n}` : `${n}`); // could be simpler but hours supports 3+ digits
+
 const formatTime = (totalMilliSeconds: number): string => {
   const milliSecondsInASecond = 1000;
   const milliSecondsInMinute = 60 * milliSecondsInASecond;
@@ -69,12 +71,32 @@ const formatTime = (totalMilliSeconds: number): string => {
 
   const hours = Math.floor(totalMilliSeconds / milliSecondsInHour);
   let remainder = totalMilliSeconds % milliSecondsInHour;
+  const formattedHours = toDisplayTimeFormat(hours);
 
   const minutes = Math.floor(remainder / milliSecondsInMinute);
   remainder %= milliSecondsInMinute;
+  const formattedMinutes = toDisplayTimeFormat(minutes);
 
   const seconds = Math.floor(remainder / milliSecondsInASecond);
-  return `${hours}:${minutes}:${seconds}`;
+  const formattedSeconds = toDisplayTimeFormat(seconds);
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+};
+
+const summaryContainerStyles: ThemeUIStyleObject = {
+  gridTemplateColumns: [
+    'repeat(2, 1fr)',
+    'repeat(2, 1fr)',
+    'repeat(4, 1fr)',
+    'repeat(4, 1fr)',
+  ],
+  columnGap: ['m', 'm', null, null],
+};
+
+const summaryCardStyles: ThemeUIStyleObject = {
+  textAlign: 'center',
+  mb: 's',
+  p: 's',
+  flexDirection: 'column',
 };
 
 type SummaryProps = {
@@ -85,21 +107,21 @@ type SummaryProps = {
 
 const Summary: VFC<SummaryProps> = ({ summary, valueFormatter, title }) => (
   <Box sx={{ p: 'm' }}>
-    <Text variant="h4" as="h3">
+    <Text variant="h4" as="h3" sx={{ mb: 's' }}>
       {title}
     </Text>
-    <Flex sx={{ justifyContent: 'space-between' }}>
+    <Grid sx={summaryContainerStyles}>
       {summary.map((stat) => (
-        <Box key={stat.title} sx={{ textAlign: 'center' }}>
+        <Flex key={stat.title} sx={summaryCardStyles}>
           <Text as="p" variant="h4" sx={{ textAlign: 'center' }}>
             {valueFormatter ? valueFormatter(stat.value) : stat.value}
           </Text>
           <Text as="p" variant="caption" sx={{ wordBreak: 'break-word' }}>
             {stat.title}
           </Text>
-        </Box>
+        </Flex>
       ))}
-    </Flex>
+    </Grid>
   </Box>
 );
 

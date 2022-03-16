@@ -8,6 +8,8 @@ const actionBarContainerStyles: ThemeUIStyleObject = {
   justifyContent: 'space-around',
   alignItems: 'center',
   width: '100%',
+  borderBottom: '1px solid',
+  borderBottomColor: 'opacity10',
 };
 
 type ActionBarProps = SettingsProps & StatsProps;

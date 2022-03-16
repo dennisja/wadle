@@ -10,4 +10,11 @@ const mediaQueries: MediaQueries = {
   l: '@media (min-width: 1280px)',
 };
 
+export const breakPoints = [
+  '767px',
+  '959px',
+  '1279px',
+  '@media (min-width: 1280px)',
+];
+
 export default mediaQueries;
