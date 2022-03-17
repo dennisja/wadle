@@ -1,6 +1,13 @@
 import { VFC } from 'react';
 
-const icons = ['delete', 'info', 'settings', 'stats', 'close'] as const;
+const icons = [
+  'delete',
+  'info',
+  'settings',
+  'stats',
+  'close',
+  'github',
+] as const;
 
 type IconName = typeof icons[number];
 

@@ -37,7 +37,7 @@ enum LocalStorageStateKeys {
   BOARD = 'board',
   CURRENT_ROW = 'currentRow',
   CURRENT_COLUMN = 'currentColumn',
-  ANSWER = 'guess',
+  ANSWER = 'guessIndex',
   IS_VALID_ROW = 'isValidRow',
   GAME_STATE = 'gameStatus',
   GAME_MODE = 'gameMode',
