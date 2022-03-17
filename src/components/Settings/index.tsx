@@ -8,6 +8,7 @@ import {
   Divider,
   ThemeUIStyleObject,
   useColorMode,
+  Link,
 } from 'theme-ui';
 import useToggle from '../../hooks/useToggle';
 import { GameMode, Noop } from '../../types';
@@ -61,6 +62,18 @@ const ColorModeSettingRow = () => {
   );
 };
 
+const githubLinkStyles: ThemeUIStyleObject = {
+  p: 's',
+  bg: 'white',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: '50%',
+  '&:hover': {
+    bg: 'green',
+  },
+};
+
 export type SettingsProps = {
   onGameModeChange: Noop;
   gameMode: GameMode;
@@ -88,6 +101,24 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
           </Box>
         </SettingRow>
         <ColorModeSettingRow />
+        <SettingRow title="Contact">
+          <Link
+            href="https://twitter.com/dennisjjagwe"
+            target="_blank"
+            color="text"
+          >
+            Twitter
+          </Link>
+        </SettingRow>
+        <SettingRow title="Contribute">
+          <Link
+            as={Link}
+            sx={githubLinkStyles}
+            href="https://github.com/dennisja/wadle"
+          >
+            <Icon iconName="github" />
+          </Link>
+        </SettingRow>
       </Modal>
     </>
   );
