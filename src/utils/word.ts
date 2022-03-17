@@ -1,5 +1,3 @@
-import { getRandomItem } from '.';
-
 const BAD_WORDS_LIST = ['penis', 'whore', 'dildo', 'pussy', 'fucks', 'dicks'];
 
 const WORD_LIST = [
@@ -9356,6 +9354,8 @@ const WORD_BAG = createWordBag(WORD_LIST);
 
 const BAD_WORDS_BAG = createWordBag(BAD_WORDS_LIST);
 
-const getRandomWord = () => getRandomItem(WORD_LIST).toUpperCase();
+const getAnswer = (index: number) => WORD_LIST[index].toUpperCase();
 
-export { WORD_BAG, getRandomWord, BAD_WORDS_BAG };
+const getAnswerIndex = () => Math.floor(Math.random() * WORD_LIST.length);
+
+export { WORD_BAG, BAD_WORDS_BAG, getAnswerIndex, getAnswer };
