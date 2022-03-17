@@ -113,8 +113,9 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
         <SettingRow title="Contribute">
           <Link
             as={Link}
-            sx={githubLinkStyles}
             href="https://github.com/dennisja/wadle"
+            target="_blank"
+            sx={githubLinkStyles}
           >
             <Icon iconName="github" />
           </Link>
