@@ -12,3 +12,6 @@ coverage
 *.log
 *.svg
 *.md
+*.png
+*.ico
+*.html

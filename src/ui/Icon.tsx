@@ -7,6 +7,7 @@ const icons = [
   'stats',
   'close',
   'github',
+  'share',
 ] as const;
 
 type IconName = typeof icons[number];

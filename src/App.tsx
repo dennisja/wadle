@@ -51,6 +51,7 @@ function App() {
             gameStatus={game.gameStatus}
             playAgain={game.restartGame}
             steps={game.currentStep}
+            board={game.board}
           />
         </Modal>
       </GameContainer>

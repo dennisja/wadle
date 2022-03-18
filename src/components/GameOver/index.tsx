@@ -1,9 +1,10 @@
 import { VFC } from 'react';
 import { Flex, Text } from 'theme-ui';
-import { GameStatus } from '../types';
-import Button from '../ui/Button';
-import { getRandomItem } from '../utils';
-import { getAnswer } from '../utils/word';
+import { GameStatus } from '../../types';
+import Button from '../../ui/Button';
+import { getRandomItem } from '../../utils';
+import { getAnswer } from '../../utils/word';
+import ShareButton from './ShareButton';
 
 const GAME_WON_MESSAGES: Record<number, string[]> = {
   1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
@@ -27,6 +28,7 @@ type GameOverProps = {
 
   /** The number of times taken to complete the game */
   steps: number;
+  board: readonly string[][];
 };
 
 const GameOver: VFC<GameOverProps> = ({
@@ -34,6 +36,7 @@ const GameOver: VFC<GameOverProps> = ({
   playAgain,
   steps,
   answerId,
+  board,
 }) => (
   <Flex
     sx={{
@@ -64,14 +67,19 @@ const GameOver: VFC<GameOverProps> = ({
       </Text>
     )}
 
-    <Button
-      variant="primary"
-      sx={{ my: 'l' }}
-      onClick={playAgain}
-      size="medium"
-    >
-      Play Again
-    </Button>
+    <Flex sx={{ my: 'l' }}>
+      <Button
+        variant="primary"
+        sx={{ height: '100%' }}
+        onClick={playAgain}
+        size="medium"
+      >
+        Play Again
+      </Button>
+      {gameStatus === GameStatus.WON && (
+        <ShareButton answerId={answerId} board={board} />
+      )}
+    </Flex>
   </Flex>
 );
 
