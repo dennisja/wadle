@@ -31,4 +31,4 @@ export type Radii = ArrayWithExtraKeys<
   }
 >;
 
-export type ZIndices = { modalOverlay: number };
+export type ZIndices = { modalOverlay: number; toast: number };
