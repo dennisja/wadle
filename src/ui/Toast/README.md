@@ -33,6 +33,7 @@ const SomeComponent = () => {
         createToast({
           title: 'Like You',
           messages: ['People will find you', 'But they do not define you'],
+          type: 'success',
         })
       }
     >

@@ -8,6 +8,7 @@ const toastsContainerStyles: ThemeUIStyleObject = {
   top: '50px',
   flexDirection: 'column',
   width: 'min(300px, 90vw)',
+  transform: 'translate(calc(50vw - 50%))',
 };
 
 const ToastContainer: VFC = () => {

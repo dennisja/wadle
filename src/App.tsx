@@ -18,6 +18,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
+      <ToastContainer />
       <GameContainer>
         <ActionBar
           gameMode={game.gameMode}
@@ -25,7 +26,6 @@ function App() {
           gameStats={game.gameStats}
           streakStats={game.streakStats}
         />
-        <ToastContainer />
         <GuessesBoard
           rows={game.board}
           isRowInvalid={game.isRowInvalid}

@@ -28,9 +28,9 @@ const ActionBar: VFC<ActionBarProps> = ({
       variant="h1"
       onClick={() => {
         createToast({
-          messages: ['Lorem ipsum hshssgdg gsgsgsgjd fssyysu', 'Rolex is here'],
-          type: 'success',
-          title: 'Love',
+          messages: ['You like clicking things 😂'],
+          type: 'info',
+          title: 'Look at you',
         });
       }}
     >

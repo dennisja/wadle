@@ -42,6 +42,7 @@ const toastTypeStyles: Record<ToastType, ThemeUICSSObject> = {
     color: 'blue',
     border: '1px solid blue',
     borderLeft: '3px solid blue',
+    borderColor: 'blue', // needed to pick this from theme
   },
   success: {
     color: 'green',
@@ -49,9 +50,9 @@ const toastTypeStyles: Record<ToastType, ThemeUICSSObject> = {
     borderLeft: '3px solid green',
   },
   warning: {
-    color: 'green',
-    border: '1px solid green',
-    borderLeft: '3px solid green',
+    color: 'orange',
+    border: '1px solid orange',
+    borderLeft: '3px solid orange',
   },
 };
 
