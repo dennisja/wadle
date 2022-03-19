@@ -5,6 +5,16 @@ import Instructions from './Instructions';
 import Settings, { SettingsProps } from './Settings';
 import Stats, { StatsProps } from './Stats';
 
+const UI_TEXT = {
+  pageTitle: {
+    name: 'Wadle',
+    click: {
+      toastMessage: ['You like clicking things 😂'],
+      toastTitle: 'Look at you',
+    },
+  },
+};
+
 const actionBarContainerStyles: ThemeUIStyleObject = {
   justifyContent: 'space-around',
   alignItems: 'center',
@@ -28,13 +38,13 @@ const ActionBar: VFC<ActionBarProps> = ({
       variant="h1"
       onClick={() => {
         createToast({
-          messages: ['You like clicking things 😂'],
+          messages: UI_TEXT.pageTitle.click.toastMessage,
           type: 'info',
-          title: 'Look at you',
+          title: UI_TEXT.pageTitle.click.toastTitle,
         });
       }}
     >
-      Wadle
+      {UI_TEXT.pageTitle.name}
     </Text>
     <Box>
       <Stats gameStats={gameStats} streakStats={streakStats} />

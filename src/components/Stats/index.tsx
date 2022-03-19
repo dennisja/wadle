@@ -22,6 +22,11 @@ const statsContainerStyles: ThemeUIStyleObject = {
   flexDirection: 'column',
 };
 
+const UI_TEXT = {
+  noGamesPlayedInfo: 'Play Some Games',
+  modalTitle: 'Statistics',
+};
+
 export type StatsProps = Statistics;
 
 const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
@@ -33,7 +38,7 @@ const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
       <IconButton onClick={toggleModal}>
         <Icon iconName="stats" />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={toggleModal} title="Statistics">
+      <Modal isOpen={isOpen} onClose={toggleModal} title={UI_TEXT.modalTitle}>
         {playedSomeGames ? (
           <Flex sx={statsContainerStyles}>
             <StreakSummary gameStats={gameStats} streakStats={streakStats} />
@@ -44,7 +49,7 @@ const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
           </Flex>
         ) : (
           <Text as="div" variant="h4" sx={noGamesInfoStyles}>
-            Play Some Games
+            {UI_TEXT.noGamesPlayedInfo}
           </Text>
         )}
       </Modal>

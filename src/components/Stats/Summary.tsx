@@ -3,6 +3,23 @@ import { Box, Flex, Grid, Text, ThemeUIStyleObject } from 'theme-ui';
 import { GameStats, GameStatus } from '../../types';
 import { Statistics } from './types';
 
+const UI_TEXT = {
+  time: {
+    title: 'Time',
+    shortestGame: 'Shortest game',
+    longestGame: 'Longest game',
+    averageTime: 'Average Time',
+    playTime: 'Playing Time',
+  },
+  streak: {
+    title: 'Streak',
+    currentStreak: 'Current Streak',
+    maxStreak: 'Max Streak',
+    totalPlayed: 'Played',
+    winPercentage: 'Win %',
+  },
+};
+
 type StatsSummary = { value: number; title: string };
 
 export const getTotalPlayedGames = (gameStats: readonly GameStats[]): number =>
@@ -25,13 +42,13 @@ const getStreakSummary = ({
   streakStats,
 }: Statistics): readonly StatsSummary[] => {
   const summary = [
-    { value: streakStats.currentStreak, title: 'Current Streak' },
-    { value: streakStats.maxStreak, title: 'Max Streak' },
+    { value: streakStats.currentStreak, title: UI_TEXT.streak.currentStreak },
+    { value: streakStats.maxStreak, title: UI_TEXT.streak.maxStreak },
     {
       value: getTotalPlayedGames(gameStats),
-      title: 'Played',
+      title: UI_TEXT.streak.totalPlayed,
     },
-    { value: winPercentage(gameStats), title: 'Win %' },
+    { value: winPercentage(gameStats), title: UI_TEXT.streak.winPercentage },
   ];
   return summary;
 };
@@ -55,10 +72,10 @@ const getTimeSummary = (
   const averageTime = totalGameTime / numberOfGames;
 
   return [
-    { value: maxTime, title: 'Longest game' },
-    { value: minTime, title: 'Shortest game' },
-    { value: averageTime, title: 'Average time' },
-    { value: totalGameTime, title: 'Play time' },
+    { value: maxTime, title: UI_TEXT.time.longestGame },
+    { value: minTime, title: UI_TEXT.time.shortestGame },
+    { value: averageTime, title: UI_TEXT.time.averageTime },
+    { value: totalGameTime, title: UI_TEXT.time.playTime },
   ];
 };
 
@@ -132,7 +149,7 @@ const StreakSummary: VFC<StreakSummaryProps> = ({ streakStats, gameStats }) => {
     () => getStreakSummary({ gameStats, streakStats }),
     [gameStats, streakStats]
   );
-  return <Summary summary={streakSummary} title="Streak" />;
+  return <Summary summary={streakSummary} title={UI_TEXT.streak.title} />;
 };
 
 type TimeSummaryProps = { gameStats: readonly GameStats[] };
@@ -140,7 +157,11 @@ type TimeSummaryProps = { gameStats: readonly GameStats[] };
 const TimeSummary: VFC<TimeSummaryProps> = ({ gameStats }) => {
   const timeSummary = useMemo(() => getTimeSummary(gameStats), [gameStats]);
   return (
-    <Summary summary={timeSummary} valueFormatter={formatTime} title="Time" />
+    <Summary
+      summary={timeSummary}
+      valueFormatter={formatTime}
+      title={UI_TEXT.time.title}
+    />
   );
 };
 

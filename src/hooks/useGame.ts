@@ -1,6 +1,7 @@
 import { GetRowCellsStatus } from '../components/GuessesBoard/types';
 import { getKeyboardLettersStatus } from '../components/Keyboard/lettersStatus';
 import { GameMode, GameStatus } from '../types';
+import { createToast } from '../ui/Toast';
 import { isGameOver, isHardMode } from '../utils/game';
 import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/row';
 import { getAnswer, getAnswerIndex, WORD_BAG } from '../utils/word';
@@ -131,9 +132,12 @@ const useGame = () => {
       });
       if (revelationErrors.length) {
         setIsValidRow(false);
-        // TODO(toast): add toast here instead
-        // eslint-disable-next-line no-alert
-        window.alert(revelationErrors.join('\n'));
+        createToast({
+          messages: revelationErrors,
+          title: 'Errors',
+          type: 'error',
+          duration: 3000 * revelationErrors.length,
+        });
         return;
       }
     }

@@ -143,6 +143,8 @@ const INSTRUCTIONS: readonly string[] = [
   'After every guess, the tiles color will change to show how close you are to the guess',
 ];
 
+const UI_TEXT = { instructions: 'Instructions' };
+
 const Instructions: VFC = () => {
   const [isOpen, toggleIsOpen] = useToggle();
 
@@ -151,7 +153,11 @@ const Instructions: VFC = () => {
       <IconButton onClick={toggleIsOpen}>
         <Icon iconName="info" />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={toggleIsOpen} title="Instructions">
+      <Modal
+        isOpen={isOpen}
+        onClose={toggleIsOpen}
+        title={UI_TEXT.instructions}
+      >
         <Flex sx={instructionContainerStyles}>
           {INSTRUCTIONS.map((instruction) => (
             <Text key={instruction.slice(0, 10)} sx={{ mb: 'm' }}>

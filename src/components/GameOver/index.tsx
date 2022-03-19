@@ -21,6 +21,13 @@ const GAME_LOST_MESSAGES = [
   'Good luck next time!!!',
 ];
 
+const UI_TEXT = {
+  answerPrefix: 'The answer was',
+  gameLost: GAME_LOST_MESSAGES,
+  gameWon: GAME_WON_MESSAGES,
+  playAgain: 'Play Again',
+};
+
 type GameOverProps = {
   answerId: number;
   gameStatus: GameStatus;
@@ -53,14 +60,14 @@ const GameOver: VFC<GameOverProps> = ({
     <Text variant="tiles">
       {getRandomItem(
         gameStatus === GameStatus.WON
-          ? GAME_WON_MESSAGES[steps]
-          : GAME_LOST_MESSAGES
+          ? UI_TEXT.gameWon[steps]
+          : UI_TEXT.gameLost
       )}
     </Text>
 
     {gameStatus === GameStatus.LOST && (
       <Text>
-        The answer was{' '}
+        {UI_TEXT.answerPrefix}{' '}
         <Text as="span" variant="h4">
           {getAnswer(answerId)}
         </Text>
@@ -74,7 +81,7 @@ const GameOver: VFC<GameOverProps> = ({
         onClick={playAgain}
         size="medium"
       >
-        Play Again
+        {UI_TEXT.playAgain}
       </Button>
       {gameStatus === GameStatus.WON && (
         <ShareButton answerId={answerId} board={board} />
