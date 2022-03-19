@@ -1,6 +1,8 @@
 import { Noop } from '../types';
 
 // inspired by https://developer.mozilla.org/en-US/docs/Web/API/clearTimeout
+// we put it behind a factory function here because we don't want it to be a singleton so as
+// to prevent cancelling timeouts we don't have to cancel
 
 type Schedule = {
   timeoutId: NodeJS.Timeout | undefined;

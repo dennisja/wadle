@@ -4,6 +4,10 @@ import { GameStats, GameStatus } from '../../types';
 
 type GuessDistributionEntry = { value: number; title: string };
 
+const UI_TEXT = {
+  title: 'Guess Distribution',
+};
+
 export const getGuessDistribution = (
   gameStats: readonly GameStats[]
 ): readonly GuessDistributionEntry[] => {
@@ -63,7 +67,7 @@ const GuessDistribution: VFC<GuessDistributionProps> = ({ gameStats }) => {
   return (
     <Box sx={{ p: 'm' }}>
       <Text variant="h4" as="h3" sx={{ mb: 'm' }}>
-        Guess Distribution
+        {UI_TEXT.title}
       </Text>
       {guessDistribution.map((guess) => (
         <Flex key={guess.title} sx={barContainerStyles}>

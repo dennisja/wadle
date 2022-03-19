@@ -15,6 +15,20 @@ import { GameMode, Noop } from '../../types';
 import Icon from '../../ui/Icon';
 import Modal from '../../ui/Modal';
 
+const UI_TEXT = {
+  modalTitle: 'Settings',
+  hardMode: {
+    title: 'Hard mode',
+    description: 'All revelations in the previous guesses must be used',
+  },
+  contact: {
+    title: 'Contact',
+    link: { name: 'Twitter' },
+  },
+  contribute: { title: 'Contribute' },
+  darkMode: { title: 'Dark Mode' },
+};
+
 const switchStyles: ThemeUIStyleObject = {
   'input:checked ~ &': {
     backgroundColor: 'green',
@@ -50,7 +64,7 @@ const ColorModeSettingRow = () => {
   }, [setColorMode]);
 
   return (
-    <SettingRow title="Dark mode">
+    <SettingRow title={UI_TEXT.darkMode.title}>
       <Box>
         <Switch
           sx={switchStyles}
@@ -87,10 +101,10 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
       <IconButton onClick={toggleModal}>
         <Icon iconName="settings" />
       </IconButton>
-      <Modal title="Settings" isOpen={isOpen} onClose={toggleModal}>
+      <Modal title={UI_TEXT.modalTitle} isOpen={isOpen} onClose={toggleModal}>
         <SettingRow
-          title="Hard mode"
-          description="All revelations in the previous guesses must be used"
+          title={UI_TEXT.hardMode.title}
+          description={UI_TEXT.hardMode.description}
         >
           <Box>
             <Switch
@@ -101,16 +115,16 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
           </Box>
         </SettingRow>
         <ColorModeSettingRow />
-        <SettingRow title="Contact">
+        <SettingRow title={UI_TEXT.contact.title}>
           <Link
             href="https://twitter.com/dennisjjagwe"
             target="_blank"
             color="text"
           >
-            Twitter
+            {UI_TEXT.contact.link.name}
           </Link>
         </SettingRow>
-        <SettingRow title="Contribute">
+        <SettingRow title={UI_TEXT.contribute.title}>
           <Link
             as={Link}
             href="https://github.com/dennisja/wadle"
