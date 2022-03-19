@@ -1,5 +1,6 @@
 import { VFC } from 'react';
 import { Box, Flex, Text, ThemeUIStyleObject } from 'theme-ui';
+import { createToast } from '../ui/Toast';
 import Instructions from './Instructions';
 import Settings, { SettingsProps } from './Settings';
 import Stats, { StatsProps } from './Stats';
@@ -22,7 +23,17 @@ const ActionBar: VFC<ActionBarProps> = ({
 }) => (
   <Flex sx={actionBarContainerStyles}>
     <Instructions />
-    <Text as="h1" variant="h1">
+    <Text
+      as="h1"
+      variant="h1"
+      onClick={() => {
+        createToast({
+          messages: ['Lorem ipsum hshssgdg gsgsgsgjd fssyysu', 'Rolex is here'],
+          type: 'success',
+          title: 'Love',
+        });
+      }}
+    >
       Wadle
     </Text>
     <Box>

@@ -10,6 +10,7 @@ import { GameStatus } from './types';
 import Button from './ui/Button';
 import Modal from './ui/Modal';
 import theme from './ui/theme';
+import { ToastContainer } from './ui/Toast';
 
 function App() {
   const game = useGame();
@@ -24,6 +25,7 @@ function App() {
           gameStats={game.gameStats}
           streakStats={game.streakStats}
         />
+        <ToastContainer />
         <GuessesBoard
           rows={game.board}
           isRowInvalid={game.isRowInvalid}
