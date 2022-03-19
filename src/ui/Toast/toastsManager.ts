@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Noop } from '../../types';
+import { createScheduler } from '../../utils/schedule';
 import uniqueId from '../../utils/uniqueId';
 import { DEFAULT_TOAST_TIMER, TOAST_TRANSITION_DURATION } from './constants';
 import { createEmitter } from './createEmitter';
@@ -27,21 +28,19 @@ export const onToastRemovalInitiation = (callback: ToastRemoveHandler) =>
 export const createToastRemoveHandler =
   (id: string): Noop =>
   () => {
-    // eslint-disable-next-line no-undef-init
-    let timeoutId: NodeJS.Timeout | undefined = undefined;
-
     // notify about removal initiation such that any other removal method doesn't work
     // e.g if the user has pressed the close button and its already time up for the toast
     // to render, closing it is in progress so we don't want to do anything
     initiateToastRemoval(id);
-    // we don't want to immediately remove the toast, we just want to remove it after the transition duration has passed
-    timeoutId = setTimeout(() => {
-      removeToast(id);
+    const scheduler = createScheduler();
 
-      if (timeoutId !== undefined) {
-        clearTimeout(timeoutId);
-      }
-    }, TOAST_TRANSITION_DURATION);
+    // we don't want to immediately remove the toast, we just want to remove it after the transition duration has passed
+    scheduler.run({
+      callback: () => {
+        removeToast(id);
+      },
+      after: TOAST_TRANSITION_DURATION,
+    });
   };
 
 type CreateToastResult = { toast: ToastData; remove: ToastRemoveHandler };

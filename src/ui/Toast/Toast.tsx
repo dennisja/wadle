@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState, VFC } from 'react';
 import { Box, Flex, IconButton, ThemeUICSSObject, Text } from 'theme-ui';
 import { noop } from '../../utils';
+import { createScheduler } from '../../utils/schedule';
 import Icon from '../Icon';
-import { TOAST_TRANSITION_DURATION } from './constants';
+import { DEFAULT_TOAST_TIMER, TOAST_TRANSITION_DURATION } from './constants';
 import {
   createToastRemoveHandler,
   onToastRemovalInitiation,
@@ -64,7 +65,7 @@ type ToastProps = ToastData;
 const Toast: VFC<ToastProps> = ({
   id,
   messages,
-  duration,
+  duration = DEFAULT_TOAST_TIMER,
   type: toastType,
   title,
 }) => {
@@ -80,18 +81,17 @@ const Toast: VFC<ToastProps> = ({
   }, [id, toastStatus]);
 
   useEffect(() => {
+    const scheduler = createScheduler();
     // When we mount initially we want to wait for the transition to finish
-    // eslint-disable-next-line no-undef-init
-    let timeoutId: NodeJS.Timeout | undefined = undefined;
-
-    timeoutId = setTimeout(() => {
-      setToastStatus(ToastStatus.MOUNTED);
-    }, TOAST_TRANSITION_DURATION);
+    scheduler.run({
+      callback: () => {
+        setToastStatus(ToastStatus.MOUNTED);
+      },
+      after: TOAST_TRANSITION_DURATION,
+    });
 
     return () => {
-      if (timeoutId !== undefined) {
-        clearTimeout(timeoutId);
-      }
+      scheduler.cancel();
     };
   }, []);
 
@@ -106,20 +106,18 @@ const Toast: VFC<ToastProps> = ({
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line no-undef-init
-    let timeoutId: NodeJS.Timeout | undefined = undefined;
-
     // we don't need to do anything if we are already unmounting the toast
     if (isUnMounting(toastStatus)) return undefined;
-
-    timeoutId = setTimeout(() => {
-      handleToastRemove();
-    }, duration);
+    const scheduler = createScheduler();
+    scheduler.run({
+      callback: () => {
+        handleToastRemove();
+      },
+      after: duration,
+    });
 
     return () => {
-      if (timeoutId !== undefined) {
-        clearTimeout(timeoutId);
-      }
+      scheduler.cancel();
     };
   }, [duration, handleToastRemove, toastStatus]);
 
