@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
-import { GameMode, GameStats, GameStatus, StreakStats } from '../types';
+import type { GameStats, GameMode, StreakStats } from '../types';
+import { GameStatus } from '../types';
 import { usePersistedState } from './usePersistedState';
 
 enum StatsLocalStorageKeys {

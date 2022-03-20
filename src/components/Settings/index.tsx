@@ -88,7 +88,7 @@ const githubLinkStyles: ThemeUIStyleObject = {
   },
 };
 
-export type SettingsProps = {
+type SettingsProps = {
   onGameModeChange: Noop;
   gameMode: GameMode;
 };
@@ -140,3 +140,4 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
 };
 
 export default Settings;
+export type { SettingsProps };

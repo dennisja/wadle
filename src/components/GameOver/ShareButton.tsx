@@ -21,7 +21,7 @@ const UI_TEXT = {
   share: 'Share',
 };
 
-export type ShareButtonProps = {
+type ShareButtonProps = {
   board: readonly string[][];
   answerId: number;
 };

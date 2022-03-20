@@ -12,7 +12,7 @@ const icons = [
 
 type IconName = typeof icons[number];
 
-export type IconProps = JSX.IntrinsicElements['svg'] & { iconName: IconName };
+type IconProps = JSX.IntrinsicElements['svg'] & { iconName: IconName };
 
 const Icon: VFC<IconProps> = ({
   iconName,
@@ -26,3 +26,4 @@ const Icon: VFC<IconProps> = ({
 );
 
 export default Icon;
+export type { IconProps };

@@ -27,7 +27,7 @@ const UI_TEXT = {
   modalTitle: 'Statistics',
 };
 
-export type StatsProps = Statistics;
+type StatsProps = Statistics;
 
 const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
   const [isOpen, toggleModal] = useToggle();
@@ -58,3 +58,4 @@ const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
 };
 
 export default Stats;
+export type { StatsProps };

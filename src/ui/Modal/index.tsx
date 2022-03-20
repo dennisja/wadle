@@ -1,7 +1,7 @@
 import { ClassNames, ClassNamesContent } from '@emotion/react';
 import { FC } from 'react';
 import ReactModal from 'react-modal';
-import { Noop } from '../../types';
+import type { Noop } from '../../types';
 import ModalHeader from './ModalHeader';
 
 const isNotTestEnv = process.env.NODE_ENV !== 'test';

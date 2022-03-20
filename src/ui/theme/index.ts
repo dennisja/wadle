@@ -20,13 +20,15 @@ const theme = makeTheme({
   breakpoints: breakPoints,
 });
 
-export type ExactThemeType = typeof theme;
+type ExactThemeType = typeof theme;
 
 interface ExactContextValue extends Omit<ThemeUIContextValue, 'theme'> {
   theme: ExactThemeType;
 }
 type UseTheme = () => ExactContextValue;
 
-export const useTheme = useThemeUI as unknown as UseTheme;
+const useTheme = useThemeUI as unknown as UseTheme;
 
 export default theme;
+export { useTheme };
+export type { ExactThemeType };

@@ -55,7 +55,7 @@ type UsePersistedStateOptions<T> = {
  * A wrapper around useState hook that persists changes to localStorage
  * Just built for convenience to introduce minimal changes to already working code
  */
-export const usePersistedState = <T>({
+const usePersistedState = <T>({
   key,
   fallback,
 }: UsePersistedStateOptions<T>): UsePersistedStateResult<T> => {
@@ -84,3 +84,5 @@ export const usePersistedState = <T>({
 
   return [state, persistedSetState];
 };
+
+export { usePersistedState };

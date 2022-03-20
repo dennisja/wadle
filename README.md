@@ -2,10 +2,13 @@
 
 Based on [wordle](https://www.powerlanguage.co.uk/wordle/)
 
-## Goals
+## Learning Goals
 
 - [x] Try out SVG sprites for loading SVG Icons
-- [ ] Try out theme-ui
+- [x] Try out theme-ui
+- [x] Try implementing a toast without react context
+- [ ] PWA
+- [ ] Cypress
 
 ## Available Scripts
 
