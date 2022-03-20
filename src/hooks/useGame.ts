@@ -8,6 +8,12 @@ import { getAnswer, getAnswerIndex, WORD_BAG } from '../utils/word';
 import { usePersistedState } from './usePersistedState';
 import useStats from './useStats';
 
+const UI_TEXT = {
+  gameModeChange: {
+    warning: 'You cannot change game mode in between a game.',
+  },
+};
+
 const defaultBoard = [
   ['', '', '', '', ''],
   ['', '', '', '', ''],
@@ -182,6 +188,13 @@ const useGame = () => {
     currentRow === rowIndex && !isValidRow;
 
   const toggleGameMode = () => {
+    if (gameStatus === GameStatus.PLAYING) {
+      createToast({
+        messages: [UI_TEXT.gameModeChange.warning],
+        type: 'warning',
+      });
+      return;
+    }
     setGameMode((prevMode) =>
       prevMode === GameMode.HARD ? GameMode.EASY : GameMode.HARD
     );
