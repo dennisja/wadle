@@ -4,13 +4,21 @@ import { GameMode, GameStatus } from '../types';
 import { createToast } from '../ui/Toast';
 import { isGameOver, isHardMode } from '../utils/game';
 import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/row';
-import { getAnswer, getAnswerIndex, WORD_BAG } from '../utils/word';
+import {
+  BAD_WORDS_BAG,
+  getAnswer,
+  getAnswerIndex,
+  WORD_BAG,
+} from '../utils/word';
 import { usePersistedState } from './usePersistedState';
 import useStats from './useStats';
 
 const UI_TEXT = {
   gameModeChange: {
     warning: 'You cannot change game mode in between a game.',
+  },
+  word: {
+    bad: "That is a big word. It can't fit in our list",
   },
 };
 
@@ -120,6 +128,12 @@ const useGame = () => {
 
   const advanceToNextRow = () => {
     if (isGameOver(gameStatus)) {
+      return;
+    }
+
+    if (BAD_WORDS_BAG.has(board[currentRow].join('').toLowerCase())) {
+      createToast({ messages: [UI_TEXT.word.bad], type: 'error' });
+      setIsValidRow(false);
       return;
     }
 
