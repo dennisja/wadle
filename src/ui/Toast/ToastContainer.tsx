@@ -7,7 +7,7 @@ const toastsContainerStyles: ThemeUIStyleObject = {
   position: 'absolute',
   top: '50px',
   flexDirection: 'column',
-  width: 'min(300px, 90vw)',
+  width: 'min(400px, 90vw)',
   transform: 'translate(calc(50vw - 50%))',
 };
 

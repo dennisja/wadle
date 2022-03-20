@@ -1,6 +1,6 @@
 type MediaQuery = 'sm' | 'smToM' | 'm' | 'mToL' | 'l';
 
-export type MediaQueries = Record<MediaQuery, string>;
+type MediaQueries = Record<MediaQuery, string>;
 
 const mediaQueries: MediaQueries = {
   sm: '@media  (max-width: 767px)',
@@ -10,11 +10,8 @@ const mediaQueries: MediaQueries = {
   l: '@media (min-width: 1280px)',
 };
 
-export const breakPoints = [
-  '767px',
-  '959px',
-  '1279px',
-  '@media (min-width: 1280px)',
-];
+const breakPoints = ['767px', '959px', '1279px', '@media (min-width: 1280px)'];
 
 export default mediaQueries;
+export { breakPoints };
+export type { MediaQueries };

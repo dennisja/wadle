@@ -148,6 +148,7 @@ const Toast: VFC<ToastProps> = ({
         variant="icon"
         sx={{ color, '&:hover': { color: 'white', bg: color } }}
         onClick={handleToastRemove}
+        aria-label="Close Toast"
       >
         <Icon iconName="close" />
       </IconButton>

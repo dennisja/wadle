@@ -29,7 +29,7 @@ const updateLetterStatus = (
   return status;
 };
 
-export const getKeyboardLettersStatus = ({
+const getKeyboardLettersStatus = ({
   currentRow,
   board,
   answer,
@@ -44,3 +44,5 @@ export const getKeyboardLettersStatus = ({
   }
   return letterStatus;
 };
+
+export { getKeyboardLettersStatus };

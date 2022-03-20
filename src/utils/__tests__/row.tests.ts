@@ -32,6 +32,16 @@ describe('utils/game', () => {
         'VOIDS',
       ],
       [[], 'LOIDS'.split(''), 'DIODE'.split(''), 'VOIDS'],
+      [
+        [
+          'The letter at position 2 should be A',
+          'The letter at position 3 should be D',
+          'The letter at position 4 should be I',
+        ],
+        'GLYPH'.split(''),
+        'RADII'.split(''),
+        'WADIS',
+      ],
     ])(
       'should return %p when the current row is %p and the previous row was %p given the answer is %p ',
       (expectedErrors, currentRow, previousRow, answer) => {

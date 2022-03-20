@@ -1,25 +1,25 @@
-export enum LetterStatus {
+enum LetterStatus {
   UN_GUESSED = 'unGuessed', // not yet guessed
   CORRECT = 'correct', // guessed and in the exact position as in answer
   PRESENT = 'present', // guessed and in answer but in wrong position
   ABSENT = 'absent', // guessed but not in answer
 }
 
-export type Noop = () => void;
+type Noop = () => void;
 
-export enum GameStatus {
+enum GameStatus {
   PLAYING = 'playing',
   WON = 'won',
   LOST = 'lost',
   IDLE = 'idle',
 }
 
-export enum GameMode {
+enum GameMode {
   HARD = 'hard',
   EASY = 'easy',
 }
 
-export type GameStats = {
+type GameStats = {
   status: GameStatus;
   guesses: number;
   startedAt: number; // time stamp at which game was started
@@ -27,7 +27,10 @@ export type GameStats = {
   mode: GameMode;
 };
 
-export type StreakStats = {
+type StreakStats = {
   currentStreak: number;
   maxStreak: number;
 };
+
+export { LetterStatus, GameMode, GameStatus };
+export type { GameStats, Noop, StreakStats };

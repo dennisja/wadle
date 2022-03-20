@@ -22,7 +22,7 @@ const UI_TEXT = {
 
 type StatsSummary = { value: number; title: string };
 
-export const getTotalPlayedGames = (gameStats: readonly GameStats[]): number =>
+const getTotalPlayedGames = (gameStats: readonly GameStats[]): number =>
   gameStats[gameStats.length - 1].status === GameStatus.PLAYING
     ? gameStats.length - 1
     : gameStats.length;
@@ -165,4 +165,4 @@ const TimeSummary: VFC<TimeSummaryProps> = ({ gameStats }) => {
   );
 };
 
-export { StreakSummary, TimeSummary };
+export { StreakSummary, TimeSummary, getTotalPlayedGames };

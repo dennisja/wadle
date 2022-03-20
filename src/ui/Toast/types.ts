@@ -1,12 +1,12 @@
-export type ToastType = 'success' | 'error' | 'info' | 'warning';
+type ToastType = 'success' | 'error' | 'info' | 'warning';
 
-export enum ToastEvents {
+enum ToastEvents {
   ADD_TOAST = 'addToast',
   REMOVE_TOAST = 'removeToast',
   INITIATE_TOAST_REMOVAL = 'initiateToastRemoval',
 }
 
-export type CreateToastPayload = {
+type CreateToastPayload = {
   /** A list of messages to display in a toast */
   messages: readonly string[];
 
@@ -20,6 +20,9 @@ export type CreateToastPayload = {
   duration?: number;
 };
 
-export type ToastData = {
+type ToastData = {
   id: string;
 } & CreateToastPayload;
+
+export { ToastEvents };
+export type { ToastType, CreateToastPayload, ToastData };

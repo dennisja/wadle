@@ -1,10 +1,10 @@
-export type ButtonSize = 'keyBoard' | 'small' | 'medium' | 'large';
+type ButtonSize = 'keyBoard' | 'small' | 'medium' | 'large';
 
-export type ArrayWithExtraKeys<ArrayType, ExtraKeys> = Array<ArrayType> & {
+type ArrayWithExtraKeys<ArrayType, ExtraKeys> = Array<ArrayType> & {
   [key in keyof ExtraKeys]: ExtraKeys[key];
 };
 
-export type Space = ArrayWithExtraKeys<
+type Space = ArrayWithExtraKeys<
   number,
   {
     xxs: number;
@@ -18,7 +18,7 @@ export type Space = ArrayWithExtraKeys<
   }
 >;
 
-export type Radii = ArrayWithExtraKeys<
+type Radii = ArrayWithExtraKeys<
   number,
   {
     xxs: number;
@@ -31,4 +31,6 @@ export type Radii = ArrayWithExtraKeys<
   }
 >;
 
-export type ZIndices = { modalOverlay: number; toast: number };
+type ZIndices = { modalOverlay: number; toast: number };
+
+export type { ButtonSize, ArrayWithExtraKeys, Space, Radii, ZIndices };

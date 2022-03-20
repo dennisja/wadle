@@ -1,6 +1,8 @@
 import { GameStats, StreakStats } from '../../types';
 
-export type Statistics = {
+type Statistics = {
   gameStats: readonly GameStats[];
   streakStats: StreakStats;
 };
+
+export type { Statistics };

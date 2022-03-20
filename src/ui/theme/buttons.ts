@@ -41,7 +41,7 @@ const buttons = {
   },
 };
 
-export const buttonSizes: Record<ButtonSize, ThemeUIStyleObject> = {
+const buttonSizes: Record<ButtonSize, ThemeUIStyleObject> = {
   keyBoard: {
     height: '58px',
   },
@@ -51,3 +51,4 @@ export const buttonSizes: Record<ButtonSize, ThemeUIStyleObject> = {
 };
 
 export default buttons;
+export { buttonSizes };

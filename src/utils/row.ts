@@ -1,5 +1,12 @@
 import { LetterStatus } from '../types';
 
+const UI_TEXT = {
+  revelations: {
+    correct: { prefix: 'The letter at position', postfix: 'should be' },
+    present: { postfix: 'should be used in the current word' },
+  },
+};
+
 const characterBag = (items: readonly string[] = []) => {
   const chars: Record<string, number> = {};
 
@@ -24,7 +31,7 @@ const characterBag = (items: readonly string[] = []) => {
 };
 
 const UN_SUBMITTED_ROW_STATUS = Array(5).fill(LetterStatus.UN_GUESSED);
-export const getRowCellsStatus = ({
+const getRowCellsStatus = ({
   row,
   answer,
   isSubmitted,
@@ -62,7 +69,7 @@ export const getRowCellsStatus = ({
   return rowStatus;
 };
 
-export const getPreviousRevelationErrors = ({
+const getPreviousRevelationErrors = ({
   currentRow,
   previousRow,
   answer,
@@ -73,9 +80,9 @@ export const getPreviousRevelationErrors = ({
 }): readonly string[] => {
   const answerCharBag = characterBag(answer.split(''));
   const currentRowCharBag = characterBag(currentRow);
-  const visitedIndices: Record<string, boolean> = {};
   const errors: string[] = [];
 
+  // get all errors related to correct characters in the previous row that are missing in the current row
   previousRow.forEach((prevRowChar, i) => {
     const currentRowChar = currentRow[i];
     const answerChar = answer.charAt(i);
@@ -83,20 +90,24 @@ export const getPreviousRevelationErrors = ({
     if (answerChar !== prevRowChar) return;
 
     if (currentRowChar !== answerChar) {
-      errors.push(`The letter at position ${i + 1} should be ${answerChar}`);
+      errors.push(
+        `${UI_TEXT.revelations.correct.prefix} ${i + 1} ${
+          UI_TEXT.revelations.correct.postfix
+        } ${answerChar}`
+      );
     } else {
-      // we don't want to re visit the character in this position when calculating the present revelation errors
-      // we therefore remove it from the answer and the list of characters in current row
-      answerCharBag.remove(answerChar);
       currentRowCharBag.remove(answerChar);
     }
-    visitedIndices[i] = true;
+    // we don't want to re visit the character in this position when calculating the present revelation errors
+    // we therefore remove it from the answer
+    answerCharBag.remove(answerChar);
   });
 
-  previousRow.forEach((prevRowChar, i) => {
-    if (!(i in visitedIndices) && answerCharBag.has(prevRowChar)) {
+  // Get all errors related to a present characters in the previous row that are missing in current row
+  previousRow.forEach((prevRowChar) => {
+    if (answerCharBag.has(prevRowChar)) {
       if (!currentRowCharBag.has(prevRowChar)) {
-        errors.push(`${prevRowChar} should be used in the current word`);
+        errors.push(`${prevRowChar} ${UI_TEXT.revelations.present.postfix}`);
       }
 
       answerCharBag.remove(prevRowChar);
@@ -104,3 +115,5 @@ export const getPreviousRevelationErrors = ({
   });
   return errors;
 };
+
+export { getPreviousRevelationErrors, getRowCellsStatus };

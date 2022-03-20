@@ -4,13 +4,14 @@ import { createScheduler } from '../../utils/schedule';
 import uniqueId from '../../utils/uniqueId';
 import { DEFAULT_TOAST_TIMER, TOAST_TRANSITION_DURATION } from './constants';
 import { createEmitter } from './createEmitter';
-import { CreateToastPayload, ToastData, ToastEvents } from './types';
+import type { CreateToastPayload, ToastData } from './types';
+import { ToastEvents } from './types';
 
-export const toastsEmitter = createEmitter();
+const toastsEmitter = createEmitter();
 
 const defaultToasts: readonly ToastData[] = [];
 
-export const removeToast = (id: string): void => {
+const removeToast = (id: string): void => {
   toastsEmitter.emit(ToastEvents.REMOVE_TOAST, id);
 };
 
@@ -19,13 +20,13 @@ const initiateToastRemoval = (id: string): void => {
 };
 
 type ToastRemoveHandler = (id: string) => void;
-export const onToastRemovalInitiation = (callback: ToastRemoveHandler) =>
+const onToastRemovalInitiation = (callback: ToastRemoveHandler) =>
   toastsEmitter.register<ToastEvents, ToastRemoveHandler>(
     ToastEvents.INITIATE_TOAST_REMOVAL,
     callback
   );
 
-export const createToastRemoveHandler =
+const createToastRemoveHandler =
   (id: string): Noop =>
   () => {
     // notify about removal initiation such that any other removal method doesn't work
@@ -45,7 +46,7 @@ export const createToastRemoveHandler =
 
 type CreateToastResult = { toast: ToastData; remove: ToastRemoveHandler };
 
-export const createToast = ({
+const createToast = ({
   duration = DEFAULT_TOAST_TIMER,
   ...data
 }: CreateToastPayload): CreateToastResult => {
@@ -87,3 +88,4 @@ const useToastsManager = (): ToastsMangerResult => {
 };
 
 export default useToastsManager;
+export { createToast, createToastRemoveHandler, onToastRemovalInitiation };

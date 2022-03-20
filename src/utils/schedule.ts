@@ -10,7 +10,7 @@ type Schedule = {
   cancel: Noop;
 };
 
-export const createScheduler = (): Schedule => ({
+const createScheduler = (): Schedule => ({
   timeoutId: undefined,
   run: function run({ callback, after }) {
     this.timeoutId = setTimeout(() => {
@@ -24,3 +24,5 @@ export const createScheduler = (): Schedule => ({
     }
   },
 });
+
+export { createScheduler };

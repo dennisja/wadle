@@ -8,7 +8,7 @@ const UI_TEXT = {
   title: 'Guess Distribution',
 };
 
-export const getGuessDistribution = (
+const getGuessDistribution = (
   gameStats: readonly GameStats[]
 ): readonly GuessDistributionEntry[] => {
   const distribution: GuessDistributionEntry[] = [
@@ -31,7 +31,7 @@ export const getGuessDistribution = (
   return distribution;
 };
 
-export const getGuessBarWidth = (value: number, maxValue: number): number => {
+const getGuessBarWidth = (value: number, maxValue: number): number => {
   const offset = 0.05 * maxValue; // ensure that guesses with zero values at least have a width
   return Math.round(((value + offset) / (maxValue + offset)) * 100);
 };

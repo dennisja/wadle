@@ -1,6 +1,8 @@
 import { LetterStatus } from '../../types';
 
-export type GetRowCellsStatus = (options: {
+type GetRowCellsStatus = (options: {
   row: readonly string[];
   rowIndex: number;
 }) => readonly LetterStatus[];
+
+export type { GetRowCellsStatus };

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { Noop } from '../types';
+import type { Noop } from '../types';
 
 type UseToggleResult = [boolean, Noop, Noop, Noop];
 
