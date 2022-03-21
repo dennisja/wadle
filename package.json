@@ -44,10 +44,11 @@
     "start": "react-scripts start",
     "build": "cross-env REACT_APP_COMMIT_SHA=$COMMIT_REF react-scripts build",
     "test": "react-scripts test",
+    "test:staged": "cross-env CI=true yarn test --findRelatedTests --bail --env=jsdom",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint": "eslint --ext .ts,.tsx .",
-    "format": "prettier --write --ignore-unknown  \"**/*.+(js|ts|tsx|html|svg|json)\" "
+    "format": "prettier --write --ignore-unknown --ignore-path .gitignore  \"**/*.+(js|ts|tsx|html|svg|json)\" "
   },
   "eslintConfig": {
     "extends": [
@@ -68,9 +69,10 @@
     ]
   },
   "lint-staged": {
-    "**/*": [
-      "yarn lint",
-      "yarn format"
+    "**/*.{ts,tsx}": [
+      "yarn format",
+      "yarn test:staged",
+      "yarn lint"
     ]
   }
 }

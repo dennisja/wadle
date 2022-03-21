@@ -18,7 +18,7 @@ const UI_TEXT = {
     warning: 'You cannot change game mode in between a game.',
   },
   word: {
-    bad: "That is a big word. It can't fit in our list",
+    bad: "That is a big word. It can't fit in our list.",
   },
 };
 
