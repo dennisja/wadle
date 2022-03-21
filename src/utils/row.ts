@@ -81,6 +81,7 @@ const getPreviousRevelationErrors = ({
   const answerCharBag = characterBag(answer.split(''));
   const currentRowCharBag = characterBag(currentRow);
   const errors: string[] = [];
+  const visitedIndices: Record<string, boolean> = {};
 
   // get all errors related to correct characters in the previous row that are missing in the current row
   previousRow.forEach((prevRowChar, i) => {
@@ -101,12 +102,13 @@ const getPreviousRevelationErrors = ({
     // we don't want to re visit the character in this position when calculating the present revelation errors
     // we therefore remove it from the answer
     answerCharBag.remove(answerChar);
+    visitedIndices[i] = true;
   });
 
   // Get all errors related to a present characters in the previous row that are missing in current row
-  previousRow.forEach((prevRowChar) => {
+  previousRow.forEach((prevRowChar, i) => {
     if (answerCharBag.has(prevRowChar)) {
-      if (!currentRowCharBag.has(prevRowChar)) {
+      if (!(i in visitedIndices) && !currentRowCharBag.has(prevRowChar)) {
         errors.push(`${prevRowChar} ${UI_TEXT.revelations.present.postfix}`);
       }
 

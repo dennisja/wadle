@@ -15,6 +15,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -42,10 +44,11 @@
     "start": "react-scripts start",
     "build": "cross-env REACT_APP_COMMIT_SHA=$COMMIT_REF react-scripts build",
     "test": "react-scripts test",
+    "test:staged": "cross-env CI=true yarn test --findRelatedTests --bail --env=jsdom",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint": "eslint --ext .ts,.tsx .",
-    "format": "prettier --write --ignore-unknown  \"**/*.+(js|ts|tsx|html|svg|json)\" "
+    "format": "prettier --write --ignore-unknown --ignore-path .gitignore  \"**/*.+(js|ts|tsx|html|svg|json)\" "
   },
   "eslintConfig": {
     "extends": [
@@ -66,9 +69,10 @@
     ]
   },
   "lint-staged": {
-    "**/*": [
-      "yarn lint",
-      "yarn format"
+    "**/*.{ts,tsx}": [
+      "yarn format",
+      "yarn test:staged",
+      "yarn lint"
     ]
   }
 }

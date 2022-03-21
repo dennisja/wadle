@@ -1,4 +1,13 @@
-const BAD_WORDS_LIST = ['penis', 'whore', 'dildo', 'pussy', 'fucks', 'dicks'];
+const BAD_WORDS_LIST = [
+  'penis',
+  'whore',
+  'dildo',
+  'pussy',
+  'fucks',
+  'dicks',
+  'porno',
+  'porns',
+];
 
 const WORD_LIST = [
   'aahed',
@@ -6102,8 +6111,6 @@ const WORD_LIST = [
   'porin',
   'porks',
   'porky',
-  'porno',
-  'porns',
   'porny',
   'ports',
   'posed',
