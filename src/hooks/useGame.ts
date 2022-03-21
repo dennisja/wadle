@@ -15,10 +15,11 @@ import useStats from './useStats';
 
 const UI_TEXT = {
   gameModeChange: {
-    warning: 'You cannot change game mode in between a game.',
+    warning:
+      'Tosobola kukyusa level yomuzannyo ngolina omuzannyo ogugenda mu maaso',
   },
   word: {
-    bad: "That is a big word. It can't fit in our list.",
+    bad: 'Ekyo ekigambo nga kinene mukama waffe',
   },
 };
 

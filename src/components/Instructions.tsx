@@ -39,7 +39,7 @@ type ExampleProps = {
 
 const EXAMPLES: readonly ExampleProps[] = [
   {
-    title: 'Correct',
+    title: 'Ennyukuta entufu',
     cellsStatus: [
       LetterStatus.CORRECT,
       LetterStatus.UN_GUESSED,
@@ -50,13 +50,13 @@ const EXAMPLES: readonly ExampleProps[] = [
     isValidRow: true,
     letters: EXAMPLE_ROW_LETTERS,
     description: {
-      prefix: 'The letter',
+      prefix: 'Ennyukuta',
       highlight: 'W',
-      postfix: 'is in the word and in the correct position',
+      postfix: 'mweri mu kigambo kyolina okuteba era eri mu kifo kitufu',
     },
   },
   {
-    title: 'Present',
+    title: 'Ennyukuta mweri',
     cellsStatus: [
       LetterStatus.UN_GUESSED,
       LetterStatus.PRESENT,
@@ -67,13 +67,13 @@ const EXAMPLES: readonly ExampleProps[] = [
     isValidRow: true,
     letters: EXAMPLE_ROW_LETTERS,
     description: {
-      prefix: 'The letter',
+      prefix: 'Ennyukuta',
       highlight: 'A',
-      postfix: 'is in the word but in the wrong position',
+      postfix: 'mweri mukigambo kyolina okuteba naye eri mu kifo kikyamu',
     },
   },
   {
-    title: 'Absent',
+    title: 'Ennyukuta eteri mukigambo',
     cellsStatus: [
       LetterStatus.UN_GUESSED,
       LetterStatus.UN_GUESSED,
@@ -84,13 +84,13 @@ const EXAMPLES: readonly ExampleProps[] = [
     isValidRow: true,
     letters: EXAMPLE_ROW_LETTERS,
     description: {
-      prefix: 'The letter',
+      prefix: 'Ennyukuta',
       highlight: 'D',
-      postfix: 'is not in the word',
+      postfix: 'teri mu kigambo kyolina okuteba',
     },
   },
   {
-    title: 'Wrong word',
+    title: 'Ekigambo kyetutalina',
     cellsStatus: [
       LetterStatus.UN_GUESSED,
       LetterStatus.UN_GUESSED,
@@ -101,9 +101,9 @@ const EXAMPLES: readonly ExampleProps[] = [
     isValidRow: false,
     letters: EXAMPLE_ROW_LETTERS,
     description: {
-      prefix: 'The word',
+      prefix: 'Ekigambo',
       highlight: 'WADLE',
-      postfix: 'does not exist in our word list',
+      postfix: 'tekiri mu list yebigambo byetulina',
     },
   },
 ];
@@ -138,12 +138,12 @@ const Example: VFC<ExampleProps> = ({
 );
 
 const INSTRUCTIONS: readonly string[] = [
-  'Guess the word in six tries.',
-  'Each guess is a 5 letter word. Press enter to submit.',
-  'After every guess, the tiles color will change to show how close you are to the guess',
+  'Teeba ekigambu mu mikisa mukaaga.',
+  'Buli kigambo kya nnyukuta taano. Womala ozitekamu ngonyiga Enter',
+  'Buuli luteeba, kaala yo lunyiriri ejja kukyuka okulaga wa wotuuse',
 ];
 
-const UI_TEXT = { instructions: 'Instructions' };
+const UI_TEXT = { instructions: 'Endagiriro', example: 'Okugeza' };
 
 const Instructions: VFC = () => {
   const [isOpen, toggleIsOpen] = useToggle();
@@ -166,7 +166,7 @@ const Instructions: VFC = () => {
           ))}
           <Divider color="colorTone.3" />
           <Text as="h3" variant="h4" sx={{ mb: 'm' }}>
-            Examples
+            {UI_TEXT.example}
           </Text>
           {EXAMPLES.map((example) => (
             <Example key={example.title} {...example} />

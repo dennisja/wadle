@@ -10,17 +10,17 @@ describe('utils/game', () => {
     };
 
     it.each`
-      expectedErrors                                                                                                              | currentRow           | previousRow          | answer
-      ${['r should be used in the current word', 'The letter at position 5 should be o']}                                         | ${'conts'.split('')} | ${'torso'.split('')} | ${'ortho'}
-      ${['r should be used in the current word']}                                                                                 | ${'conto'.split('')} | ${'torso'.split('')} | ${'ortho'}
-      ${[]}                                                                                                                       | ${'torso'.split('')} | ${'conto'.split('')} | ${'ortho'}
-      ${[]}                                                                                                                       | ${'wadle'.split('')} | ${[]}                | ${'reels'}
-      ${[]}                                                                                                                       | ${'DIODE'.split('')} | ${'AUDIO'.split('')} | ${'VOIDS'}
-      ${['The letter at position 2 should be O', 'The letter at position 3 should be I', 'The letter at position 4 should be D']} | ${'AUDIO'.split('')} | ${'LOIDL'.split('')} | ${'VOIDS'}
-      ${[]}                                                                                                                       | ${'LOIDS'.split('')} | ${'DIODE'.split('')} | ${'VOIDS'}
-      ${['The letter at position 2 should be A', 'The letter at position 3 should be D', 'The letter at position 4 should be I']} | ${'GLYPH'.split('')} | ${'RADII'.split('')} | ${'WADIS'}
-      ${[]}                                                                                                                       | ${'DINER'.split('')} | ${'DIVER'.split('')} | ${'DIRER'}
-      ${['The letter at position 4 should be E', 'L should be used in the current word']}                                         | ${'AUDIO'.split('')} | ${'LOVES'.split('')} | ${'GLEEK'}
+      expectedErrors                                                                                                                                      | currentRow           | previousRow          | answer
+      ${['r erina okukozesebwa mu lunyiriri luno', 'Ennyukuta eri mu kifo namba 5 erina kubera o']}                                                       | ${'conts'.split('')} | ${'torso'.split('')} | ${'ortho'}
+      ${['r erina okukozesebwa mu lunyiriri luno']}                                                                                                       | ${'conto'.split('')} | ${'torso'.split('')} | ${'ortho'}
+      ${[]}                                                                                                                                               | ${'torso'.split('')} | ${'conto'.split('')} | ${'ortho'}
+      ${[]}                                                                                                                                               | ${'wadle'.split('')} | ${[]}                | ${'reels'}
+      ${[]}                                                                                                                                               | ${'DIODE'.split('')} | ${'AUDIO'.split('')} | ${'VOIDS'}
+      ${['Ennyukuta eri mu kifo namba 2 erina kubera O', 'Ennyukuta eri mu kifo namba 3 erina kubera I', 'Ennyukuta eri mu kifo namba 4 erina kubera D']} | ${'AUDIO'.split('')} | ${'LOIDL'.split('')} | ${'VOIDS'}
+      ${[]}                                                                                                                                               | ${'LOIDS'.split('')} | ${'DIODE'.split('')} | ${'VOIDS'}
+      ${['Ennyukuta eri mu kifo namba 2 erina kubera A', 'Ennyukuta eri mu kifo namba 3 erina kubera D', 'Ennyukuta eri mu kifo namba 4 erina kubera I']} | ${'GLYPH'.split('')} | ${'RADII'.split('')} | ${'WADIS'}
+      ${[]}                                                                                                                                               | ${'DINER'.split('')} | ${'DIVER'.split('')} | ${'DIRER'}
+      ${['Ennyukuta eri mu kifo namba 4 erina kubera E', 'L erina okukozesebwa mu lunyiriri luno']}                                                       | ${'AUDIO'.split('')} | ${'LOVES'.split('')} | ${'GLEEK'}
     `(
       'should return $expectedErrors when the current row is $currentRow and the previous row was $previousRow given the answer is $answer ',
       ({ expectedErrors, currentRow, previousRow, answer }: TestProps) => {

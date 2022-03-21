@@ -5,18 +5,18 @@ import { Statistics } from './types';
 
 const UI_TEXT = {
   time: {
-    title: 'Time',
-    shortestGame: 'Shortest game',
-    longestGame: 'Longest game',
-    averageTime: 'Average Time',
-    playTime: 'Playing Time',
+    title: 'Obudde bwomuzannyo',
+    shortestGame: 'Ogusinga obuwanvu',
+    longestGame: 'Ogusinga obumpi',
+    averageTime: 'Average',
+    playTime: 'Emizannyo gyona',
   },
   streak: {
-    title: 'Streak',
-    currentStreak: 'Current Streak',
-    maxStreak: 'Max Streak',
-    totalPlayed: 'Played',
-    winPercentage: 'Win %',
+    title: 'Ekisinde',
+    currentStreak: 'Kyoli mukutambuza',
+    maxStreak: 'Ekisinga obuwanvu',
+    totalPlayed: 'Omuwendo gwemizanyo',
+    winPercentage: '% gyowangudde',
   },
 };
 

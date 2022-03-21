@@ -5,7 +5,7 @@ import { GameStats, GameStatus } from '../../types';
 type GuessDistributionEntry = { value: number; title: string };
 
 const UI_TEXT = {
-  title: 'Guess Distribution',
+  title: 'Emirundi gyokozeseza okuteba',
 };
 
 const getGuessDistribution = (

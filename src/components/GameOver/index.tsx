@@ -7,25 +7,21 @@ import { getAnswer } from '../../utils/word';
 import ShareButton from './ShareButton';
 
 const GAME_WON_MESSAGES: Record<number, string[]> = {
-  1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
-  2: ['Hats off!!!', 'Tremendous!!!', 'Way to go!!!'],
-  3: ['What a game!!!', 'You did it!!!', 'You rock!!!'],
-  4: ['Respect!!!', 'Kudos!!!', 'You rule!!!'],
-  5: ['Good show!!!', 'Well deserved!!!', 'Nice one!!!'],
-  6: ['Pheeew!!!', 'Pat on the back!!!', 'Good one mate!!!'],
+  1: ['Wa Wa Wa!!!', 'Kyatabu!!!', 'Gwe Asinga!!!'],
+  2: ['Nkugideko enkofiira!!!', 'Kyakabi!!!', 'Kyeko baaba!!!'],
+  3: ['Oli watabu!!!', 'Okikoze muganda wange!!!', 'Teri akwenkana!!!'],
+  4: ['Kyekyo jjaja', 'Nenkya bwotyo!!!', 'Gwe asinga mukinto kino!!!'],
+  5: ['Webale kuzanya!!!', 'Webale butapowa!!!', 'Webale kulemerako!!!'],
+  6: ['Pheeew!!!', 'Kulika omuzannyo!!!', 'Kata kikuleme!!!'],
 };
 
-const GAME_LOST_MESSAGES = [
-  'Almost got it!!!',
-  'Nice try!!!',
-  'Good luck next time!!!',
-];
+const GAME_LOST_MESSAGES = ['Biganye!!!', 'Webale kugezako!!!', 'Byayanga!!!'];
 
 const UI_TEXT = {
-  answerPrefix: 'The answer was',
+  answerPrefix: 'Ekigambo ekitufu kibadde',
   gameLost: GAME_LOST_MESSAGES,
   gameWon: GAME_WON_MESSAGES,
-  playAgain: 'Play Again',
+  playAgain: 'Damu Ozanye',
 };
 
 type GameOverProps = {

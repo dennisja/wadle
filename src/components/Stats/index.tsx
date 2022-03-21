@@ -23,8 +23,8 @@ const statsContainerStyles: ThemeUIStyleObject = {
 };
 
 const UI_TEXT = {
-  noGamesPlayedInfo: 'Play Some Games',
-  modalTitle: 'Statistics',
+  noGamesPlayedInfo: 'Zannya yo emizanyo',
+  modalTitle: 'Embalilira',
 };
 
 type StatsProps = Statistics;

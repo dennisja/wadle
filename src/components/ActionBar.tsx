@@ -9,8 +9,8 @@ const UI_TEXT = {
   pageTitle: {
     name: 'Wadle',
     click: {
-      toastMessage: ['You like clicking things 😂'],
-      toastTitle: 'Look at you',
+      toastMessage: ['Oyagala onyigiriza buli kimu 😂'],
+      toastTitle: 'Leero gwe',
     },
   },
 };

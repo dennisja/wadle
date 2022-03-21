@@ -15,10 +15,10 @@ const ShareEmoji: Record<LetterStatus, string> = {
 };
 
 const UI_TEXT = {
-  copySuccess: 'Copied data to clipboard.',
-  copyOrShareFailure: 'Copying/Sharing text failed.',
+  copySuccess: 'Obubaka tubukopye ku clipboard',
+  copyOrShareFailure: 'Okukopa/okusindika obubaka tekisoboka',
   appName: 'WADLE',
-  share: 'Share',
+  share: 'Sindika',
 };
 
 type ShareButtonProps = {

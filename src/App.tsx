@@ -12,7 +12,7 @@ import Modal from './ui/Modal';
 import theme from './ui/theme';
 import { ToastContainer } from './ui/Toast';
 
-const UI_TEXT = { playAgain: 'Play Again', gameOver: 'Game Over' };
+const UI_TEXT = { playAgain: 'Ddamu Ozanye', gameOver: 'Kawedemu!!!' };
 
 function App() {
   const game = useGame();

@@ -2,8 +2,8 @@ import { LetterStatus } from '../types';
 
 const UI_TEXT = {
   revelations: {
-    correct: { prefix: 'The letter at position', postfix: 'should be' },
-    present: { postfix: 'should be used in the current word' },
+    correct: { prefix: 'Ennyukuta eri mu kifo namba', postfix: 'erina kubera' },
+    present: { postfix: 'erina okukozesebwa mu lunyiriri luno' },
   },
 };
 

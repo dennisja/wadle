@@ -18,15 +18,15 @@ import Modal from '../../ui/Modal';
 const UI_TEXT = {
   modalTitle: 'Settings',
   hardMode: {
-    title: 'Hard mode',
-    description: 'All revelations in the previous guesses must be used',
+    title: 'Level Enzibu',
+    description: 'Buli nnyukuta gyozudde munyiriri eziyise olina okugikozesa',
   },
   contact: {
-    title: 'Contact',
+    title: 'Yogera nange',
     link: { name: 'Twitter' },
   },
-  contribute: { title: 'Contribute' },
-  darkMode: { title: 'Dark Mode' },
+  contribute: { title: 'Tuyambeko' },
+  darkMode: { title: 'Kozesa langi enzirugavu' },
 };
 
 const switchStyles: ThemeUIStyleObject = {

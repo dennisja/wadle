@@ -18,7 +18,7 @@ describe('App', () => {
   });
 
   test('notifies user when they click page title', async () => {
-    const toastTitleText = 'Look at you';
+    const toastTitleText = 'Leero gwe';
     const appTitle = screen.getByText('Wadle');
     appTitle.click();
     const toastTitle = await screen.findByText(toastTitleText);
