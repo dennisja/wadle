@@ -23,7 +23,6 @@ const toastStyles: ThemeUICSSObject = {
   borderRadius: 's',
   alignItems: 'center',
   transition: `transform ${TOAST_TRANSITION_DURATION}ms linear`,
-  zIndex: 'toast',
   bg: 'colorTone.6',
 };
 
@@ -146,7 +145,7 @@ const Toast: VFC<ToastProps> = ({
       </Box>
       <IconButton
         variant="icon"
-        sx={{ color, '&:hover': { color: 'white', bg: color } }}
+        sx={{ color, '&:hover': { color: 'white', bg: color }, ml: 's' }}
         onClick={handleToastRemove}
         aria-label="Close Toast"
       >

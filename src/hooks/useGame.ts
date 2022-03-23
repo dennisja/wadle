@@ -19,6 +19,7 @@ const UI_TEXT = {
   },
   word: {
     bad: "That is a big word. It can't fit in our list.",
+    absent: 'Not in word list',
   },
 };
 
@@ -127,7 +128,8 @@ const useGame = () => {
   };
 
   const advanceToNextRow = () => {
-    if (isGameOver(gameStatus)) {
+    const currentRowIsIncomplete = board[currentRow].join('').trim().length < 5;
+    if (isGameOver(gameStatus) || currentRowIsIncomplete) {
       return;
     }
 
@@ -140,6 +142,7 @@ const useGame = () => {
     const rowState = getRowStatus(board[currentRow], answer);
 
     if (rowState === RowStatus.HAS_INVALID_WORD) {
+      createToast({ messages: [UI_TEXT.word.absent], type: 'error' });
       setIsValidRow(false);
       return;
     }

@@ -10,19 +10,26 @@ type Schedule = {
   cancel: Noop;
 };
 
-const createScheduler = (): Schedule => ({
-  timeoutId: undefined,
-  run: function run({ callback, after }) {
-    this.timeoutId = setTimeout(() => {
-      callback();
-      this.cancel();
-    }, after);
-  },
-  cancel: function cancel() {
-    if (this.timeoutId !== undefined) {
-      clearTimeout(this.timeoutId);
-    }
-  },
-});
+const createScheduler = (): Schedule => {
+  const schedule: Schedule = {
+    timeoutId: undefined,
+    run: function run({ callback, after }) {
+      this.timeoutId = setTimeout(() => {
+        callback();
+        this.cancel();
+      }, after);
+    },
+    cancel: function cancel() {
+      if (this.timeoutId !== undefined) {
+        clearTimeout(this.timeoutId);
+      }
+    },
+  };
+
+  schedule.cancel = schedule.cancel.bind(schedule);
+  schedule.run = schedule.run.bind(schedule);
+
+  return schedule;
+};
 
 export { createScheduler };
