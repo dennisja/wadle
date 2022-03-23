@@ -4,11 +4,12 @@ import Toast from './Toast';
 import useToastManager from './toastsManager';
 
 const toastsContainerStyles: ThemeUIStyleObject = {
-  position: 'absolute',
+  position: 'fixed',
   top: '50px',
   flexDirection: 'column',
-  width: 'min(400px, 90vw)',
+  maxWidth: 'min(400px, 90vw)',
   transform: 'translate(calc(50vw - 50%))',
+  zIndex: 'toast',
 };
 
 const ToastContainer: VFC = () => {
