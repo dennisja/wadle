@@ -32,7 +32,13 @@ type StreakStats = {
   maxStreak: number;
 };
 
-type Language = 'english' | 'luganda' | 'ateso' | 'acholi' | 'lugbara';
+type Language =
+  | 'english'
+  | 'luganda'
+  | 'ateso'
+  | 'acholi'
+  | 'lugbara'
+  | 'runyankore';
 
 export { LetterStatus, GameMode, GameStatus };
 export type { GameStats, Noop, StreakStats, Language };

@@ -5,6 +5,7 @@ import luganda from './languages/luganda';
 import ateso from './languages/ateso';
 import acholi from './languages/acholi';
 import lugbara from './languages/lugbara';
+import runyankore from './languages/runyankore';
 import type { UIText } from './languages/english';
 import { LANGUAGE } from '../constants';
 import { Language } from '../../types';
@@ -33,6 +34,7 @@ const LANGUAGE_TRANSLATIONS: Record<Language, UIText> = {
   ateso,
   acholi,
   lugbara,
+  runyankore,
 };
 
 const translation: TranslationFunction = (path) => {
