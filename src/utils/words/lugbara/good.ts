@@ -1,5 +1,4 @@
 const WORD_LIST = [
-  ';diyi',
   'aaria',
   'abaas',
   'ababa',
@@ -184,7 +183,6 @@ const WORD_LIST = [
   'aleta',
   'aleza',
   'alezu',
-  'alia;',
   'aliaa',
   'aliai',
   'aliar',
@@ -559,7 +557,6 @@ const WORD_LIST = [
   'dinin',
   'dinir',
   'diria',
-  'diyi:',
   'diyia',
   'diyii',
   'diyio',
@@ -1170,8 +1167,6 @@ const WORD_LIST = [
   'khadi',
   'kilas',
   'kiloa',
-  'kini:',
-  'kini;',
   'kizza',
   'kkumi',
   'kofia',
@@ -2218,7 +2213,6 @@ const WORD_LIST = [
   'zotaa',
   'zumba',
   'zuria',
-  '́diyi',
 ];
 
 export default WORD_LIST;
