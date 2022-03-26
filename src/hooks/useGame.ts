@@ -1,16 +1,16 @@
 import { GetRowCellsStatus } from '../components/GuessesBoard/types';
 import { getKeyboardLettersStatus } from '../components/Keyboard/lettersStatus';
-import { GameMode, GameStatus } from '../types';
+import { GameMode, GameStatus, Language } from '../types';
 import { createToast } from '../ui/Toast';
 import { isGameOver, isHardMode } from '../utils/game';
 import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/row';
 import { t } from '../utils/translations';
 import {
-  BAD_WORDS_BAG,
   getAnswer,
   getAnswerIndex,
-  WORD_BAG,
-} from '../utils/word';
+  getBadWordsBag,
+  getGoodWordsBag,
+} from '../utils/words';
 import { usePersistedState } from './usePersistedState';
 import useStats from './useStats';
 
@@ -33,9 +33,14 @@ enum RowStatus {
   HAS_INVALID_WORD = 'hasInvalidWord',
 }
 
-const getRowStatus = (characters: string[], answer: string): RowStatus => {
+const getRowStatus = (
+  characters: string[],
+  answer: string,
+  language: Language
+): RowStatus => {
   const word = characters.join('');
   if (word === answer) return RowStatus.HAS_ANSWER;
+  const WORD_BAG = getGoodWordsBag(language);
   if (WORD_BAG.has(word.toLocaleLowerCase())) return RowStatus.HAS_VALID_WORD;
   return RowStatus.HAS_INVALID_WORD;
 };
@@ -50,7 +55,7 @@ enum LocalStorageStateKeys {
   GAME_MODE = 'gameMode',
 }
 
-const useGame = () => {
+const useGame = (language: Language) => {
   const [board, setBoard] = usePersistedState({
     key: LocalStorageStateKeys.BOARD,
     fallback: defaultBoard,
@@ -65,7 +70,7 @@ const useGame = () => {
   });
   const [answerIndex, setAnswerIndex] = usePersistedState({
     key: LocalStorageStateKeys.ANSWER,
-    fallback: getAnswerIndex,
+    fallback: () => getAnswerIndex(language),
   });
   const [isValidRow, setIsValidRow] = usePersistedState({
     key: LocalStorageStateKeys.IS_VALID_ROW,
@@ -86,7 +91,7 @@ const useGame = () => {
       return GameStatus.PLAYING;
     },
   });
-  const answer = getAnswer(answerIndex);
+  const answer = getAnswer(answerIndex, language);
 
   const addLetterToBoard = (character: string) => {
     if (currentColumn < board[0].length && !isGameOver(gameStatus)) {
@@ -124,13 +129,14 @@ const useGame = () => {
       return;
     }
 
+    const BAD_WORDS_BAG = getBadWordsBag(language);
     if (BAD_WORDS_BAG.has(board[currentRow].join('').toLowerCase())) {
       createToast({ messages: [t('useGame.word.bad')], type: 'error' });
       setIsValidRow(false);
       return;
     }
 
-    const rowState = getRowStatus(board[currentRow], answer);
+    const rowState = getRowStatus(board[currentRow], answer, language);
 
     if (rowState === RowStatus.HAS_INVALID_WORD) {
       createToast({ messages: [t('useGame.word.absent')], type: 'error' });
@@ -181,7 +187,7 @@ const useGame = () => {
     setCurrentRow(0);
     setCurrentColumn(0);
     setGameStatus(GameStatus.PLAYING);
-    setAnswerIndex(getAnswerIndex());
+    setAnswerIndex(getAnswerIndex(language));
     stats.updateStatsOnGameStart(gameMode);
   };
 

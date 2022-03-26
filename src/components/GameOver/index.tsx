@@ -1,10 +1,10 @@
 import { VFC } from 'react';
 import { Flex, Text } from 'theme-ui';
-import { GameStatus } from '../../types';
+import { GameStatus, Language } from '../../types';
 import Button from '../../ui/Button';
 import { getRandomItem } from '../../utils';
 import { t } from '../../utils/translations';
-import { getAnswer } from '../../utils/word';
+import { getAnswer } from '../../utils/words';
 import ShareButton from './ShareButton';
 
 type GameOverProps = {
@@ -15,6 +15,7 @@ type GameOverProps = {
   /** The number of times taken to complete the game */
   steps: number;
   board: readonly string[][];
+  language: Language;
 };
 
 const GameOver: VFC<GameOverProps> = ({
@@ -23,6 +24,7 @@ const GameOver: VFC<GameOverProps> = ({
   steps,
   answerId,
   board,
+  language,
 }) => (
   <Flex
     sx={{
@@ -48,7 +50,7 @@ const GameOver: VFC<GameOverProps> = ({
       <Text>
         {t('gameOver.answerPrefix')}{' '}
         <Text as="span" variant="h4">
-          {getAnswer(answerId)}
+          {getAnswer(answerId, language)}
         </Text>
       </Text>
     )}
@@ -63,7 +65,7 @@ const GameOver: VFC<GameOverProps> = ({
         {t('gameOver.playAgain')}
       </Button>
       {gameStatus === GameStatus.WON && (
-        <ShareButton answerId={answerId} board={board} />
+        <ShareButton answerId={answerId} board={board} language={language} />
       )}
     </Flex>
   </Flex>

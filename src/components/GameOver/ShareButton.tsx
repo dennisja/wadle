@@ -1,10 +1,10 @@
 import { VFC } from 'react';
 import * as Sentry from '@sentry/react';
-import { LetterStatus } from '../../types';
+import { Language, LetterStatus } from '../../types';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
 import { getRowCellsStatus } from '../../utils/row';
-import { getAnswer } from '../../utils/word';
+import { getAnswer } from '../../utils/words';
 import { createToast } from '../../ui/Toast';
 import { t } from '../../utils/translations';
 
@@ -18,14 +18,16 @@ const ShareEmoji: Record<LetterStatus, string> = {
 type ShareButtonProps = {
   board: readonly string[][];
   answerId: number;
+  language: Language;
 };
 
 const toSharableEmojis = ({
   answerId,
   board,
+  language,
 }: ShareButtonProps): readonly string[][] => {
   const result: string[][] = [];
-  const answer = getAnswer(answerId);
+  const answer = getAnswer(answerId, language);
 
   board.forEach((row) => {
     if (row.join('').trim().length !== 5) return;
@@ -54,9 +56,9 @@ const formatMessage = (boardStateEmojis: readonly string[][]): string => {
   return message;
 };
 
-const ShareButton: VFC<ShareButtonProps> = ({ board, answerId }) => {
+const ShareButton: VFC<ShareButtonProps> = ({ board, answerId, language }) => {
   const handleShare = async () => {
-    const emojis = toSharableEmojis({ board, answerId });
+    const emojis = toSharableEmojis({ board, answerId, language });
     const message = formatMessage(emojis);
     try {
       if (navigator.canShare?.({ text: message })) {

@@ -45,6 +45,7 @@ const SettingsRow: FC<SettingsRowProps> = ({
 const LANGUAGES: readonly Language[] = [
   'acholi',
   'ateso',
+  'english',
   'luganda',
   'lugbara',
   'runyankore',
