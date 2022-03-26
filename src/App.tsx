@@ -6,15 +6,17 @@ import GlobalStyles from './components/GlobalStyles';
 import GuessesBoard from './components/GuessesBoard';
 import Keyboard from './components/Keyboard';
 import useGame from './hooks/useGame';
+import useLanguage from './hooks/useLanguage';
 import { GameStatus } from './types';
 import Button from './ui/Button';
 import Modal from './ui/Modal';
 import theme from './ui/theme';
-import { ToastContainer } from './ui/Toast';
+import { createToast, ToastContainer } from './ui/Toast';
 import { t } from './utils/translations';
 
 function App() {
   const game = useGame();
+  const lang = useLanguage();
 
   return (
     <ThemeProvider theme={theme}>
@@ -26,6 +28,19 @@ function App() {
           onGameModeChange={game.toggleGameMode}
           gameStats={game.gameStats}
           streakStats={game.streakStats}
+          language={lang.language}
+          onLanguageChange={(language) => {
+            if (game.gameStatus === GameStatus.PLAYING) {
+              createToast({
+                messages: t('settings.language.change.gameInProgress.messages'),
+                title: t('settings.language.change.gameInProgress.title'),
+                type: 'warning',
+                duration: 5000,
+              });
+              return;
+            }
+            lang.setLanguage(language);
+          }}
         />
         <GuessesBoard
           rows={game.board}

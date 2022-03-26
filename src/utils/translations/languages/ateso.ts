@@ -99,6 +99,16 @@ const UI_TEXT: UIText = {
     },
     contribute: { title: 'Contribute' },
     darkMode: { title: 'Dark Mode' },
+    language: {
+      title: 'Language',
+      note: 'The language in which you will be playing. Default is english.',
+      change: {
+        gameInProgress: {
+          title: 'Language not changed',
+          messages: ['You can not change the language in between a game'],
+        },
+      },
+    },
   },
 
   shareButton: {

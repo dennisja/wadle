@@ -3,7 +3,7 @@ import { Box, Flex, Text, ThemeUIStyleObject } from 'theme-ui';
 import { createToast } from '../ui/Toast';
 import { t } from '../utils/translations';
 import Instructions from './Instructions';
-import Settings, { SettingsProps } from './Settings';
+import Settings, { SelectLanguageProps, SettingsProps } from './Settings';
 import Stats, { StatsProps } from './Stats';
 
 const actionBarContainerStyles: ThemeUIStyleObject = {
@@ -14,13 +14,15 @@ const actionBarContainerStyles: ThemeUIStyleObject = {
   borderBottomColor: 'opacity10',
 };
 
-type ActionBarProps = SettingsProps & StatsProps;
+type ActionBarProps = SettingsProps & StatsProps & SelectLanguageProps;
 
 const ActionBar: VFC<ActionBarProps> = ({
   gameMode,
   onGameModeChange,
   gameStats,
   streakStats,
+  onLanguageChange,
+  language,
 }) => (
   <Flex sx={actionBarContainerStyles}>
     <Instructions />
@@ -39,7 +41,12 @@ const ActionBar: VFC<ActionBarProps> = ({
     </Text>
     <Box>
       <Stats gameStats={gameStats} streakStats={streakStats} />
-      <Settings gameMode={gameMode} onGameModeChange={onGameModeChange} />
+      <Settings
+        gameMode={gameMode}
+        onGameModeChange={onGameModeChange}
+        onLanguageChange={onLanguageChange}
+        language={language}
+      />
     </Box>
   </Flex>
 );

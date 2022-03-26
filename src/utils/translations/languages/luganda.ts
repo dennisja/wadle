@@ -102,6 +102,16 @@ const UI_TEXT: UIText = {
     },
     contribute: { title: 'Tuyambeko' },
     darkMode: { title: 'Kozesa langi enzirugavu' },
+    language: {
+      title: 'Olulimi',
+      note: 'Olulimi lwokozesa okuzannya',
+      change: {
+        gameInProgress: {
+          title: 'Olulimi telukyuse',
+          messages: ['Tosobola kukyusa lulimi ngomuzannyo gukyagenda mu maaso'],
+        },
+      },
+    },
   },
 
   shareButton: {
