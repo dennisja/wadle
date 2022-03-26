@@ -47,6 +47,7 @@ const UI_TEXT = {
       'After every guess, the tiles color will change to show how close you are to the guess',
     ],
     examples: {
+      title: 'Examples',
       correct: {
         title: 'Correct',
         description: {

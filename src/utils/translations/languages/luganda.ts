@@ -5,137 +5,142 @@ const UI_TEXT: UIText = {
     pageTitle: {
       name: 'Wadle',
       click: {
-        toastMessage: ['You like clicking things 😂'],
-        toastTitle: 'Look at you',
+        toastMessage: ['Oyagala onyigiriza buli kimu 😂'],
+        toastTitle: 'Leero gwe',
       },
     },
   },
 
-  app: { playAgain: 'Play Again', gameOver: 'Game Over' },
+  app: { playAgain: 'Ddamu ozanye', gameOver: 'Kawedemu!!!' },
 
   board: {
     // translations for row
     revelations: {
-      correct: { prefix: 'The letter at position', postfix: 'should be' },
-      present: { postfix: 'should be used in the current word' },
+      correct: {
+        prefix: 'Ennyukuta eri mu kifo namba',
+        postfix: 'erina kubera',
+      },
+      present: { postfix: 'erina okukozesebwa mu lunyiriri luno' },
     },
   },
 
   gameOver: {
-    answerPrefix: 'The answer was',
+    answerPrefix: 'Ekigambo ekitufu kibadde',
     messages: {
-      gameLost: ['Almost got it!!!', 'Nice try!!!', 'Good luck next time!!!'],
+      gameLost: ['Biganye!!!', 'Webale kugezako!!!', 'Byayanga!!!'],
       gameWon: {
-        1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
-        2: ['Hats off!!!', 'Tremendous!!!', 'Way to go!!!'],
-        3: ['What a game!!!', 'You did it!!!', 'You rock!!!'],
-        4: ['Respect!!!', 'Kudos!!!', 'You rule!!!'],
-        5: ['Good show!!!', 'Well deserved!!!', 'Nice one!!!'],
-        6: ['Pheeew!!!', 'Pat on the back!!!', 'Good one mate!!!'],
+        1: ['Wa Wa Wa!!!', 'Kyatabu!!!', 'Gwe Asinga!!!'],
+        2: ['Nkugideko enkofiira!!!', 'Kyakabi!!!', 'Kyeko baaba!!!'],
+        3: ['Oli watabu!!!', 'Okikoze muganda wange!!!', 'Teri akwenkana!!!'],
+        4: ['Kyekyo jjaja', 'Nenkya bwotyo!!!', 'Gwe asinga mukinto kino!!!'],
+        5: ['Webale kuzanya!!!', 'Webale butapowa!!!', 'Webale kulemerako!!!'],
+        6: ['Pheeew!!!', 'Kulika omuzannyo!!!', 'Kata kikuleme!!!'],
       } as Record<number, string[]>,
     },
-    playAgain: 'Play Again',
+    playAgain: 'Ddamu ozanye',
   },
 
   guessDistribution: {
-    title: 'Guess Distribution',
+    title: 'Emirundi gyokozeseza okuteba',
   },
 
   instructions: {
-    title: 'Instructions',
+    title: 'Endagiriro',
     instructions: [
-      'Guess the word in six tries.',
-      'Each guess is a 5 letter word. Press enter to submit.',
-      'After every guess, the tiles color will change to show how close you are to the guess',
+      'Teeba ekigambu mu mikisa mukaaga.',
+      'Buli kigambo kya nnyukuta taano. Womala ozitekamu ngonyiga Enter',
+      'Buuli luteeba, kaala yo lunyiriri ejja kukyuka okulaga wa wotuuse',
     ],
     examples: {
+      title: 'Endagiriro',
       correct: {
-        title: 'Correct',
+        title: 'Ennyukuta entufu',
         description: {
-          prefix: 'The letter',
+          prefix: 'Ennyukuta',
           highlight: 'W',
-          postfix: 'is in the word and in the correct position',
+          postfix: 'mweri mu kigambo kyolina okuteba era eri mu kifo kitufu',
         },
       },
 
       present: {
-        title: 'Present',
+        title: 'Ennyukuta mweri',
         description: {
-          prefix: 'The letter',
+          prefix: 'Ennyukuta',
           highlight: 'A',
-          postfix: 'is in the word but in the wrong position',
+          postfix: 'mweri mukigambo kyolina okuteba naye eri mu kifo kikyamu',
         },
       },
 
       absent: {
-        title: 'Absent',
+        title: 'Ennyukuta eteri mukigambo',
         description: {
-          prefix: 'The letter',
+          prefix: 'Ennyukuta',
           highlight: 'D',
-          postfix: 'is not in the word',
+          postfix: 'eri mu kigambo kyolina okuteba',
         },
       },
 
       wrongWord: {
-        title: 'Wrong word',
+        title: 'Ekigambo kyetutalina',
         description: {
-          prefix: 'The word',
+          prefix: 'Ekigambo',
           highlight: 'WADLE',
-          postfix: 'does not exist in our word list',
+          postfix: 'tekiri mu lukalala lwebigambo byetulina',
         },
       },
     },
   },
   settings: {
-    modalTitle: 'Settings',
+    modalTitle: 'Enteekateeka',
     hardMode: {
-      title: 'Hard mode',
-      description: 'All revelations in the previous guesses must be used',
+      title: 'Eddala Erizibu',
+      description: 'Buli nnyukuta gyozudde munyiriri eziyise olina okugikozesa',
     },
     contact: {
-      title: 'Contact',
+      title: 'Yogera nange',
       link: { name: 'Twitter' },
     },
-    contribute: { title: 'Contribute' },
-    darkMode: { title: 'Dark Mode' },
+    contribute: { title: 'Tuyambeko' },
+    darkMode: { title: 'Kozesa langi enzirugavu' },
   },
 
   shareButton: {
-    copySuccess: 'Copied data to clipboard.',
-    copyOrShareFailure: 'Copying/Sharing text failed.',
+    copySuccess: 'Obubaka bukopedwa. Olina okubupestinga okusobola okubugabana',
+    copyOrShareFailure: 'Okukopa/okusindika obubaka kuganye',
     appName: 'WADLE',
-    share: 'Share',
+    share: 'Sindika',
   },
 
   stats: {
-    noGamesPlayedInfo: 'Play Some Games',
-    modalTitle: 'Statistics',
+    noGamesPlayedInfo: 'Zannya yo emizanyo',
+    modalTitle: 'Embalirira',
   },
 
   statsSummary: {
     time: {
-      title: 'Time',
-      shortestGame: 'Shortest game',
-      longestGame: 'Longest game',
+      title: 'Obudde bwomuzannyo',
+      shortestGame: 'Ogusinga obuwanvu',
+      longestGame: 'Ogusinga obumpi',
       averageTime: 'Average Time',
-      playTime: 'Playing Time',
+      playTime: 'Emizannyo gyona',
     },
     streak: {
-      title: 'Streak',
-      currentStreak: 'Current Streak',
-      maxStreak: 'Max Streak',
-      totalPlayed: 'Played',
-      winPercentage: 'Win %',
+      title: 'Ekisinde',
+      currentStreak: 'Kyoli mukutambuza',
+      maxStreak: 'Ekisinga obuwanvu',
+      totalPlayed: 'Omuwendo gwemizanyo',
+      winPercentage: '% gyowangudde',
     },
   },
 
   useGame: {
     gameModeChange: {
-      warning: 'You cannot change game mode in between a game.',
+      warning:
+        'Tosobola kukyusa level yomuzannyo ngolina omuzannyo ogugenda mu maaso.',
     },
     word: {
-      bad: "That is a big word. It can't fit in our list.",
-      absent: 'Not in word list',
+      bad: 'Ekyo ekigambo nga kinene mukama waffe',
+      absent: 'Ekigambo tetukirina mulukalala lwaffe',
     },
   },
 };

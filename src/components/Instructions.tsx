@@ -143,7 +143,7 @@ const Instructions: VFC = () => {
           ))}
           <Divider color="colorTone.3" />
           <Text as="h3" variant="h4" sx={{ mb: 'm' }}>
-            Examples
+            {t('instructions.examples.title')}
           </Text>
           {EXAMPLES.map((example) => (
             <Example key={example.title} {...example} />
