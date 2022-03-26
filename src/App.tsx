@@ -11,8 +11,7 @@ import Button from './ui/Button';
 import Modal from './ui/Modal';
 import theme from './ui/theme';
 import { ToastContainer } from './ui/Toast';
-
-const UI_TEXT = { playAgain: 'Play Again', gameOver: 'Game Over' };
+import { t } from './utils/translations';
 
 function App() {
   const game = useGame();
@@ -35,7 +34,7 @@ function App() {
         />
         {GameStatus.IDLE === game.gameStatus ? (
           <Button size="large" sx={{ mb: 'xl' }} onClick={game.restartGame}>
-            {UI_TEXT.playAgain}
+            {t('app.playAgain')}
           </Button>
         ) : (
           <Keyboard
@@ -46,7 +45,7 @@ function App() {
           />
         )}
         <Modal
-          title={UI_TEXT.gameOver}
+          title={t('app.gameOver')}
           isOpen={game.isGameOver}
           onClose={game.toIdleState}
         >

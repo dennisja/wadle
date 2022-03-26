@@ -11,55 +11,8 @@ import useToggle from '../hooks/useToggle';
 import { LetterStatus } from '../types';
 import Icon from '../ui/Icon';
 import Modal from '../ui/Modal';
+import { t } from '../utils/translations';
 import { Row } from './GuessesBoard';
-
-const UI_TEXT = {
-  instructions: {
-    title: 'Instructions',
-    instructions: [
-      'Guess the word in six tries.',
-      'Each guess is a 5 letter word. Press enter to submit.',
-      'After every guess, the tiles color will change to show how close you are to the guess',
-    ],
-    examples: {
-      correct: {
-        title: 'Correct',
-        description: {
-          prefix: 'The letter',
-          highlight: 'W',
-          postfix: 'is in the word and in the correct position',
-        },
-      },
-
-      present: {
-        title: 'Present',
-        description: {
-          prefix: 'The letter',
-          highlight: 'A',
-          postfix: 'is in the word but in the wrong position',
-        },
-      },
-
-      absent: {
-        title: 'Absent',
-        description: {
-          prefix: 'The letter',
-          highlight: 'D',
-          postfix: 'is not in the word',
-        },
-      },
-
-      wrongWord: {
-        title: 'Wrong word',
-        description: {
-          prefix: 'The word',
-          highlight: 'WADLE',
-          postfix: 'does not exist in our word list',
-        },
-      },
-    },
-  },
-};
 
 const exampleTilesStyles: ThemeUIStyleObject = {
   gridTemplateColumns: 'repeat(5, 1fr)',
@@ -87,7 +40,7 @@ type ExampleProps = {
 
 const EXAMPLES: readonly ExampleProps[] = [
   {
-    title: UI_TEXT.instructions.examples.correct.title,
+    title: t('instructions.examples.correct.title'),
     cellsStatus: [
       LetterStatus.CORRECT,
       LetterStatus.UN_GUESSED,
@@ -97,10 +50,10 @@ const EXAMPLES: readonly ExampleProps[] = [
     ],
     isValidRow: true,
     letters: EXAMPLE_ROW_LETTERS,
-    description: UI_TEXT.instructions.examples.correct.description,
+    description: t('instructions.examples.correct.description'),
   },
   {
-    title: UI_TEXT.instructions.examples.present.title,
+    title: t('instructions.examples.present.title'),
     cellsStatus: [
       LetterStatus.UN_GUESSED,
       LetterStatus.PRESENT,
@@ -110,10 +63,10 @@ const EXAMPLES: readonly ExampleProps[] = [
     ],
     isValidRow: true,
     letters: EXAMPLE_ROW_LETTERS,
-    description: UI_TEXT.instructions.examples.present.description,
+    description: t('instructions.examples.present.description'),
   },
   {
-    title: UI_TEXT.instructions.examples.absent.title,
+    title: t('instructions.examples.absent.title'),
     cellsStatus: [
       LetterStatus.UN_GUESSED,
       LetterStatus.UN_GUESSED,
@@ -123,10 +76,10 @@ const EXAMPLES: readonly ExampleProps[] = [
     ],
     isValidRow: true,
     letters: EXAMPLE_ROW_LETTERS,
-    description: UI_TEXT.instructions.examples.absent.description,
+    description: t('instructions.examples.absent.description'),
   },
   {
-    title: UI_TEXT.instructions.examples.wrongWord.title,
+    title: t('instructions.examples.wrongWord.title'),
     cellsStatus: [
       LetterStatus.UN_GUESSED,
       LetterStatus.UN_GUESSED,
@@ -136,7 +89,7 @@ const EXAMPLES: readonly ExampleProps[] = [
     ],
     isValidRow: false,
     letters: EXAMPLE_ROW_LETTERS,
-    description: UI_TEXT.instructions.examples.wrongWord.description,
+    description: t('instructions.examples.wrongWord.description'),
   },
 ];
 
@@ -180,10 +133,10 @@ const Instructions: VFC = () => {
       <Modal
         isOpen={isOpen}
         onClose={toggleIsOpen}
-        title={UI_TEXT.instructions.title}
+        title={t('instructions.title')}
       >
         <Flex sx={instructionContainerStyles}>
-          {UI_TEXT.instructions.instructions.map((instruction) => (
+          {t('instructions.instructions').map((instruction) => (
             <Text key={instruction.slice(0, 10)} sx={{ mb: 'm' }}>
               {instruction}
             </Text>

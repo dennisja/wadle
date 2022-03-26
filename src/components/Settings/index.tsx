@@ -14,20 +14,7 @@ import useToggle from '../../hooks/useToggle';
 import { GameMode, Noop } from '../../types';
 import Icon from '../../ui/Icon';
 import Modal from '../../ui/Modal';
-
-const UI_TEXT = {
-  modalTitle: 'Settings',
-  hardMode: {
-    title: 'Hard mode',
-    description: 'All revelations in the previous guesses must be used',
-  },
-  contact: {
-    title: 'Contact',
-    link: { name: 'Twitter' },
-  },
-  contribute: { title: 'Contribute' },
-  darkMode: { title: 'Dark Mode' },
-};
+import { t } from '../../utils/translations';
 
 const switchStyles: ThemeUIStyleObject = {
   'input:checked ~ &': {
@@ -64,7 +51,7 @@ const ColorModeSettingRow = () => {
   }, [setColorMode]);
 
   return (
-    <SettingRow title={UI_TEXT.darkMode.title}>
+    <SettingRow title={t('settings.darkMode.title')}>
       <Box>
         <Switch
           sx={switchStyles}
@@ -101,10 +88,14 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
       <IconButton onClick={toggleModal}>
         <Icon iconName="settings" />
       </IconButton>
-      <Modal title={UI_TEXT.modalTitle} isOpen={isOpen} onClose={toggleModal}>
+      <Modal
+        title={t('settings.modalTitle')}
+        isOpen={isOpen}
+        onClose={toggleModal}
+      >
         <SettingRow
-          title={UI_TEXT.hardMode.title}
-          description={UI_TEXT.hardMode.description}
+          title={t('settings.hardMode.title')}
+          description={t('settings.hardMode.description')}
         >
           <Box>
             <Switch
@@ -115,16 +106,16 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
           </Box>
         </SettingRow>
         <ColorModeSettingRow />
-        <SettingRow title={UI_TEXT.contact.title}>
+        <SettingRow title={t('settings.contact.title')}>
           <Link
             href="https://twitter.com/dennisjjagwe"
             target="_blank"
             color="text"
           >
-            {UI_TEXT.contact.link.name}
+            {t('settings.contact.link.name')}
           </Link>
         </SettingRow>
-        <SettingRow title={UI_TEXT.contribute.title}>
+        <SettingRow title={t('settings.contribute.title')}>
           <Link
             as={Link}
             href="https://github.com/dennisja/wadle"

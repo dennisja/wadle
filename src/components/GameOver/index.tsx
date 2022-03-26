@@ -3,24 +3,9 @@ import { Flex, Text } from 'theme-ui';
 import { GameStatus } from '../../types';
 import Button from '../../ui/Button';
 import { getRandomItem } from '../../utils';
+import { t } from '../../utils/translations';
 import { getAnswer } from '../../utils/word';
 import ShareButton from './ShareButton';
-
-const UI_TEXT = {
-  answerPrefix: 'The answer was',
-  messages: {
-    gameLost: ['Almost got it!!!', 'Nice try!!!', 'Good luck next time!!!'],
-    gameWon: {
-      1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
-      2: ['Hats off!!!', 'Tremendous!!!', 'Way to go!!!'],
-      3: ['What a game!!!', 'You did it!!!', 'You rock!!!'],
-      4: ['Respect!!!', 'Kudos!!!', 'You rule!!!'],
-      5: ['Good show!!!', 'Well deserved!!!', 'Nice one!!!'],
-      6: ['Pheeew!!!', 'Pat on the back!!!', 'Good one mate!!!'],
-    } as Record<number, string[]>,
-  },
-  playAgain: 'Play Again',
-};
 
 type GameOverProps = {
   answerId: number;
@@ -54,14 +39,14 @@ const GameOver: VFC<GameOverProps> = ({
     <Text variant="tiles">
       {getRandomItem(
         gameStatus === GameStatus.WON
-          ? UI_TEXT.messages.gameWon[steps]
-          : UI_TEXT.messages.gameLost
+          ? t('gameOver.messages.gameWon')[steps]
+          : t('gameOver.messages.gameLost')
       )}
     </Text>
 
     {gameStatus === GameStatus.LOST && (
       <Text>
-        {UI_TEXT.answerPrefix}{' '}
+        {t('gameOver.answerPrefix')}{' '}
         <Text as="span" variant="h4">
           {getAnswer(answerId)}
         </Text>
@@ -75,7 +60,7 @@ const GameOver: VFC<GameOverProps> = ({
         onClick={playAgain}
         size="medium"
       >
-        {UI_TEXT.playAgain}
+        {t('gameOver.playAgain')}
       </Button>
       {gameStatus === GameStatus.WON && (
         <ShareButton answerId={answerId} board={board} />

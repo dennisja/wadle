@@ -4,6 +4,7 @@ import { GameMode, GameStatus } from '../types';
 import { createToast } from '../ui/Toast';
 import { isGameOver, isHardMode } from '../utils/game';
 import { getPreviousRevelationErrors, getRowCellsStatus } from '../utils/row';
+import { t } from '../utils/translations';
 import {
   BAD_WORDS_BAG,
   getAnswer,
@@ -12,16 +13,6 @@ import {
 } from '../utils/word';
 import { usePersistedState } from './usePersistedState';
 import useStats from './useStats';
-
-const UI_TEXT = {
-  gameModeChange: {
-    warning: 'You cannot change game mode in between a game.',
-  },
-  word: {
-    bad: "That is a big word. It can't fit in our list.",
-    absent: 'Not in word list',
-  },
-};
 
 const defaultBoard = [
   ['', '', '', '', ''],
@@ -134,7 +125,7 @@ const useGame = () => {
     }
 
     if (BAD_WORDS_BAG.has(board[currentRow].join('').toLowerCase())) {
-      createToast({ messages: [UI_TEXT.word.bad], type: 'error' });
+      createToast({ messages: [t('useGame.word.bad')], type: 'error' });
       setIsValidRow(false);
       return;
     }
@@ -142,7 +133,7 @@ const useGame = () => {
     const rowState = getRowStatus(board[currentRow], answer);
 
     if (rowState === RowStatus.HAS_INVALID_WORD) {
-      createToast({ messages: [UI_TEXT.word.absent], type: 'error' });
+      createToast({ messages: [t('useGame.word.absent')], type: 'error' });
       setIsValidRow(false);
       return;
     }
@@ -207,7 +198,7 @@ const useGame = () => {
   const toggleGameMode = () => {
     if (gameStatus === GameStatus.PLAYING) {
       createToast({
-        messages: [UI_TEXT.gameModeChange.warning],
+        messages: [t('useGame.gameModeChange.warning')],
         type: 'warning',
       });
       return;
