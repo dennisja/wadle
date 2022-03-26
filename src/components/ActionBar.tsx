@@ -1,19 +1,10 @@
 import { VFC } from 'react';
 import { Box, Flex, Text, ThemeUIStyleObject } from 'theme-ui';
 import { createToast } from '../ui/Toast';
+import { t } from '../utils/translations';
 import Instructions from './Instructions';
 import Settings, { SettingsProps } from './Settings';
 import Stats, { StatsProps } from './Stats';
-
-const UI_TEXT = {
-  pageTitle: {
-    name: 'Wadle',
-    click: {
-      toastMessage: ['You like clicking things 😂'],
-      toastTitle: 'Look at you',
-    },
-  },
-};
 
 const actionBarContainerStyles: ThemeUIStyleObject = {
   justifyContent: 'space-around',
@@ -38,13 +29,13 @@ const ActionBar: VFC<ActionBarProps> = ({
       variant="h1"
       onClick={() => {
         createToast({
-          messages: UI_TEXT.pageTitle.click.toastMessage,
+          messages: t('actionBar.pageTitle.click.toastMessage'),
           type: 'info',
-          title: UI_TEXT.pageTitle.click.toastTitle,
+          title: t('actionBar.pageTitle.click.toastTitle'),
         });
       }}
     >
-      {UI_TEXT.pageTitle.name}
+      {t('actionBar.pageTitle.name')}
     </Text>
     <Box>
       <Stats gameStats={gameStats} streakStats={streakStats} />

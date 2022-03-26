@@ -3,6 +3,7 @@ import { Divider, Text, IconButton, ThemeUIStyleObject, Flex } from 'theme-ui';
 import useToggle from '../../hooks/useToggle';
 import Icon from '../../ui/Icon';
 import Modal from '../../ui/Modal';
+import { t } from '../../utils/translations';
 import GuessDistribution from './GuessDistribution';
 import { getTotalPlayedGames, StreakSummary, TimeSummary } from './Summary';
 import { Statistics } from './types';
@@ -22,11 +23,6 @@ const statsContainerStyles: ThemeUIStyleObject = {
   flexDirection: 'column',
 };
 
-const UI_TEXT = {
-  noGamesPlayedInfo: 'Play Some Games',
-  modalTitle: 'Statistics',
-};
-
 type StatsProps = Statistics;
 
 const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
@@ -38,7 +34,11 @@ const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
       <IconButton onClick={toggleModal}>
         <Icon iconName="stats" />
       </IconButton>
-      <Modal isOpen={isOpen} onClose={toggleModal} title={UI_TEXT.modalTitle}>
+      <Modal
+        isOpen={isOpen}
+        onClose={toggleModal}
+        title={t('stats.modalTitle')}
+      >
         {playedSomeGames ? (
           <Flex sx={statsContainerStyles}>
             <StreakSummary gameStats={gameStats} streakStats={streakStats} />
@@ -49,7 +49,7 @@ const Stats: VFC<StatsProps> = ({ gameStats, streakStats }) => {
           </Flex>
         ) : (
           <Text as="div" variant="h4" sx={noGamesInfoStyles}>
-            {UI_TEXT.noGamesPlayedInfo}
+            {t('stats.noGamesPlayedInfo')}
           </Text>
         )}
       </Modal>

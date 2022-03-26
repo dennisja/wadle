@@ -135,6 +135,7 @@ const UI_TEXT: UIText = {
     },
     word: {
       bad: "That is a big word. It can't fit in our list.",
+      absent: 'Not in word list',
     },
   },
 };
