@@ -105,3 +105,6 @@ dist
 
 # Mac OS
 .DS_store
+
+build
+.vscode

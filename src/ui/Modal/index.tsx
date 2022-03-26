@@ -48,7 +48,9 @@ const getModalContentStyles = ({
     display: flex;
     flex-direction: column;
     opacity: 0;
-    transition: opacity ${TRANSITION_DURATION}ms ease-in-out;
+    transition: opacity ${TRANSITION_DURATION}ms ease-in-out transform
+      ${TRANSITION_DURATION}ms ease-in-out;
+    transform: translateX(100%);
 
     ${theme.mediaQueries.smToM} {
       width: 50%;
@@ -66,13 +68,16 @@ const getModalContentStyles = ({
   `),
   afterOpen: cx(css`
     opacity: 1;
-
+    transform: translateX(0);
+    transition: opacity ${TRANSITION_DURATION}ms ease-in-out transform
+      ${TRANSITION_DURATION}ms ease-in-out;
     ${theme.mediaQueries.sm} {
       transform: translateY(0);
     }
   `),
   beforeClose: cx(css`
     opacity: 0;
+    transform: translateX(100%);
 
     ${theme.mediaQueries.sm} {
       transform: translateY(100%);

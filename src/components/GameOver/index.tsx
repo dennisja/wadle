@@ -6,25 +6,19 @@ import { getRandomItem } from '../../utils';
 import { getAnswer } from '../../utils/word';
 import ShareButton from './ShareButton';
 
-const GAME_WON_MESSAGES: Record<number, string[]> = {
-  1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
-  2: ['Hats off!!!', 'Tremendous!!!', 'Way to go!!!'],
-  3: ['What a game!!!', 'You did it!!!', 'You rock!!!'],
-  4: ['Respect!!!', 'Kudos!!!', 'You rule!!!'],
-  5: ['Good show!!!', 'Well deserved!!!', 'Nice one!!!'],
-  6: ['Pheeew!!!', 'Pat on the back!!!', 'Good one mate!!!'],
-};
-
-const GAME_LOST_MESSAGES = [
-  'Almost got it!!!',
-  'Nice try!!!',
-  'Good luck next time!!!',
-];
-
 const UI_TEXT = {
   answerPrefix: 'The answer was',
-  gameLost: GAME_LOST_MESSAGES,
-  gameWon: GAME_WON_MESSAGES,
+  messages: {
+    gameLost: ['Almost got it!!!', 'Nice try!!!', 'Good luck next time!!!'],
+    gameWon: {
+      1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
+      2: ['Hats off!!!', 'Tremendous!!!', 'Way to go!!!'],
+      3: ['What a game!!!', 'You did it!!!', 'You rock!!!'],
+      4: ['Respect!!!', 'Kudos!!!', 'You rule!!!'],
+      5: ['Good show!!!', 'Well deserved!!!', 'Nice one!!!'],
+      6: ['Pheeew!!!', 'Pat on the back!!!', 'Good one mate!!!'],
+    } as Record<number, string[]>,
+  },
   playAgain: 'Play Again',
 };
 
@@ -60,8 +54,8 @@ const GameOver: VFC<GameOverProps> = ({
     <Text variant="tiles">
       {getRandomItem(
         gameStatus === GameStatus.WON
-          ? UI_TEXT.gameWon[steps]
-          : UI_TEXT.gameLost
+          ? UI_TEXT.messages.gameWon[steps]
+          : UI_TEXT.messages.gameLost
       )}
     </Text>
 
