@@ -910,7 +910,6 @@ const WORD_LIST = [
   'lilye',
   'limbo',
   'lingi',
-  'links',
   'lirye',
   'litta',
   'litte',
