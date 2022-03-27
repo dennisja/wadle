@@ -1,19 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import * as Sentry from '@sentry/react';
-import { BrowserTracing } from '@sentry/tracing';
 import App from './App';
-import { SENTRY_DSN, NODE_ENV, COMMIT_SHA } from './envs';
 import reportWebVitals from './reportWebVitals';
 import { ROOT_ELEMENT } from './utils/constants';
+import { initSentry } from './utils/sentry';
 
-Sentry.init({
-  dsn: SENTRY_DSN,
-  integrations: [new BrowserTracing()],
-  tracesSampleRate: 0.5,
-  release: `wadle@${COMMIT_SHA}`,
-  environment: NODE_ENV,
-});
+initSentry();
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,5 +1,4 @@
 import { VFC } from 'react';
-import * as Sentry from '@sentry/react';
 import { Language, LetterStatus } from '../../types';
 import Button from '../../ui/Button';
 import Icon from '../../ui/Icon';
@@ -7,6 +6,7 @@ import { getRowCellsStatus } from '../../utils/row';
 import { getAnswer } from '../../utils/words';
 import { createToast } from '../../ui/Toast';
 import { t } from '../../utils/translations';
+import { captureSentryException } from '../../utils/sentry';
 
 const ShareEmoji: Record<LetterStatus, string> = {
   [LetterStatus.ABSENT]: '⬛',
@@ -77,7 +77,7 @@ const ShareButton: VFC<ShareButtonProps> = ({ board, answerId, language }) => {
           messages: [t('shareButton.copyOrShareFailure')],
           type: 'error',
         });
-        Sentry.captureException(error);
+        captureSentryException(error);
       }
     }
   };
