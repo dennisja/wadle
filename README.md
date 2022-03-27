@@ -8,7 +8,8 @@ Based on [wordle](https://www.powerlanguage.co.uk/wordle/)
 - [x] Try out theme-ui
 - [x] Try implementing a toast without react context
 - [ ] PWA
-- [ ] Cypress
+- ~[ ] Cypress => Will experiment with this in another project~
+- [ ] Try segment
 
 ## Translations
 
@@ -39,6 +40,8 @@ You can add a word by updating the good or bad word list of the language to whic
 The words are split into good and bad words to make the game safe for all players. If you find a word in the good words list that might be offensive and considered nasty/obscene in a particular language. Please move it to the bad words list and create a pull request.
 
 A word cannot be in both the good words and bad words list,it should only be in one of them.
+
+> For easy identification of words. They should be added in alphabetical order
 
 ### Word sources
 
