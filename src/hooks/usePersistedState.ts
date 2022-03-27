@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import * as Sentry from '@sentry/react';
+import { captureSentryException } from '../utils/sentry';
 
 type SetPersistedState<T> = T | ((x: T) => T);
 
@@ -12,7 +12,7 @@ const persist = <T>({ key, value }: PersistOptions<T>) => {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
-    Sentry.captureException(error);
+    captureSentryException(error);
   }
 };
 
@@ -36,7 +36,7 @@ const read = <T>({ key, fallback }: ReadOptions<T>): T => {
 
     return JSON.parse(value) as T;
   } catch (error) {
-    Sentry.captureException(error);
+    captureSentryException(error);
     return fallback;
   }
 };
