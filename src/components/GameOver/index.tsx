@@ -1,11 +1,12 @@
 import { VFC } from 'react';
 import { Flex, Text } from 'theme-ui';
-import { GameStatus, Language } from '../../types';
+import { GameStatus } from '../../types';
 import Button from '../../ui/Button';
 import { getRandomItem } from '../../utils';
 import { t } from '../../utils/translations';
 import { getAnswer } from '../../utils/words';
 import ShareButton from './ShareButton';
+import type { Language } from '../../types';
 
 type GameOverProps = {
   answerId: number;

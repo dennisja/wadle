@@ -1,4 +1,4 @@
-import { Language } from '../types';
+import type { Language } from '../types';
 
 const KEYBOARD_LETTERS = [
   ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],

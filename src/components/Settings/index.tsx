@@ -12,10 +12,11 @@ import {
   Input,
 } from 'theme-ui';
 import useToggle from '../../hooks/useToggle';
-import { GameMode, Language, Noop } from '../../types';
+import { GameMode } from '../../types';
 import Icon from '../../ui/Icon';
 import Modal from '../../ui/Modal';
 import { t } from '../../utils/translations';
+import type { Language, Noop } from '../../types';
 
 type SettingsRowProps = { title: string; description?: string };
 

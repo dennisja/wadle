@@ -8,12 +8,13 @@ import GuessesBoard from './components/GuessesBoard';
 import Keyboard from './components/Keyboard';
 import useGame from './hooks/useGame';
 import useLanguage from './hooks/useLanguage';
-import { GameStatus, Language } from './types';
 import Button from './ui/Button';
 import Modal from './ui/Modal';
 import theme from './ui/theme';
 import { createToast, ToastContainer } from './ui/Toast';
 import { t } from './utils/translations';
+import { GameStatus } from './types';
+import type { Language } from './types';
 
 const showPlayAgainButton = (gameStatus: GameStatus) =>
   [GameStatus.IDLE, GameStatus.UN_STARTED].includes(gameStatus);

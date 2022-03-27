@@ -1,6 +1,6 @@
-import { Language } from '../types';
 import { LANGUAGE } from '../utils/constants';
 import { usePersistedState } from './usePersistedState';
+import type { Language } from '../types';
 
 const useLanguage = () => {
   const [language, setLanguage] = usePersistedState<Language>({

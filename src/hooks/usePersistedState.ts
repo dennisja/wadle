@@ -25,7 +25,7 @@ type ReadOptions<T> = {
  * Reads the value of the key in localStorage.
  * If the key is not found, it returns the fallback value and sets the value of that key to the fallback value in localStorage
  */
-export const read = <T>({ key, fallback }: ReadOptions<T>): T => {
+const read = <T>({ key, fallback }: ReadOptions<T>): T => {
   try {
     const value = localStorage.getItem(key);
 
@@ -85,4 +85,4 @@ const usePersistedState = <T>({
   return [state, persistedSetState];
 };
 
-export { usePersistedState };
+export { usePersistedState, read };

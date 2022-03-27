@@ -40,6 +40,12 @@
       "rules": {
         "no-unused-expressions": "off"
       }
+    },
+    {
+      "files": ["src/utils/translations/*.ts"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
     }
   ]
 }

@@ -10,6 +10,14 @@ Based on [wordle](https://www.powerlanguage.co.uk/wordle/)
 - [ ] PWA
 - [ ] Cypress
 
+## Adding or editing translations
+
+> Note on making all words available regardless of the language
+
+## Adding a new word
+
+> Note on making all translations available regardless of language
+
 ## Available Scripts
 
 In the project directory, you can run:
