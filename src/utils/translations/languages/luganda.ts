@@ -129,8 +129,8 @@ const UI_TEXT: UIText = {
   statsSummary: {
     time: {
       title: 'Obudde bwomuzannyo',
-      shortestGame: 'Ogusinga obuwanvu',
-      longestGame: 'Ogusinga obumpi',
+      shortestGame: 'Ogusinga obumpi',
+      longestGame: 'Ogusinga obuwanvu',
       averageTime: 'Average Time',
       playTime: 'Emizannyo gyona',
     },

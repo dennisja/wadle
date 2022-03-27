@@ -38,7 +38,8 @@ type ExampleProps = {
   description: { prefix: string; highlight: string; postfix: string };
 };
 
-const EXAMPLES: readonly ExampleProps[] = [
+// put examples behind a functional call to make sure that t is re run with the correct language when language changes
+const getExamples = (): readonly ExampleProps[] => [
   {
     title: t('instructions.examples.correct.title'),
     cellsStatus: [
@@ -145,7 +146,7 @@ const Instructions: VFC = () => {
           <Text as="h3" variant="h4" sx={{ mb: 'm' }}>
             {t('instructions.examples.title')}
           </Text>
-          {EXAMPLES.map((example) => (
+          {getExamples().map((example) => (
             <Example key={example.title} {...example} />
           ))}
         </Flex>
