@@ -38,8 +38,12 @@ const getGoodWordsBag = (language: Language) =>
 const getBadWordsBag = (language: Language) =>
   createWordBag(WORDS[language].bad);
 
-const getAnswer = (index: number, language: Language) =>
-  WORDS[language].good[index].toUpperCase();
+const getAnswer = (index: number, language: Language) => {
+  const words = WORDS[language].good;
+  // prevent getting an undefined error when we switch between languages when the current index is more than the number of words  in the selected language
+  const answerIndex = Math.min(index, words.length - 1);
+  return words[answerIndex].toUpperCase();
+};
 
 const getAnswerIndex = (language: Language) =>
   Math.floor(Math.random() * WORDS[language].good.length);

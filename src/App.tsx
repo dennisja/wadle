@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { ThemeProvider } from 'theme-ui';
+import { Flex, ThemeProvider } from 'theme-ui';
 import ActionBar from './components/ActionBar';
 import GameContainer from './components/GameContainer';
 import GameOver from './components/GameOver';
@@ -14,6 +14,12 @@ import Modal from './ui/Modal';
 import theme from './ui/theme';
 import { createToast, ToastContainer } from './ui/Toast';
 import { t } from './utils/translations';
+
+const showPlayAgainButton = (gameStatus: GameStatus) =>
+  [GameStatus.IDLE, GameStatus.UN_STARTED].includes(gameStatus);
+
+const isUnStarted = (gameStatus: GameStatus) =>
+  gameStatus !== GameStatus.UN_STARTED;
 
 function App() {
   const lang = useLanguage();
@@ -30,9 +36,10 @@ function App() {
         });
         return;
       }
+      game.toUnStartedState();
       lang.setLanguage(language);
     },
-    [lang.setLanguage, game.gameStatus]
+    [lang.setLanguage, game.gameStatus, game.toUnStartedState]
   );
 
   return (
@@ -48,15 +55,27 @@ function App() {
           language={lang.language}
           onLanguageChange={handleLanguageChange}
         />
-        <GuessesBoard
-          rows={game.board}
-          isRowInvalid={game.isRowInvalid}
-          getRowCellsStatus={game.getRowCellsStatus}
-        />
-        {GameStatus.IDLE === game.gameStatus ? (
-          <Button size="large" sx={{ mb: 'xl' }} onClick={game.restartGame}>
-            {t('app.playAgain')}
-          </Button>
+        {isUnStarted(game.gameStatus) && (
+          <GuessesBoard
+            rows={game.board}
+            isRowInvalid={game.isRowInvalid}
+            getRowCellsStatus={game.getRowCellsStatus}
+          />
+        )}
+        {showPlayAgainButton(game.gameStatus) ? (
+          <Flex
+            sx={{
+              ...(!isUnStarted(game.gameStatus) && {
+                height: '100%',
+              }),
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Button size="large" sx={{ mb: 'xl' }} onClick={game.restartGame}>
+              {t('app.playAgain')}
+            </Button>
+          </Flex>
         ) : (
           <Keyboard
             onAddCharacter={game.addLetterToBoard}

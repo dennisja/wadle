@@ -195,6 +195,10 @@ const useGame = (language: Language) => {
     setGameStatus(GameStatus.IDLE);
   };
 
+  const toUnStartedState = () => {
+    setGameStatus(GameStatus.UN_STARTED);
+  };
+
   const rowCellsStatus: GetRowCellsStatus = ({ row, rowIndex }) =>
     getRowCellsStatus({ row, answer, isSubmitted: rowIndex < currentRow });
 
@@ -215,27 +219,28 @@ const useGame = (language: Language) => {
   };
 
   return {
-    board,
     addLetterToBoard,
-    restartGame,
-    removeLetterFromBoard,
     advanceToNextRow,
+    answerIndex,
+    board,
+    currentStep: currentRow,
+    gameMode,
+    gameStats,
+    gameStatus,
+    getRowCellsStatus: rowCellsStatus,
+    isGameOver: isGameOver(gameStatus),
+    isRowInvalid,
     keyboardLettersStatus: getKeyboardLettersStatus({
       currentRow,
       board,
       answer,
     }),
-    isRowInvalid,
-    gameStatus,
-    isGameOver: isGameOver(gameStatus),
-    currentStep: currentRow,
-    answerIndex,
-    toIdleState,
-    getRowCellsStatus: rowCellsStatus,
-    toggleGameMode,
-    gameMode,
+    restartGame,
+    removeLetterFromBoard,
     streakStats,
-    gameStats,
+    toggleGameMode,
+    toIdleState,
+    toUnStartedState,
   };
 };
 
