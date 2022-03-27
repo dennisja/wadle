@@ -1,14 +1,3 @@
-const BAD_WORDS_LIST = [
-  'penis',
-  'whore',
-  'dildo',
-  'pussy',
-  'fucks',
-  'dicks',
-  'porno',
-  'porns',
-];
-
 const WORD_LIST = [
   'aahed',
   'aalii',
@@ -9340,29 +9329,4 @@ const WORD_LIST = [
   'zymes',
 ];
 
-interface Bag {
-  has(word: string): boolean;
-}
-
-const createWordBag = (list: string[]): Bag => {
-  const bag = list.reduce<Record<string, boolean>>((wordBag, currentWord) => {
-    wordBag[currentWord] = true;
-    return wordBag;
-  }, {});
-
-  return {
-    has(word: string) {
-      return word in bag;
-    },
-  };
-};
-
-const WORD_BAG = createWordBag(WORD_LIST);
-
-const BAD_WORDS_BAG = createWordBag(BAD_WORDS_LIST);
-
-const getAnswer = (index: number) => WORD_LIST[index].toUpperCase();
-
-const getAnswerIndex = () => Math.floor(Math.random() * WORD_LIST.length);
-
-export { WORD_BAG, BAD_WORDS_BAG, getAnswerIndex, getAnswer };
+export default WORD_LIST;
