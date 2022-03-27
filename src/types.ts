@@ -11,7 +11,8 @@ enum GameStatus {
   PLAYING = 'playing',
   WON = 'won',
   LOST = 'lost',
-  IDLE = 'idle',
+  IDLE = 'idle', // when game is finished but user has not chosen to play again
+  UN_STARTED = 'unStarted', // when we switch the language and user hasn't chosen to begin a game
 }
 
 enum GameMode {
@@ -32,5 +33,13 @@ type StreakStats = {
   maxStreak: number;
 };
 
+type Language =
+  | 'english'
+  | 'luganda'
+  | 'ateso'
+  | 'acholi'
+  | 'lugbara'
+  | 'runyankore';
+
 export { LetterStatus, GameMode, GameStatus };
-export type { GameStats, Noop, StreakStats };
+export type { GameStats, Noop, StreakStats, Language };

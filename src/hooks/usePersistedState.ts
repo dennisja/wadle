@@ -85,4 +85,4 @@ const usePersistedState = <T>({
   return [state, persistedSetState];
 };
 
-export { usePersistedState };
+export { usePersistedState, read };

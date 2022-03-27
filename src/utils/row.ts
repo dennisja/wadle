@@ -1,11 +1,5 @@
 import { LetterStatus } from '../types';
-
-const UI_TEXT = {
-  revelations: {
-    correct: { prefix: 'The letter at position', postfix: 'should be' },
-    present: { postfix: 'should be used in the current word' },
-  },
-};
+import { t } from './translations';
 
 const characterBag = (items: readonly string[] = []) => {
   const chars: Record<string, number> = {};
@@ -92,9 +86,9 @@ const getPreviousRevelationErrors = ({
 
     if (currentRowChar !== answerChar) {
       errors.push(
-        `${UI_TEXT.revelations.correct.prefix} ${i + 1} ${
-          UI_TEXT.revelations.correct.postfix
-        } ${answerChar}`
+        `${t('board.revelations.correct.prefix')} ${i + 1} ${t(
+          'board.revelations.correct.postfix'
+        )} ${answerChar}`
       );
     } else {
       currentRowCharBag.remove(answerChar);
@@ -109,7 +103,7 @@ const getPreviousRevelationErrors = ({
   previousRow.forEach((prevRowChar, i) => {
     if (answerCharBag.has(prevRowChar)) {
       if (!(i in visitedIndices) && !currentRowCharBag.has(prevRowChar)) {
-        errors.push(`${prevRowChar} ${UI_TEXT.revelations.present.postfix}`);
+        errors.push(`${prevRowChar} ${t('board.revelations.present.postfix')}`);
       }
 
       answerCharBag.remove(prevRowChar);

@@ -3,30 +3,10 @@ import { Flex, Text } from 'theme-ui';
 import { GameStatus } from '../../types';
 import Button from '../../ui/Button';
 import { getRandomItem } from '../../utils';
-import { getAnswer } from '../../utils/word';
+import { t } from '../../utils/translations';
+import { getAnswer } from '../../utils/words';
 import ShareButton from './ShareButton';
-
-const GAME_WON_MESSAGES: Record<number, string[]> = {
-  1: ['Sensational!!!', 'Outstanding!!!', 'Fantastic!!!'],
-  2: ['Hats off!!!', 'Tremendous!!!', 'Way to go!!!'],
-  3: ['What a game!!!', 'You did it!!!', 'You rock!!!'],
-  4: ['Respect!!!', 'Kudos!!!', 'You rule!!!'],
-  5: ['Good show!!!', 'Well deserved!!!', 'Nice one!!!'],
-  6: ['Pheeew!!!', 'Pat on the back!!!', 'Good one mate!!!'],
-};
-
-const GAME_LOST_MESSAGES = [
-  'Almost got it!!!',
-  'Nice try!!!',
-  'Good luck next time!!!',
-];
-
-const UI_TEXT = {
-  answerPrefix: 'The answer was',
-  gameLost: GAME_LOST_MESSAGES,
-  gameWon: GAME_WON_MESSAGES,
-  playAgain: 'Play Again',
-};
+import type { Language } from '../../types';
 
 type GameOverProps = {
   answerId: number;
@@ -36,6 +16,7 @@ type GameOverProps = {
   /** The number of times taken to complete the game */
   steps: number;
   board: readonly string[][];
+  language: Language;
 };
 
 const GameOver: VFC<GameOverProps> = ({
@@ -44,6 +25,7 @@ const GameOver: VFC<GameOverProps> = ({
   steps,
   answerId,
   board,
+  language,
 }) => (
   <Flex
     sx={{
@@ -60,16 +42,16 @@ const GameOver: VFC<GameOverProps> = ({
     <Text variant="tiles">
       {getRandomItem(
         gameStatus === GameStatus.WON
-          ? UI_TEXT.gameWon[steps]
-          : UI_TEXT.gameLost
+          ? t('gameOver.messages.gameWon')[steps]
+          : t('gameOver.messages.gameLost')
       )}
     </Text>
 
     {gameStatus === GameStatus.LOST && (
       <Text>
-        {UI_TEXT.answerPrefix}{' '}
+        {t('gameOver.answerPrefix')}{' '}
         <Text as="span" variant="h4">
-          {getAnswer(answerId)}
+          {getAnswer(answerId, language)}
         </Text>
       </Text>
     )}
@@ -81,10 +63,10 @@ const GameOver: VFC<GameOverProps> = ({
         onClick={playAgain}
         size="medium"
       >
-        {UI_TEXT.playAgain}
+        {t('gameOver.playAgain')}
       </Button>
       {gameStatus === GameStatus.WON && (
-        <ShareButton answerId={answerId} board={board} />
+        <ShareButton answerId={answerId} board={board} language={language} />
       )}
     </Flex>
   </Flex>

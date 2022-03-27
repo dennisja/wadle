@@ -10,6 +10,44 @@ Based on [wordle](https://www.powerlanguage.co.uk/wordle/)
 - [ ] PWA
 - [ ] Cypress
 
+## Translations
+
+All translations are currently found in the [translations folder](src/utils/translations/).
+
+> All the translations are currently included in the JS bundle which means they will all be downloaded by a user regardless of the selected language. This is okay for now given that lazy loading them just saves a user about 5kbs of data. On the upside though all the relevant code will be available and the user won't need to fetch anything else when they change a language
+
+### Adding a new ui translation
+
+When you introduce a key value pair in any translations file. You have to do the same for other languages and typescript enforces that all the language files are in sync. If you are not sure about what the text translates to in another language. Just use the english translations.
+
+> Currently only Luganda and English have translations but other languages are still using English translations given that I have no Idea about those languages. [The Luganda languages are also not accurate](https://twitter.com/dennisjjagwe/status/1506036966898520070), if you can volunteer to update them the better.
+
+### Editing translations
+
+If you find an inaccurate translation or one that can be improved. Please edit the relevant [language file](src/utils/translations/) and open a pull request.
+
+## Words
+
+All words available when playing can be found in the [words folder](src/utils/words/).
+
+> As of now, all words are part of the JS bundle regardless of the selected language. Lazy loading words based on the language isn't that beneficial currently given it only saves a user less than 10kbs. Loading them all means we don't have to fetch an unavailable word list when the language changes
+
+### Adding a new word
+
+You can add a word by updating the good or bad word list of the language to which the word belongs
+
+The words are split into good and bad words to make the game safe for all players. If you find a word in the good words list that might be offensive and considered nasty/obscene in a particular language. Please move it to the bad words list and create a pull request.
+
+A word cannot be in both the good words and bad words list,it should only be in one of them.
+
+### Word sources
+
+- Most of the [Luganda words](src/utils/words/luganda/) were obtained by scrapping Luganda news sites and some from the [sunbird ai language data set](https://github.com/SunbirdAI/ug-language-parallel-text-dataset)
+- All [acholi](src/utils/words/acholi/), [ateso](src/utils/words/ateso/), [runyankore](src/utils/words/runyankore/) and [lugbara](src/utils/words/lugbara/) words were obtained from [the sunbird ai language data set](https://github.com/SunbirdAI/ug-language-parallel-text-dataset)
+- The scripts to get these words are not included
+
+> Since most of these words were obtained programatically, there is a a high chance that there are some words that don't belong to those languages or are just names of people. If you find any of them please make a PR to remove them.
+
 ## Available Scripts
 
 In the project directory, you can run:

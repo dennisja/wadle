@@ -9,35 +9,22 @@ import {
   ThemeUIStyleObject,
   useColorMode,
   Link,
+  Input,
 } from 'theme-ui';
 import useToggle from '../../hooks/useToggle';
-import { GameMode, Noop } from '../../types';
+import { GameMode } from '../../types';
 import Icon from '../../ui/Icon';
 import Modal from '../../ui/Modal';
+import { t } from '../../utils/translations';
+import type { Language, Noop } from '../../types';
 
-const UI_TEXT = {
-  modalTitle: 'Settings',
-  hardMode: {
-    title: 'Hard mode',
-    description: 'All revelations in the previous guesses must be used',
-  },
-  contact: {
-    title: 'Contact',
-    link: { name: 'Twitter' },
-  },
-  contribute: { title: 'Contribute' },
-  darkMode: { title: 'Dark Mode' },
-};
+type SettingsRowProps = { title: string; description?: string };
 
-const switchStyles: ThemeUIStyleObject = {
-  'input:checked ~ &': {
-    backgroundColor: 'green',
-  },
-};
-
-type SettingRowProps = { title: string; description?: string };
-
-const SettingRow: FC<SettingRowProps> = ({ title, description, children }) => (
+const SettingsRow: FC<SettingsRowProps> = ({
+  title,
+  description,
+  children,
+}) => (
   <>
     <Box sx={{ p: 'm' }}>
       <Flex sx={{ justifyContent: 'space-between', mb: 's' }}>
@@ -56,7 +43,52 @@ const SettingRow: FC<SettingRowProps> = ({ title, description, children }) => (
   </>
 );
 
-const ColorModeSettingRow = () => {
+const LANGUAGES: readonly Language[] = [
+  'acholi',
+  'ateso',
+  'english',
+  'luganda',
+  'lugbara',
+  'runyankore',
+];
+
+export type SelectLanguageProps = {
+  language: Language;
+  onLanguageChange: (lang: Language) => void;
+};
+
+const SelectLanguage: VFC<SelectLanguageProps> = ({
+  language,
+  onLanguageChange,
+}) => (
+  <SettingsRow
+    title={t('settings.language.title')}
+    description={t('settings.language.note')}
+  >
+    <Box>
+      <Input
+        as="select"
+        value={language}
+        onChange={(e) => onLanguageChange(e.target.value as Language)}
+        sx={{ pl: 'm', appearance: 'auto', borderRadius: 'xs' }}
+      >
+        {LANGUAGES.map((lang) => (
+          <option value={lang} key={lang}>
+            {lang}
+          </option>
+        ))}
+      </Input>
+    </Box>
+  </SettingsRow>
+);
+
+const switchStyles: ThemeUIStyleObject = {
+  'input:checked ~ &': {
+    backgroundColor: 'green',
+  },
+};
+
+const ColorModeSettingsRow = () => {
   const [colorMode, setColorMode] = useColorMode();
 
   const toggleColorMode = useCallback(() => {
@@ -64,7 +96,7 @@ const ColorModeSettingRow = () => {
   }, [setColorMode]);
 
   return (
-    <SettingRow title={UI_TEXT.darkMode.title}>
+    <SettingsRow title={t('settings.darkMode.title')}>
       <Box>
         <Switch
           sx={switchStyles}
@@ -72,7 +104,7 @@ const ColorModeSettingRow = () => {
           onChange={toggleColorMode}
         />
       </Box>
-    </SettingRow>
+    </SettingsRow>
   );
 };
 
@@ -91,9 +123,14 @@ const githubLinkStyles: ThemeUIStyleObject = {
 type SettingsProps = {
   onGameModeChange: Noop;
   gameMode: GameMode;
-};
+} & SelectLanguageProps;
 
-const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
+const Settings: VFC<SettingsProps> = ({
+  onGameModeChange,
+  gameMode,
+  onLanguageChange,
+  language,
+}) => {
   const [isOpen, toggleModal] = useToggle();
 
   return (
@@ -101,10 +138,14 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
       <IconButton onClick={toggleModal}>
         <Icon iconName="settings" />
       </IconButton>
-      <Modal title={UI_TEXT.modalTitle} isOpen={isOpen} onClose={toggleModal}>
-        <SettingRow
-          title={UI_TEXT.hardMode.title}
-          description={UI_TEXT.hardMode.description}
+      <Modal
+        title={t('settings.modalTitle')}
+        isOpen={isOpen}
+        onClose={toggleModal}
+      >
+        <SettingsRow
+          title={t('settings.hardMode.title')}
+          description={t('settings.hardMode.description')}
         >
           <Box>
             <Switch
@@ -113,18 +154,22 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
               onChange={onGameModeChange}
             />
           </Box>
-        </SettingRow>
-        <ColorModeSettingRow />
-        <SettingRow title={UI_TEXT.contact.title}>
+        </SettingsRow>
+        <ColorModeSettingsRow />
+        <SelectLanguage
+          onLanguageChange={onLanguageChange}
+          language={language}
+        />
+        <SettingsRow title={t('settings.contact.title')}>
           <Link
             href="https://twitter.com/dennisjjagwe"
             target="_blank"
             color="text"
           >
-            {UI_TEXT.contact.link.name}
+            {t('settings.contact.link.name')}
           </Link>
-        </SettingRow>
-        <SettingRow title={UI_TEXT.contribute.title}>
+        </SettingsRow>
+        <SettingsRow title={t('settings.contribute.title')}>
           <Link
             as={Link}
             href="https://github.com/dennisja/wadle"
@@ -133,7 +178,7 @@ const Settings: VFC<SettingsProps> = ({ onGameModeChange, gameMode }) => {
           >
             <Icon iconName="github" />
           </Link>
-        </SettingRow>
+        </SettingsRow>
       </Modal>
     </>
   );
