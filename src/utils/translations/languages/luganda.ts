@@ -47,7 +47,7 @@ const UI_TEXT: UIText = {
   instructions: {
     title: 'Endagiriro',
     instructions: [
-      'Teeba ekigambu mu mikisa mukaaga.',
+      'Teeba ekigambo mu mikisa mukaaga.',
       'Buli kigambo kya nnyukuta taano. Womala ozitekamu ngonyiga Enter',
       'Buuli luteeba, kaala yo lunyiriri ejja kukyuka okulaga wa wotuuse',
     ],
@@ -76,7 +76,7 @@ const UI_TEXT: UIText = {
         description: {
           prefix: 'Ennyukuta',
           highlight: 'D',
-          postfix: 'eri mu kigambo kyolina okuteba',
+          postfix: 'teri mu kigambo kyolina okuteba',
         },
       },
 
