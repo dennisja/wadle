@@ -8,7 +8,7 @@ Based on [wordle](https://www.powerlanguage.co.uk/wordle/)
 - [x] Try out theme-ui
 - [x] Try implementing a toast without react context
 - [ ] PWA
-- [ ]~ Cypress => Will experiment with this in another project~
+- [ ] ~Cypress => Will experiment with this in another project~
 - [ ] Try segment
 
 ## Translations

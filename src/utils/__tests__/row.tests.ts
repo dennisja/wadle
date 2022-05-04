@@ -21,6 +21,7 @@ describe('utils/game', () => {
       ${['The letter at position 2 should be A', 'The letter at position 3 should be D', 'The letter at position 4 should be I']} | ${'GLYPH'.split('')} | ${'RADII'.split('')} | ${'WADIS'}
       ${[]}                                                                                                                       | ${'DINER'.split('')} | ${'DIVER'.split('')} | ${'DIRER'}
       ${['The letter at position 4 should be E', 'L should be used in the current word']}                                         | ${'AUDIO'.split('')} | ${'LOVES'.split('')} | ${'GLEEK'}
+      ${['e should be used in the current word']}                                                                                 | ${'amend'.split('')} | ${'creed'.split('')} | ${'emend'}
     `(
       'should return $expectedErrors when the current row is $currentRow and the previous row was $previousRow given the answer is $answer ',
       ({ expectedErrors, currentRow, previousRow, answer }: TestProps) => {
